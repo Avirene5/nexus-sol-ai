@@ -1,102 +1,102 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Nexus SOL AI</title>
-
 <style>
 *{box-sizing:border-box}
-body{
-margin:0;
-background:#050914;
-color:#edf4ff;
-font-family:Arial,sans-serif;
+body{margin:0;background:#07111f;color:#eef5ff;font-family:Arial,Helvetica,sans-serif}
+.page{max-width:760px;margin:auto;min-height:100vh;padding:18px 20px 50px}
+.top{height:72px;display:flex;align-items:center;justify-content:space-between;color:#0b0d12;background:#eef0fa;margin:-18px -20px 0;padding:0 30px;font-size:25px;font-weight:700}
+.arrow{font-size:36px;font-weight:400}
+.header{display:flex;align-items:center;gap:20px;padding:28px 0 25px}
+.logo{width:70px;height:70px;border-radius:20px;background:linear-gradient(145deg,#28d8ad,#4979e8);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:700}
+.brand h1{margin:0;font-size:40px}
+.brand p{margin:8px 0 0;color:#8fa3bd;font-size:22px;line-height:1.35}
+.status{margin-left:auto;border:1px solid #183552;background:#0a1a2d;border-radius:40px;padding:13px 20px;color:#aebdd0;font-size:18px}
+.dot{display:inline-block;width:14px;height:14px;background:#2bd89d;border-radius:50%;margin-right:10px}
+.hero,.card,.signal{border:1px solid #193650;background:#091a2c;border-radius:30px;box-shadow:0 10px 35px #0003}
+.hero{padding:34px 34px 38px}
+.hero h2{font-size:42px;margin:0 0 22px}
+.hero p{font-size:25px;color:#9aabc1;line-height:1.55;margin:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.card{padding:24px}
+.label{color:#8095af;font-size:18px;letter-spacing:1px}
+.value{font-size:44px;font-weight:700;margin-top:14px}
+.green{color:#35dfa5}
+.signal{margin-top:28px;padding:34px}
+.signal-title{display:flex;justify-content:space-between;align-items:center;font-size:30px;font-weight:700}
+.badge{font-size:17px;background:#0d3b40;color:#35dfa5;padding:10px 16px;border-radius:12px}
+.score{display:flex;align-items:center;gap:28px;margin:25px 0}
+.circle{width:150px;height:150px;border-radius:50%;background:conic-gradient(#35dfa5 0 86%,#17334c 86%);display:flex;align-items:center;justify-content:center;position:relative}
+.circle:after{content:"";width:116px;height:116px;border-radius:50%;background:#091a2c;position:absolute}
+.score-num{font-size:38px;font-weight:700;z-index:1}
+.score-text .small{color:#8499b1;font-size:18px;letter-spacing:1px}
+.score-text h3{font-size:38px;margin:12px 0}
+.score-text p{color:#91a5bc;font-size:20px;margin:0;line-height:1.35}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.metric .m-label{color:#8498b0;font-size:18px}
+.metric .m-value{font-size:32px;color:#35dfa5;font-weight:700;margin:8px 0}
+.bar{height:10px;background:#173049;border-radius:10px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,#35dfa5,#718cff);border-radius:10px}
+@media(max-width:560px){
+.page{padding:18px 28px 40px}
+.top{margin:-18px -28px 0;padding:0 30px}
+.header{gap:14px}
+.logo{width:64px;height:64px}
+.brand h1{font-size:35px}
+.brand p{font-size:20px}
+.status{font-size:16px;padding:11px 14px}
+.hero h2{font-size:36px}
+.hero p{font-size:22px}
+.grid{gap:14px}
+.card{padding:22px 20px}
+.value{font-size:40px}
+.signal{padding:28px 34px}
+.score{gap:20px}
+.circle{width:140px;height:140px}
+.circle:after{width:108px;height:108px}
+.score-text h3{font-size:32px}
 }
-header{
-padding:18px 22px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom:1px solid #182338;
-background:#08101e;
-position:sticky;
-top:0;
-z-index:10;
-}
-.logo{
-font-size:24px;
-font-weight:900;
-letter-spacing:.5px;
-}
-.logo span{color:#35e6a2}
-.live{
-color:#35e6a2;
-font-size:12px;
-font-weight:bold;
-}
-main{
-max-width:1200px;
-margin:auto;
-padding:24px 16px;
-}
-h1{
-font-size:34px;
-margin:0 0 8px;
-}
-.subtitle{
-color:#8290a8;
-margin-bottom:20px;
-}
-.badge{
-display:inline-block;
-padding:7px 11px;
-border:1px solid #30405c;
-border-radius:8px;
-color:#35e6a2;
-font-size:11px;
-margin-bottom:22px;
-}
-.kpis{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-}
-.card{
-background:linear-gradient(145deg,#0b1425,#07101d);
-border:1px solid #1b2b43;
-border-radius:16px;
-padding:18px;
-margin-bottom:14px;
-box-shadow:0 10px 30px #0005;
-}
-.label{
-font-size:11px;
-color:#8290a8;
-text-transform:uppercase;
-letter-spacing:1px;
-}
-.number{
-font-size:28px;
-font-weight:900;
-margin-top:8px;
-}
-.green{color:#35e6a2}
-.yellow{color:#ffd166}
-.red{color:#ff5d73}
-.blue{color:#55a8ff}
-
-.grid{
-display:grid;
-grid-template-columns:1.4fr .8fr;
-gap:14px;
-margin-top:14px;
-}
-.signal{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:14px 0;
-border-bottom:1px solid #182338;
-}
-.signal:last-child{border-bottom
+</style>
+</head>
+<body>
+<div class="page">
+<div class="top"><span>Nexus SOL AI</span><span class="arrow">→</span></div>
+<div class="header">
+<div class="logo">N</div>
+<div class="brand">
+<h1>Nexus SOL AI</h1>
+<p>Solana Signal Intelligence<br>Engine</p>
+</div>
+<div class="status"><span class="dot"></span>Scanner<br>Online</div>
+</div>
+<section class="hero">
+<h2>AI Signal Dashboard</h2>
+<p>Monitor token quality, momentum,<br>liquidity and risk from one unified<br>intelligence layer.</p>
+</section>
+<section class="grid">
+<div class="card"><div class="label">SCANNER STATUS</div><div class="value green">ONLINE</div></div>
+<div class="card"><div class="label">SCANS TODAY</div><div class="value">128</div></div>
+<div class="card"><div class="label">QUALIFIED SIGNALS</div><div class="value">17</div></div>
+<div class="card"><div class="label">SYSTEM SCORE</div><div class="value">87%</div></div>
+</section>
+<section class="signal">
+<div class="signal-title"><span>Signal Intelligence</span><span class="badge">STRONG</span></div>
+<div class="score">
+<div class="circle"><span class="score-num">86</span></div>
+<div class="score-text">
+<div class="small">CURRENT SIGNAL SCORE</div>
+<h3>High Quality</h3>
+<p>Liquidity + momentum + risk<br>composite</p>
+</div>
+</div>
+<div class="metrics">
+<div class="metric"><div class="m-label">LIQUIDITY</div><div class="m-value">92/100</div><div class="bar"><div class="fill" style="width:92%"></div></div></div>
+<div class="metric"><div class="m-label">MOMENTUM</div><div class="m-value">88/100</div><div class="bar"><div class="fill" style="width:88%"></div></div></div>
+</div>
+</section>
+</div>
+</body>
+</html>
