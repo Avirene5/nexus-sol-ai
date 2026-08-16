@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Nexus SOL AI</title>
+<title>Nexus SOL AI — Live Intelligence</title>
 
 <style>
 *{box-sizing:border-box}
@@ -22,6 +22,10 @@
   --red:#ff5577;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
   background:
@@ -37,7 +41,9 @@ body{
   padding:22px;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 .top{
   display:grid;
@@ -55,7 +61,7 @@ body{
 .logo{
   width:82px;
   height:82px;
-  border-radius:18px;
+  border-radius:20px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -67,6 +73,20 @@ body{
   box-shadow:
     0 0 28px #09d9ff55,
     inset 0 0 20px #ffffff22;
+  position:relative;
+  overflow:hidden;
+}
+
+.logo:after{
+  content:"";
+  position:absolute;
+  width:120%;
+  height:2px;
+  background:#ffffff66;
+  transform:rotate(-35deg);
+  left:-10%;
+  top:45%;
+  box-shadow:0 0 15px #fff;
 }
 
 .brand h1{
@@ -91,7 +111,8 @@ body{
 .live{
   border:1px solid #16465a;
   border-radius:20px;
-  background:linear-gradient(90deg,#061523,#071c2c);
+  background:
+    linear-gradient(90deg,#061523,#071c2c);
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -111,6 +132,18 @@ body{
   background:var(--green);
   border-radius:50%;
   box-shadow:0 0 18px var(--green);
+  animation:pulse 1.6s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{
+    box-shadow:0 0 8px var(--green);
+    opacity:.7;
+  }
+  50%{
+    box-shadow:0 0 25px var(--green);
+    opacity:1;
+  }
 }
 
 .live strong{
@@ -140,7 +173,9 @@ body{
   font-size:27px;
 }
 
-/* MAIN */
+/* =========================
+   LAYOUT
+========================= */
 
 .layout{
   display:grid;
@@ -148,12 +183,15 @@ body{
   gap:18px;
 }
 
-/* SIDEBAR */
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar{
   border:1px solid var(--line);
   border-radius:18px;
-  background:linear-gradient(180deg,#061321,#030b15);
+  background:
+    linear-gradient(180deg,#061321,#030b15);
   padding:12px;
 }
 
@@ -169,7 +207,8 @@ body{
 }
 
 .nav.active{
-  background:linear-gradient(90deg,#082c45,#071827);
+  background:
+    linear-gradient(90deg,#082c45,#071827);
   color:white;
   border-left:2px solid var(--cyan);
   box-shadow:0 0 22px #00d9ff12;
@@ -225,7 +264,9 @@ body{
   line-height:1.6;
 }
 
-/* DASHBOARD */
+/* =========================
+   DASHBOARD
+========================= */
 
 .dashboard{
   min-width:0;
@@ -245,7 +286,9 @@ body{
   box-shadow:0 10px 35px #0008;
 }
 
-/* SIGNAL */
+/* =========================
+   SIGNAL
+========================= */
 
 .signal{
   min-height:390px;
@@ -254,11 +297,25 @@ body{
   padding:22px;
 }
 
+.signal:before{
+  content:"";
+  position:absolute;
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  background:#00d9ff08;
+  filter:blur(25px);
+  left:50%;
+  top:40%;
+  transform:translate(-50%,-50%);
+}
+
 .signal h3{
   text-align:center;
   margin:0 0 12px;
   font-size:15px;
   letter-spacing:1px;
+  position:relative;
 }
 
 .gauge{
@@ -326,7 +383,9 @@ body{
   white-space:nowrap;
 }
 
-/* RIGHT METRICS */
+/* =========================
+   RIGHT METRICS
+========================= */
 
 .side-metrics{
   display:grid;
@@ -386,7 +445,9 @@ body{
   box-shadow:0 -8px 0 -7px #18d9ff;
 }
 
-/* KPI */
+/* =========================
+   KPIs
+========================= */
 
 .kpis{
   display:grid;
@@ -442,7 +503,9 @@ body{
   color:#8ba0b4;
 }
 
-/* LOWER GRID */
+/* =========================
+   LOWER GRID
+========================= */
 
 .lower{
   display:grid;
@@ -480,7 +543,9 @@ body{
   font-size:11px;
 }
 
-/* BAR CHART */
+/* =========================
+   BAR CHART
+========================= */
 
 .bar-chart{
   height:220px;
@@ -494,13 +559,15 @@ body{
 .bar{
   flex:1;
   min-width:3px;
-  background:linear-gradient(to top,#086cff,#08d8ff);
+  background:
+    linear-gradient(to top,#086cff,#08d8ff);
   border-radius:3px 3px 0 0;
   box-shadow:0 0 8px #00aaff55;
 }
 
 .bar.g{
-  background:linear-gradient(to top,#06b86d,#20f0a0);
+  background:
+    linear-gradient(to top,#06b86d,#20f0a0);
 }
 
 .axis{
@@ -511,7 +578,9 @@ body{
   margin-top:8px;
 }
 
-/* TABLE */
+/* =========================
+   TABLE
+========================= */
 
 table{
   width:100%;
@@ -547,6 +616,7 @@ td{
   justify-content:center;
   background:#182a3e;
   color:#fff;
+  font-size:12px;
 }
 
 .score-small{
@@ -564,7 +634,9 @@ td{
   color:var(--green);
 }
 
-/* PERFORMANCE */
+/* =========================
+   PERFORMANCE
+========================= */
 
 .performance{
   display:grid;
@@ -611,7 +683,9 @@ td{
   box-shadow:0 0 18px #20f0a055;
 }
 
-/* AI */
+/* =========================
+   AI
+========================= */
 
 .ai{
   display:flex;
@@ -629,7 +703,8 @@ td{
   font-size:80px;
   color:#1acfff;
   text-shadow:0 0 30px #008dff;
-  background:radial-gradient(circle,#062b52,#020b15 65%);
+  background:
+    radial-gradient(circle,#062b52,#020b15 65%);
 }
 
 .ai h2{
@@ -650,10 +725,174 @@ td{
   padding:13px;
   border-radius:9px;
   color:white;
-  background:linear-gradient(90deg,#1857db,#7128d8);
+  background:
+    linear-gradient(90deg,#1857db,#7128d8);
 }
 
-/* FOOTER */
+/* =========================
+   LIVE MARKET TICKER
+========================= */
+
+.market-wrap{
+  margin-top:16px;
+  overflow:hidden;
+  border:1px solid #12314a;
+  border-radius:15px;
+  background:#030b14;
+  box-shadow:
+    inset 0 0 25px #00d9ff06,
+    0 8px 30px #0008;
+}
+
+.market-head{
+  height:38px;
+  padding:0 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #10283c;
+  color:#7f95a9;
+  font-size:10px;
+  letter-spacing:1.5px;
+}
+
+.market-live{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:var(--green);
+}
+
+.market-live-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 10px var(--green);
+}
+
+.ticker-window{
+  overflow:hidden;
+  width:100%;
+}
+
+.ticker-track{
+  display:flex;
+  width:max-content;
+  animation:tickerMove 35s linear infinite;
+}
+
+.ticker-window:hover .ticker-track{
+  animation-play-state:paused;
+}
+
+@keyframes tickerMove{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-50%);
+  }
+}
+
+.ticker-item{
+  min-width:205px;
+  height:72px;
+  padding:0 18px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-right:1px solid #10283c;
+  background:
+    linear-gradient(90deg,#061321,#040d17);
+}
+
+.coin-icon{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    linear-gradient(135deg,#0a2940,#122c46);
+  border:1px solid #1d4562;
+  color:#fff;
+  font-weight:800;
+  font-size:11px;
+  flex:none;
+}
+
+.coin-info{
+  min-width:82px;
+}
+
+.coin-symbol{
+  display:block;
+  color:#dcecff;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.5px;
+}
+
+.coin-price{
+  display:block;
+  margin-top:4px;
+  color:white;
+  font-size:15px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.coin-change{
+  margin-left:auto;
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.up{
+  color:var(--green);
+}
+
+.down{
+  color:var(--red);
+}
+
+.live-flash{
+  animation:priceFlash .35s ease;
+}
+
+@keyframes priceFlash{
+  0%{
+    transform:scale(1.08);
+    text-shadow:0 0 15px var(--cyan);
+  }
+  100%{
+    transform:scale(1);
+    text-shadow:none;
+  }
+}
+
+/* =========================
+   LIVE DATA STATUS
+========================= */
+
+.data-status{
+  margin-top:8px;
+  color:#647b90;
+  font-size:10px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.data-status strong{
+  color:var(--green);
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
   margin-top:16px;
@@ -664,13 +903,16 @@ td{
   justify-content:space-between;
   color:#b0c0cf;
   font-size:12px;
+  background:#030c15;
 }
 
 .healthy{
   color:var(--green);
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:900px){
 
@@ -793,6 +1035,14 @@ td{
   .ai-art{
     width:100%;
   }
+
+  .ticker-item{
+    min-width:175px;
+  }
+
+  .market-head{
+    padding:0 12px;
+  }
 }
 </style>
 </head>
@@ -800,8 +1050,6 @@ td{
 <body>
 
 <div class="app">
-
-<!-- HEADER -->
 
 <header class="top">
 
@@ -817,9 +1065,10 @@ td{
 
     <div class="live-left">
       <div class="dot"></div>
+
       <div>
         <strong>LIVE SCANNER</strong>
-        <p>Scanning the Solana universe...</p>
+        <p id="scannerMessage">Connecting to live market data...</p>
       </div>
     </div>
 
@@ -835,38 +1084,64 @@ td{
 
 <div class="layout">
 
-<!-- SIDEBAR -->
-
 <aside class="sidebar">
 
-  <div class="nav active"><span>⌂</span> Dashboard</div>
-  <div class="nav"><span>◉</span> Live Scanner</div>
-  <div class="nav"><span>◎</span> Signals</div>
-  <div class="nav"><span>☆</span> Watchlist</div>
-  <div class="nav"><span>⌁</span> Performance</div>
-  <div class="nav"><span>◷</span> Outcomes</div>
-  <div class="nav"><span>⌁</span> Analytics</div>
-  <div class="nav"><span>⚙</span> Settings</div>
+  <div class="nav active">
+    <span>⌂</span> Dashboard
+  </div>
+
+  <div class="nav">
+    <span>◉</span> Live Scanner
+  </div>
+
+  <div class="nav">
+    <span>◎</span> Signals
+  </div>
+
+  <div class="nav">
+    <span>☆</span> Watchlist
+  </div>
+
+  <div class="nav">
+    <span>⌁</span> Performance
+  </div>
+
+  <div class="nav">
+    <span>◷</span> Outcomes
+  </div>
+
+  <div class="nav">
+    <span>⌁</span> Analytics
+  </div>
+
+  <div class="nav">
+    <span>⚙</span> Settings
+  </div>
 
   <div class="engine">
+
     <small>AI ENGINE STATUS</small>
-    <div class="online">● ONLINE</div>
-    <div class="brain">AI</div>
+
+    <div class="online">
+      ● ONLINE
+    </div>
+
+    <div class="brain">
+      AI
+    </div>
+
   </div>
 
   <div class="quote">
-    "The edge is intelligence."<br><br>
+    "The edge is intelligence."
+    <br><br>
     <span class="green">— NEXUS SOL AI</span>
   </div>
 
 </aside>
 
 
-<!-- DASHBOARD -->
-
 <main class="dashboard">
-
-<!-- SIGNAL + METRICS -->
 
 <section class="cards-top">
 
@@ -879,7 +1154,9 @@ td{
       <div class="score">
         <b>86</b>
         <span>/100</span>
-        <div class="strong">STRONG SIGNAL</div>
+        <div class="strong">
+          STRONG SIGNAL
+        </div>
       </div>
 
     </div>
@@ -896,12 +1173,23 @@ td{
     <div class="card metric">
 
       <div class="metric-left">
-        <div class="metric-icon">💧</div>
+
+        <div class="metric-icon">
+          💧
+        </div>
+
         <div>
+
           <label>LIQUIDITY</label>
-          <strong>92<small>/100</small></strong>
+
+          <strong>
+            92<small>/100</small>
+          </strong>
+
           <small>Excellent</small>
+
         </div>
+
       </div>
 
       <div class="mini-chart"></div>
@@ -912,12 +1200,23 @@ td{
     <div class="card metric">
 
       <div class="metric-left">
-        <div class="metric-icon">⚡</div>
+
+        <div class="metric-icon">
+          ⚡
+        </div>
+
         <div>
+
           <label>MOMENTUM</label>
-          <strong>88<small>/100</small></strong>
+
+          <strong>
+            88<small>/100</small>
+          </strong>
+
           <small>Very Strong</small>
+
         </div>
+
       </div>
 
       <div class="mini-chart"></div>
@@ -928,12 +1227,23 @@ td{
     <div class="card metric">
 
       <div class="metric-left">
-        <div class="metric-icon">🛡</div>
-        <div>
-          <label>RISK LEVEL</label>
-          <strong class="green">LOW</strong>
-          <small>Safe Zone</small>
+
+        <div class="metric-icon">
+          🛡
         </div>
+
+        <div>
+
+          <label>RISK LEVEL</label>
+
+          <strong class="green">
+            LOW
+          </strong>
+
+          <small>Safe Zone</small>
+
+        </div>
+
       </div>
 
       <div class="mini-chart"></div>
@@ -944,55 +1254,106 @@ td{
 
 </section>
 
-
-<!-- KPIs -->
 
 <section class="kpis">
 
   <div class="card kpi">
-    <div class="kpi-title">SCANS TODAY</div>
-    <div class="kpi-value">128</div>
+
+    <div class="kpi-title">
+      SCANS TODAY
+    </div>
+
+    <div class="kpi-value">
+      128
+    </div>
+
     <div class="kpi-line"></div>
-    <small class="green">+21% vs yesterday</small>
+
+    <small class="green">
+      +21% vs yesterday
+    </small>
+
   </div>
 
-  <div class="card kpi">
-    <div class="kpi-title">QUALIFIED SIGNALS</div>
-    <div class="kpi-value green">17</div>
-    <div class="kpi-line"></div>
-    <small class="green">+13% vs yesterday</small>
-  </div>
 
   <div class="card kpi">
-    <div class="kpi-title">HIT RATE (1H)</div>
-    <div class="kpi-value">62%</div>
+
+    <div class="kpi-title">
+      QUALIFIED SIGNALS
+    </div>
+
+    <div class="kpi-value green">
+      17
+    </div>
+
     <div class="kpi-line"></div>
-    <small>Last 50 signals</small>
+
+    <small class="green">
+      +13% vs yesterday
+    </small>
+
   </div>
 
+
   <div class="card kpi">
-    <div class="kpi-title">AVG ROI (1H)</div>
-    <div class="kpi-value green">+4.21%</div>
+
+    <div class="kpi-title">
+      HIT RATE (1H)
+    </div>
+
+    <div class="kpi-value">
+      62%
+    </div>
+
     <div class="kpi-line"></div>
-    <small>Paper Mode Results</small>
+
+    <small>
+      Last 50 signals
+    </small>
+
+  </div>
+
+
+  <div class="card kpi">
+
+    <div class="kpi-title">
+      AVG ROI (1H)
+    </div>
+
+    <div class="kpi-value green">
+      +4.21%
+    </div>
+
+    <div class="kpi-line"></div>
+
+    <small>
+      Paper Mode Results
+    </small>
+
   </div>
 
 </section>
 
-
-<!-- CHART + SIGNALS -->
 
 <section class="lower">
 
   <div class="card panel">
 
     <div class="panel-head">
+
       <div>
         <h3>LIVE SCANNER ACTIVITY</h3>
-        <small>Real-time scan volume and qualified signals</small>
+        <small>
+          Real-time scan volume and qualified signals
+        </small>
       </div>
-      <div class="select">24H⌄</div>
+
+      <div class="select">
+        24H⌄
+      </div>
+
     </div>
+
 
     <div class="bar-chart">
 
@@ -1024,7 +1385,9 @@ td{
 
     </div>
 
+
     <div class="axis">
+
       <span>00:00</span>
       <span>04:00</span>
       <span>08:00</span>
@@ -1032,11 +1395,24 @@ td{
       <span>16:00</span>
       <span>20:00</span>
       <span>24:00</span>
+
     </div>
 
+
     <p style="color:#7f95a9;font-size:11px">
-      🟢 Last scan: 00:01:23 ago
-      <span style="float:right">Next scan in: 03:37</span>
+
+      🟢 Last scan:
+      <span id="lastScan">
+        waiting...
+      </span>
+
+      <span style="float:right">
+        Market stream:
+        <span id="marketState" class="green">
+          CONNECTING
+        </span>
+      </span>
+
     </p>
 
   </div>
@@ -1045,18 +1421,32 @@ td{
   <div class="card panel">
 
     <div class="panel-head">
+
       <div>
-        <h3>TOP QUALIFIED SIGNALS</h3>
-        <small>Highest scoring current setups</small>
+
+        <h3>
+          TOP QUALIFIED SIGNALS
+        </h3>
+
+        <small>
+          Highest scoring current setups
+        </small>
+
       </div>
-      <div class="select">VIEW ALL</div>
+
+      <div class="select">
+        LIVE
+      </div>
+
     </div>
+
 
     <div class="table-wrap">
 
       <table>
 
         <thead>
+
           <tr>
             <th>TOKEN</th>
             <th>SCORE</th>
@@ -1064,73 +1454,109 @@ td{
             <th>MOMENTUM</th>
             <th>RISK</th>
           </tr>
+
         </thead>
+
 
         <tbody>
 
           <tr>
+
             <td>
               <div class="token">
-                <div class="token-icon">🐶</div>
-                DOGWIFHAT
+                <div class="token-icon">W</div>
+                WIF
               </div>
             </td>
-            <td><span class="score-small">89</span></td>
+
+            <td>
+              <span class="score-small">89</span>
+            </td>
+
             <td class="green">94</td>
             <td class="green">90</td>
             <td class="low">LOW</td>
+
           </tr>
 
-          <tr>
-            <td>
-              <div class="token">
-                <div class="token-icon">🐕</div>
-                POPCAT
-              </div>
-            </td>
-            <td><span class="score-small">87</span></td>
-            <td class="green">91</td>
-            <td class="green">88</td>
-            <td class="low">LOW</td>
-          </tr>
 
           <tr>
+
             <td>
               <div class="token">
-                <div class="token-icon">🐕</div>
+                <div class="token-icon">B</div>
                 BONK
               </div>
             </td>
-            <td><span class="score-small">85</span></td>
+
+            <td>
+              <span class="score-small">87</span>
+            </td>
+
+            <td class="green">91</td>
+            <td class="green">88</td>
+            <td class="low">LOW</td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              <div class="token">
+                <div class="token-icon">P</div>
+                POPCAT
+              </div>
+            </td>
+
+            <td>
+              <span class="score-small">85</span>
+            </td>
+
             <td class="green">88</td>
             <td class="green">87</td>
             <td class="low">LOW</td>
+
           </tr>
 
+
           <tr>
+
             <td>
               <div class="token">
-                <div class="token-icon">M</div>
-                MYRO
+                <div class="token-icon">J</div>
+                JUP
               </div>
             </td>
-            <td><span class="score-small">84</span></td>
+
+            <td>
+              <span class="score-small">84</span>
+            </td>
+
             <td class="green">86</td>
             <td class="green">85</td>
             <td class="low">LOW</td>
+
           </tr>
 
+
           <tr>
+
             <td>
               <div class="token">
                 <div class="token-icon">P</div>
                 PYTH
               </div>
             </td>
-            <td><span class="score-small">83</span></td>
+
+            <td>
+              <span class="score-small">83</span>
+            </td>
+
             <td class="green">87</td>
             <td class="green">83</td>
             <td class="low">LOW</td>
+
           </tr>
 
         </tbody>
@@ -1144,18 +1570,25 @@ td{
 </section>
 
 
-<!-- PERFORMANCE + AI -->
-
 <section class="lower">
 
   <div class="card panel">
 
     <div class="panel-head">
+
       <div>
-        <h3>PERFORMANCE <small>(PAPER MODE)</small></h3>
+        <h3>
+          PERFORMANCE
+          <small>(PAPER MODE)</small>
+        </h3>
       </div>
-      <div class="select">7D⌄</div>
+
+      <div class="select">
+        7D⌄
+      </div>
+
     </div>
+
 
     <div class="performance">
 
@@ -1181,9 +1614,12 @@ td{
 
     </div>
 
+
     <div class="line-chart"></div>
 
+
     <div class="axis">
+
       <span>May 10</span>
       <span>May 11</span>
       <span>May 12</span>
@@ -1191,6 +1627,7 @@ td{
       <span>May 14</span>
       <span>May 15</span>
       <span>May 16</span>
+
     </div>
 
   </div>
@@ -1202,47 +1639,579 @@ td{
       <h3>AI INSIGHT</h3>
     </div>
 
+
     <div class="ai">
 
-      <div class="ai-art">AI</div>
+      <div class="ai-art">
+        AI
+      </div>
+
 
       <div>
-        <h2>Market conditions are optimal.</h2>
+
+        <h2>
+          Market conditions are being monitored.
+        </h2>
 
         <p style="color:#9cafc0;font-size:13px;line-height:1.6">
-          High liquidity across major pairs, strong momentum
-          and improving market quality.
+
+          Nexus SOL AI combines scanner intelligence
+          with live market data to separate market
+          conditions from signal quality.
+
         </p>
 
         <ul>
-          <li>New launches with organic volume</li>
-          <li>Established tokens with momentum</li>
-          <li>Low risk, high liquidity setups</li>
+          <li>Live market prices</li>
+          <li>Liquidity and momentum monitoring</li>
+          <li>Risk-aware signal evaluation</li>
         </ul>
+
       </div>
 
     </div>
 
-    <div class="button">VIEW FULL ANALYSIS</div>
+
+    <div class="button">
+      VIEW FULL ANALYSIS
+    </div>
 
   </div>
 
 </section>
 
 
-<!-- FOOTER -->
+<!-- =========================================
+     LIVE EXCHANGE STYLE MARKET TICKER
+========================================= -->
+
+<section class="market-wrap">
+
+  <div class="market-head">
+
+    <span>
+      LIVE MARKET DATA
+    </span>
+
+    <span class="market-live">
+      <i class="market-live-dot"></i>
+      <span id="tickerStatus">
+        CONNECTING
+      </span>
+    </span>
+
+  </div>
+
+
+  <div class="ticker-window">
+
+    <div id="tickerTrack" class="ticker-track">
+
+      <!-- First copy -->
+
+      <div class="ticker-item"
+           data-symbol="SOLUSDT">
+
+        <div class="coin-icon">
+          SOL
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            SOL / USDT
+          </span>
+
+          <span id="price-SOLUSDT"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change-SOLUSDT"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item"
+           data-symbol="BTCUSDT">
+
+        <div class="coin-icon">
+          BTC
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            BTC / USDT
+          </span>
+
+          <span id="price-BTCUSDT"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change-BTCUSDT"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item"
+           data-symbol="ETHUSDT">
+
+        <div class="coin-icon">
+          ETH
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            ETH / USDT
+          </span>
+
+          <span id="price-ETHUSDT"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change-ETHUSDT"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item"
+           data-symbol="WIF">
+
+        <div class="coin-icon">
+          WIF
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            WIF
+          </span>
+
+          <span id="price-WIF"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change-WIF"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item"
+           data-symbol="BONK">
+
+        <div class="coin-icon">
+          BONK
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            BONK
+          </span>
+
+          <span id="price-BONK"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change-BONK"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item"
+           data-symbol="POPCAT">
+
+        <div class="coin-icon">
+          POP
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            POPCAT
+          </span>
+
+          <span id="price-POPCAT"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change-POPCAT"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item"
+           data-symbol="JUP">
+
+        <div class="coin-icon">
+          JUP
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            JUP
+          </span>
+
+          <span id="price-JUP"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change-JUP"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item"
+           data-symbol="PYTH">
+
+        <div class="coin-icon">
+          PYTH
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            PYTH
+          </span>
+
+          <span id="price-PYTH"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change-PYTH"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <!-- Second copy for seamless ticker -->
+
+      <div class="ticker-item">
+
+        <div class="coin-icon">
+          SOL
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            SOL / USDT
+          </span>
+
+          <span id="price2-SOLUSDT"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change2-SOLUSDT"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item">
+
+        <div class="coin-icon">
+          BTC
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            BTC / USDT
+          </span>
+
+          <span id="price2-BTCUSDT"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change2-BTCUSDT"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item">
+
+        <div class="coin-icon">
+          ETH
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            ETH / USDT
+          </span>
+
+          <span id="price2-ETHUSDT"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change2-ETHUSDT"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item">
+
+        <div class="coin-icon">
+          WIF
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            WIF
+          </span>
+
+          <span id="price2-WIF"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change2-WIF"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item">
+
+        <div class="coin-icon">
+          BONK
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            BONK
+          </span>
+
+          <span id="price2-BONK"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change2-BONK"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item">
+
+        <div class="coin-icon">
+          POP
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            POPCAT
+          </span>
+
+          <span id="price2-POPCAT"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change2-POPCAT"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item">
+
+        <div class="coin-icon">
+          JUP
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            JUP
+          </span>
+
+          <span id="price2-JUP"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change2-JUP"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+
+      <div class="ticker-item">
+
+        <div class="coin-icon">
+          PYTH
+        </div>
+
+        <div class="coin-info">
+
+          <span class="coin-symbol">
+            PYTH
+          </span>
+
+          <span id="price2-PYTH"
+                class="coin-price">
+            Loading...
+          </span>
+
+        </div>
+
+        <span id="change2-PYTH"
+              class="coin-change">
+          —
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="data-status">
+
+    <span>
+      Market feed:
+      <strong id="feedStatus">
+        Connecting...
+      </strong>
+    </span>
+
+    <span>
+      Last update:
+      <strong id="updateTime">
+        --
+      </strong>
+    </span>
+
+  </div>
+
+</section>
+
 
 <footer class="footer">
 
-  <span>SOL&nbsp;&nbsp; <b>$146.32</b> &nbsp;<span class="green">+2.41%</span></span>
+  <span>
+    SOL&nbsp;&nbsp;
+    <b id="footerSolPrice">
+      --
+    </b>
+    &nbsp;
+    <span id="footerSolChange"
+          class="green">
+      --
+    </span>
+  </span>
 
-  <span>24H Volume&nbsp;&nbsp; <b>$2.14B</b></span>
 
-  <span>Active Tokens&nbsp;&nbsp; <b>1,842</b></span>
+  <span>
+    24H Volume&nbsp;&nbsp;
+    <b id="footerVolume">
+      LIVE
+    </b>
+  </span>
+
+
+  <span>
+    Active Tokens&nbsp;&nbsp;
+    <b>
+      LIVE
+    </b>
+  </span>
+
 
   <span>
     Network Status&nbsp;&nbsp;
-    <b class="healthy">● Healthy</b>
+    <b class="healthy">
+      ● Healthy
+    </b>
   </span>
 
 </footer>
@@ -1250,6 +2219,607 @@ td{
 </main>
 </div>
 </div>
+
+
+<script>
+/*
+=========================================================
+ NEXUS SOL AI — LIVE MARKET DATA ENGINE
+=========================================================
+
+1. Binance WebSocket:
+   SOL / BTC / ETH live ticker.
+
+2. DEX Screener REST:
+   WIF / BONK / POPCAT / JUP / PYTH.
+
+3. Automatic reconnect.
+
+4. Exchange-style scrolling ticker.
+
+This is market-data only.
+It does NOT execute trades.
+=========================================================
+*/
+
+const LIVE_SYMBOLS = [
+  "SOLUSDT",
+  "BTCUSDT",
+  "ETHUSDT"
+];
+
+const DEX_TOKENS = [
+  "WIF",
+  "BONK",
+  "POPCAT",
+  "JUP",
+  "PYTH"
+];
+
+const marketState = {
+  SOLUSDT:{price:null,change:null},
+  BTCUSDT:{price:null,change:null},
+  ETHUSDT:{price:null,change:null},
+  WIF:{price:null,change:null},
+  BONK:{price:null,change:null},
+  POPCAT:{price:null,change:null},
+  JUP:{price:null,change:null},
+  PYTH:{price:null,change:null}
+};
+
+let socket = null;
+let reconnectTimer = null;
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function formatPrice(value){
+
+  const n = Number(value);
+
+  if(!Number.isFinite(n)){
+    return "--";
+  }
+
+  if(n >= 1000){
+    return "$" + n.toLocaleString(
+      "en-US",
+      {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      }
+    );
+  }
+
+  if(n >= 1){
+    return "$" + n.toLocaleString(
+      "en-US",
+      {
+        minimumFractionDigits:2,
+        maximumFractionDigits:4
+      }
+    );
+  }
+
+  if(n >= 0.01){
+    return "$" + n.toFixed(4);
+  }
+
+  if(n >= 0.0001){
+    return "$" + n.toFixed(6);
+  }
+
+  return "$" + n.toPrecision(6);
+}
+
+
+function formatChange(value){
+
+  const n = Number(value);
+
+  if(!Number.isFinite(n)){
+    return "—";
+  }
+
+  return (n >= 0 ? "+" : "") +
+    n.toFixed(2) +
+    "%";
+}
+
+
+function setText(id,value){
+
+  const el = document.getElementById(id);
+
+  if(el){
+    el.textContent = value;
+  }
+}
+
+
+function flash(id){
+
+  const el = document.getElementById(id);
+
+  if(!el){
+    return;
+  }
+
+  el.classList.remove("live-flash");
+
+  void el.offsetWidth;
+
+  el.classList.add("live-flash");
+}
+
+
+function updateTickerSymbol(symbol,price,change){
+
+  marketState[symbol] = {
+    price:price,
+    change:change
+  };
+
+  const priceText = formatPrice(price);
+  const changeText = formatChange(change);
+
+  const ids = [
+    "price-" + symbol,
+    "price2-" + symbol
+  ];
+
+  ids.forEach(id => {
+
+    setText(id,priceText);
+    flash(id);
+
+  });
+
+
+  const changeIds = [
+    "change-" + symbol,
+    "change2-" + symbol
+  ];
+
+  changeIds.forEach(id => {
+
+    const el = document.getElementById(id);
+
+    if(!el){
+      return;
+    }
+
+    el.textContent = changeText;
+
+    el.classList.remove("up","down");
+
+    if(Number(change) >= 0){
+      el.classList.add("up");
+    }else{
+      el.classList.add("down");
+    }
+
+  });
+
+
+  if(symbol === "SOLUSDT"){
+
+    setText(
+      "footerSolPrice",
+      priceText
+    );
+
+    const footerChange =
+      document.getElementById("footerSolChange");
+
+    if(footerChange){
+
+      footerChange.textContent =
+        changeText;
+
+      footerChange.classList.remove(
+        "up",
+        "down"
+      );
+
+      footerChange.classList.add(
+        Number(change) >= 0
+          ? "up"
+          : "down"
+      );
+
+    }
+
+  }
+
+  updateClock();
+
+}
+
+
+/* =========================
+   CLOCK / STATUS
+========================= */
+
+function updateClock(){
+
+  const now = new Date();
+
+  setText(
+    "updateTime",
+    now.toLocaleTimeString()
+  );
+
+  setText(
+    "lastScan",
+    now.toLocaleTimeString()
+  );
+}
+
+
+/* =========================
+   BINANCE WEBSOCKET
+========================= */
+
+function connectBinance(){
+
+  if(socket){
+
+    try{
+      socket.close();
+    }catch(e){}
+
+  }
+
+
+  setText(
+    "marketState",
+    "CONNECTING"
+  );
+
+  setText(
+    "tickerStatus",
+    "CONNECTING"
+  );
+
+  setText(
+    "feedStatus",
+    "Connecting..."
+  );
+
+
+  const streams =
+    LIVE_SYMBOLS
+      .map(symbol =>
+        symbol.toLowerCase() +
+        "@ticker"
+      )
+      .join("/");
+
+
+  const url =
+    "wss://stream.binance.com:9443/stream?streams=" +
+    streams;
+
+
+  try{
+
+    socket = new WebSocket(url);
+
+  }catch(error){
+
+    scheduleReconnect();
+
+    return;
+
+  }
+
+
+  socket.onopen = function(){
+
+    setText(
+      "marketState",
+      "LIVE"
+    );
+
+    setText(
+      "tickerStatus",
+      "LIVE"
+    );
+
+    setText(
+      "feedStatus",
+      "LIVE"
+    );
+
+    setText(
+      "scannerMessage",
+      "Live market feed connected"
+    );
+
+  };
+
+
+  socket.onmessage = function(event){
+
+    try{
+
+      const packet =
+        JSON.parse(event.data);
+
+      const data = packet.data || packet;
+
+      const symbol =
+        String(data.s || "")
+          .toUpperCase();
+
+      if(!symbol){
+        return;
+      }
+
+      const price =
+        Number(data.c);
+
+      const change =
+        Number(data.P);
+
+      if(
+        Number.isFinite(price)
+      ){
+
+        updateTickerSymbol(
+          symbol,
+          price,
+          change
+        );
+
+      }
+
+    }catch(error){
+
+      console.log(
+        "Ticker parse error",
+        error
+      );
+
+    }
+
+  };
+
+
+  socket.onerror = function(){
+
+    setText(
+      "marketState",
+      "RECONNECTING"
+    );
+
+    setText(
+      "tickerStatus",
+      "RECONNECTING"
+    );
+
+  };
+
+
+  socket.onclose = function(){
+
+    setText(
+      "marketState",
+      "RECONNECTING"
+    );
+
+    setText(
+      "tickerStatus",
+      "RECONNECTING"
+    );
+
+    setText(
+      "feedStatus",
+      "Reconnecting..."
+    );
+
+    scheduleReconnect();
+
+  };
+
+}
+
+
+function scheduleReconnect(){
+
+  if(reconnectTimer){
+    return;
+  }
+
+  reconnectTimer =
+    setTimeout(
+      function(){
+
+        reconnectTimer = null;
+
+        connectBinance();
+
+      },
+      5000
+    );
+
+}
+
+
+/* =========================
+   DEX SCREENER
+========================= */
+
+async function fetchDexToken(symbol){
+
+  try{
+
+    const url =
+      "https://api.dexscreener.com/latest/dex/search?q=" +
+      encodeURIComponent(symbol);
+
+    const response =
+      await fetch(url,{
+        cache:"no-store"
+      });
+
+    if(!response.ok){
+      throw new Error(
+        "HTTP " + response.status
+      );
+    }
+
+    const data =
+      await response.json();
+
+    const pairs =
+      Array.isArray(data.pairs)
+        ? data.pairs
+        : [];
+
+
+    const solanaPairs =
+      pairs.filter(pair =>
+        pair &&
+        pair.chainId === "solana" &&
+        pair.baseToken &&
+        String(
+          pair.baseToken.symbol || ""
+        ).toUpperCase() === symbol
+      );
+
+
+    if(!solanaPairs.length){
+      return;
+    }
+
+
+    /*
+      Prefer the pair with the
+      highest USD liquidity.
+    */
+
+    solanaPairs.sort(
+      (a,b) =>
+        Number(
+          b.liquidity?.usd || 0
+        ) -
+        Number(
+          a.liquidity?.usd || 0
+        )
+    );
+
+
+    const pair =
+      solanaPairs[0];
+
+
+    const price =
+      Number(pair.priceUsd);
+
+
+    const change =
+      Number(
+        pair.priceChange?.h24 || 0
+      );
+
+
+    if(
+      Number.isFinite(price)
+    ){
+
+      updateTickerSymbol(
+        symbol,
+        price,
+        change
+      );
+
+    }
+
+  }catch(error){
+
+    console.log(
+      "DEX Screener error:",
+      symbol,
+      error
+    );
+
+  }
+
+}
+
+
+async function refreshDexTokens(){
+
+  for(
+    const symbol of DEX_TOKENS
+  ){
+
+    await fetchDexToken(symbol);
+
+    /*
+      Small delay to keep the
+      browser/API load reasonable.
+    */
+
+    await new Promise(
+      resolve =>
+        setTimeout(resolve,150)
+    );
+
+  }
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+connectBinance();
+
+refreshDexTokens();
+
+
+/*
+  DEX data refresh:
+  10 seconds.
+*/
+
+setInterval(
+  refreshDexTokens,
+  10000
+);
+
+
+/*
+  Keep the UI clock alive.
+*/
+
+setInterval(
+  updateClock,
+  1000
+);
+
+
+/*
+  Initial status.
+*/
+
+setText(
+  "scannerMessage",
+  "Connecting to live market data..."
+);
+
+setText(
+  "lastScan",
+  "waiting..."
+);
+
+</script>
 
 </body>
 </html>
