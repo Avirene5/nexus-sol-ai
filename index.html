@@ -1,102 +1,778 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Nexus SOL AI</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#07111f;color:#eef5ff;font-family:Arial,Helvetica,sans-serif}
-.page{max-width:760px;margin:auto;min-height:100vh;padding:18px 20px 50px}
-.top{height:72px;display:flex;align-items:center;justify-content:space-between;color:#0b0d12;background:#eef0fa;margin:-18px -20px 0;padding:0 30px;font-size:25px;font-weight:700}
-.arrow{font-size:36px;font-weight:400}
-.header{display:flex;align-items:center;gap:20px;padding:28px 0 25px}
-.logo{width:70px;height:70px;border-radius:20px;background:linear-gradient(145deg,#28d8ad,#4979e8);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:700}
-.brand h1{margin:0;font-size:40px}
-.brand p{margin:8px 0 0;color:#8fa3bd;font-size:22px;line-height:1.35}
-.status{margin-left:auto;border:1px solid #183552;background:#0a1a2d;border-radius:40px;padding:13px 20px;color:#aebdd0;font-size:18px}
-.dot{display:inline-block;width:14px;height:14px;background:#2bd89d;border-radius:50%;margin-right:10px}
-.hero,.card,.signal{border:1px solid #193650;background:#091a2c;border-radius:30px;box-shadow:0 10px 35px #0003}
-.hero{padding:34px 34px 38px}
-.hero h2{font-size:42px;margin:0 0 22px}
-.hero p{font-size:25px;color:#9aabc1;line-height:1.55;margin:0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
-.card{padding:24px}
-.label{color:#8095af;font-size:18px;letter-spacing:1px}
-.value{font-size:44px;font-weight:700;margin-top:14px}
-.green{color:#35dfa5}
-.signal{margin-top:28px;padding:34px}
-.signal-title{display:flex;justify-content:space-between;align-items:center;font-size:30px;font-weight:700}
-.badge{font-size:17px;background:#0d3b40;color:#35dfa5;padding:10px 16px;border-radius:12px}
-.score{display:flex;align-items:center;gap:28px;margin:25px 0}
-.circle{width:150px;height:150px;border-radius:50%;background:conic-gradient(#35dfa5 0 86%,#17334c 86%);display:flex;align-items:center;justify-content:center;position:relative}
-.circle:after{content:"";width:116px;height:116px;border-radius:50%;background:#091a2c;position:absolute}
-.score-num{font-size:38px;font-weight:700;z-index:1}
-.score-text .small{color:#8499b1;font-size:18px;letter-spacing:1px}
-.score-text h3{font-size:38px;margin:12px 0}
-.score-text p{color:#91a5bc;font-size:20px;margin:0;line-height:1.35}
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:30px}
-.metric .m-label{color:#8498b0;font-size:18px}
-.metric .m-value{font-size:32px;color:#35dfa5;font-weight:700;margin:8px 0}
-.bar{height:10px;background:#173049;border-radius:10px;overflow:hidden}
-.fill{height:100%;background:linear-gradient(90deg,#35dfa5,#718cff);border-radius:10px}
-@media(max-width:560px){
-.page{padding:18px 28px 40px}
-.top{margin:-18px -28px 0;padding:0 30px}
-.header{gap:14px}
-.logo{width:64px;height:64px}
-.brand h1{font-size:35px}
-.brand p{font-size:20px}
-.status{font-size:16px;padding:11px 14px}
-.hero h2{font-size:36px}
-.hero p{font-size:22px}
-.grid{gap:14px}
-.card{padding:22px 20px}
-.value{font-size:40px}
-.signal{padding:28px 34px}
-.score{gap:20px}
-.circle{width:140px;height:140px}
-.circle:after{width:108px;height:108px}
-.score-text h3{font-size:32px}
+
+:root{
+  --bg:#030811;
+  --panel:#081321;
+  --panel2:#0b1828;
+  --line:#18324a;
+  --text:#f2f7ff;
+  --muted:#8195ad;
+  --green:#35e6ad;
+  --cyan:#39d9ff;
+  --blue:#668cff;
+  --red:#ff5d73;
+  --yellow:#ffd166;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(53,230,173,.10),transparent 28%),
+    radial-gradient(circle at 0% 40%,rgba(57,217,255,.07),transparent 25%),
+    var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+}
+
+.container{
+  width:min(1180px,100%);
+  margin:auto;
+  padding:20px;
+}
+
+/* HEADER */
+
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 0 28px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.logo{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:36px;
+  font-weight:900;
+  color:white;
+  background:
+    linear-gradient(145deg,#32d9b4,#4a87ff);
+  box-shadow:
+    0 0 30px rgba(53,230,173,.25),
+    inset 0 1px rgba(255,255,255,.35);
+}
+
+.brand-name{
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:-.5px;
+}
+
+.brand-sub{
+  color:#7e92aa;
+  font-size:11px;
+  letter-spacing:3px;
+  margin-top:5px;
+}
+
+.live{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:12px 18px;
+  border:1px solid rgba(53,230,173,.3);
+  border-radius:30px;
+  color:var(--green);
+  background:rgba(53,230,173,.07);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.live-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 14px var(--green);
+}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:32px;
+  padding:38px;
+  background:
+    linear-gradient(145deg,rgba(11,28,45,.98),rgba(5,14,25,.98));
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  right:-100px;
+  top:-130px;
+  border-radius:50%;
+  background:rgba(53,230,173,.12);
+  filter:blur(50px);
+}
+
+.eyebrow{
+  color:var(--green);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:3px;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  margin:0;
+  max-width:700px;
+  font-size:clamp(40px,7vw,76px);
+  line-height:.98;
+  letter-spacing:-4px;
+}
+
+.hero p{
+  max-width:700px;
+  color:#91a5bb;
+  font-size:18px;
+  line-height:1.7;
+  margin:25px 0 35px;
+}
+
+/* SCORE */
+
+.hero-bottom{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:35px;
+  align-items:end;
+}
+
+.conf-label{
+  color:#71869e;
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.conf{
+  display:flex;
+  align-items:baseline;
+  gap:5px;
+  margin-top:5px;
+}
+
+.conf strong{
+  font-size:64px;
+  letter-spacing:-3px;
+}
+
+.conf span{
+  color:var(--green);
+  font-size:22px;
+  font-weight:800;
+}
+
+.progress{
+  height:10px;
+  background:#12263a;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:14px;
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  width:87%;
+  background:linear-gradient(90deg,var(--green),var(--cyan),var(--blue));
+  border-radius:20px;
+  box-shadow:0 0 18px rgba(53,230,173,.45);
+}
+
+.normal{
+  color:#71869e;
+  font-size:12px;
+  margin-top:10px;
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:14px;
+}
+
+.card{
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:linear-gradient(145deg,#091725,#07111e);
+  padding:23px;
+  min-height:125px;
+}
+
+.card-label{
+  color:#71869e;
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.card-value{
+  margin-top:13px;
+  font-size:36px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+.green{color:var(--green)}
+.blue{color:#71a0ff}
+.yellow{color:var(--yellow)}
+
+/* INTELLIGENCE */
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:35px 0 15px;
+}
+
+.section-title h2{
+  margin:0;
+  font-size:20px;
+}
+
+.section-title span{
+  color:#60758d;
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+.intelligence{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:14px;
+}
+
+.signal-panel,
+.ai-panel{
+  border:1px solid var(--line);
+  border-radius:26px;
+  background:#071321;
+  padding:28px;
+}
+
+.signal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.signal-head h2{
+  margin:0;
+  font-size:25px;
+}
+
+.badge{
+  padding:9px 14px;
+  border-radius:20px;
+  background:rgba(53,230,173,.12);
+  border:1px solid rgba(53,230,173,.25);
+  color:var(--green);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.signal-main{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  margin:35px 0;
+}
+
+.score-ring{
+  width:155px;
+  height:155px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle,#071321 58%,transparent 59%),
+    conic-gradient(var(--green) 0 86%,#163149 86% 100%);
+  box-shadow:0 0 35px rgba(53,230,173,.12);
+}
+
+.score-ring strong{
+  font-size:43px;
+}
+
+.signal-copy small{
+  color:#72869e;
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+.signal-copy h3{
+  font-size:30px;
+  margin:8px 0;
+}
+
+.signal-copy p{
+  color:#71869e;
+  line-height:1.6;
+  margin:0;
+}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.metric{
+  background:#0a1a2a;
+  border:1px solid #163149;
+  border-radius:17px;
+  padding:17px;
+}
+
+.metric-label{
+  color:#71869e;
+  font-size:10px;
+  letter-spacing:1px;
+}
+
+.metric-value{
+  font-size:25px;
+  font-weight:900;
+  margin-top:8px;
+}
+
+/* AI PANEL */
+
+.ai-panel{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.ai-icon{
+  width:48px;
+  height:48px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#35e6ad,#4d7dff);
+  font-weight:900;
+  font-size:21px;
+  box-shadow:0 0 25px rgba(53,230,173,.2);
+}
+
+.ai-panel h2{
+  margin:20px 0 8px;
+}
+
+.ai-panel p{
+  color:#8195ad;
+  line-height:1.7;
+}
+
+.decision{
+  margin-top:25px;
+  padding:17px;
+  border-left:3px solid var(--green);
+  background:rgba(53,230,173,.05);
+}
+
+.decision strong{
+  color:var(--green);
+}
+
+.decision div{
+  color:#8195ad;
+  font-size:13px;
+  margin-top:6px;
+}
+
+/* ACTIVITY */
+
+.activity{
+  border:1px solid var(--line);
+  border-radius:26px;
+  padding:25px;
+  background:#071321;
+}
+
+.chart{
+  height:160px;
+  display:flex;
+  align-items:flex-end;
+  gap:7px;
+  padding-top:20px;
+}
+
+.bar{
+  flex:1;
+  min-width:5px;
+  border-radius:7px 7px 2px 2px;
+  background:linear-gradient(to top,var(--blue),var(--green));
+  opacity:.85;
+  box-shadow:0 0 12px rgba(53,230,173,.08);
+}
+
+.activity-foot{
+  display:flex;
+  justify-content:space-between;
+  color:#657b93;
+  font-size:11px;
+  margin-top:12px;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  color:#40546b;
+  font-size:10px;
+  letter-spacing:2px;
+  padding:35px 0 15px;
+}
+
+/* MOBILE */
+
+@media(max-width:750px){
+
+  .container{
+    padding:14px;
+  }
+
+  header{
+    padding:8px 4px 20px;
+  }
+
+  .logo{
+    width:50px;
+    height:50px;
+    font-size:30px;
+  }
+
+  .brand-name{
+    font-size:19px;
+  }
+
+  .brand-sub{
+    font-size:9px;
+  }
+
+  .live{
+    padding:10px 12px;
+    font-size:10px;
+  }
+
+  .hero{
+    padding:28px 22px;
+    border-radius:26px;
+  }
+
+  .hero h1{
+    font-size:45px;
+    letter-spacing:-2.5px;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .hero-bottom{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .card{
+    min-height:110px;
+    padding:18px;
+  }
+
+  .card-value{
+    font-size:30px;
+  }
+
+  .intelligence{
+    grid-template-columns:1fr;
+  }
+
+  .signal-panel,
+  .ai-panel,
+  .activity{
+    padding:22px;
+  }
+
+  .signal-main{
+    gap:18px;
+  }
+
+  .score-ring{
+    width:125px;
+    height:125px;
+    min-width:125px;
+  }
+
+  .score-ring strong{
+    font-size:35px;
+  }
+
+  .signal-copy h3{
+    font-size:24px;
+  }
+
+  .metrics{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .metric:last-child{
+    grid-column:1/-1;
+  }
 }
 </style>
 </head>
+
 <body>
-<div class="page">
-<div class="top"><span>Nexus SOL AI</span><span class="arrow">→</span></div>
-<div class="header">
-<div class="logo">N</div>
-<div class="brand">
-<h1>Nexus SOL AI</h1>
-<p>Solana Signal Intelligence<br>Engine</p>
-</div>
-<div class="status"><span class="dot"></span>Scanner<br>Online</div>
-</div>
+
+<div class="container">
+
+<header>
+  <div class="brand">
+    <div class="logo">N</div>
+    <div>
+      <div class="brand-name">NEXUS SOL AI</div>
+      <div class="brand-sub">SOLANA SIGNAL INTELLIGENCE</div>
+    </div>
+  </div>
+
+  <div class="live">
+    <span class="live-dot"></span>
+    LIVE SCANNER
+  </div>
+</header>
+
+
 <section class="hero">
-<h2>AI Signal Dashboard</h2>
-<p>Monitor token quality, momentum,<br>liquidity and risk from one unified<br>intelligence layer.</p>
+
+  <div class="eyebrow">AI INTELLIGENCE ENGINE · V3</div>
+
+  <h1>
+    See the signal.<br>
+    Understand the risk.
+  </h1>
+
+  <p>
+    Real-time intelligence for Solana tokens —
+    combining momentum, liquidity, security and
+    market quality into one decision layer.
+  </p>
+
+  <div class="hero-bottom">
+
+    <div>
+      <div class="conf-label">System Confidence</div>
+
+      <div class="conf">
+        <strong>87</strong>
+        <span>%</span>
+      </div>
+
+      <div class="progress">
+        <i></i>
+      </div>
+
+      <div class="normal">
+        Engine operating normally
+      </div>
+    </div>
+
+    <div></div>
+
+  </div>
+
 </section>
-<section class="grid">
-<div class="card"><div class="label">SCANNER STATUS</div><div class="value green">ONLINE</div></div>
-<div class="card"><div class="label">SCANS TODAY</div><div class="value">128</div></div>
-<div class="card"><div class="label">QUALIFIED SIGNALS</div><div class="value">17</div></div>
-<div class="card"><div class="label">SYSTEM SCORE</div><div class="value">87%</div></div>
+
+
+<div class="stats">
+
+  <div class="card">
+    <div class="card-label">Scans Today</div>
+    <div class="card-value">128</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Qualified Signals</div>
+    <div class="card-value green">17</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">System Score</div>
+    <div class="card-value blue">87%</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Risk State</div>
+    <div class="card-value yellow">LOW</div>
+  </div>
+
+</div>
+
+
+<div class="section-title">
+  <h2>Signal Intelligence</h2>
+  <span>LIVE DECISION LAYER</span>
+</div>
+
+
+<section class="intelligence">
+
+  <div class="signal-panel">
+
+    <div class="signal-head">
+      <h2>Current Signal</h2>
+      <div class="badge">STRONG</div>
+    </div>
+
+    <div class="signal-main">
+
+      <div class="score-ring">
+        <strong>86</strong>
+      </div>
+
+      <div class="signal-copy">
+        <small>CURRENT SIGNAL SCORE</small>
+        <h3>High Quality</h3>
+        <p>
+          Liquidity + momentum + security
+          composite intelligence.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="metrics">
+
+      <div class="metric">
+        <div class="metric-label">LIQUIDITY</div>
+        <div class="metric-value green">92/100</div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-label">MOMENTUM</div>
+        <div class="metric-value blue">88/100</div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-label">RISK</div>
+        <div class="metric-value green">LOW</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="ai-panel">
+
+    <div>
+      <div class="ai-icon">N</div>
+
+      <h2>AI Decision Layer</h2>
+
+      <p>
+        Nexus evaluates multiple market dimensions
+        before allowing a token to reach the qualified
+        signal layer.
+      </p>
+    </div>
+
+    <div class="decision">
+      <strong>QUALIFIED SIGNAL</strong>
+      <div>
+        Strong liquidity, positive momentum and
+        acceptable risk profile.
+      </div>
+    </div>
+
+  </div>
+
 </section>
-<section class="signal">
-<div class="signal-title"><span>Signal Intelligence</span><span class="badge">STRONG</span></div>
-<div class="score">
-<div class="circle"><span class="score-num">86</span></div>
-<div class="score-text">
-<div class="small">CURRENT SIGNAL SCORE</div>
-<h3>High Quality</h3>
-<p>Liquidity + momentum + risk<br>composite</p>
+
+
+<div class="section-title">
+  <h2>Scanner Activity</h2>
+  <span>LAST 24 CYCLES</span>
 </div>
-</div>
-<div class="metrics">
-<div class="metric"><div class="m-label">LIQUIDITY</div><div class="m-value">92/100</div><div class="bar"><div class="fill" style="width:92%"></div></div></div>
-<div class="metric"><div class="m-label">MOMENTUM</div><div class="m-value">88/100</div><div class="bar"><div class="fill" style="width:88%"></div></div></div>
-</div>
+
+
+<section class="activity">
+
+  <div class="chart">
+    <div class="bar" style="height:35%"></div>
+    <div class="bar" style="height:52%"></div>
+    <div class="bar" style="height:42%"></div>
+    <div class="bar" style="height:68%"></div>
+    <div class="bar" style="height:58%"></div>
+    <div class="bar" style="height:76%"></div>
+    <div class="bar" style="height:48%"></div>
+    <div class="bar" style="height:82%"></div>
+    <div class="bar" style="height:64%"></div>
+    <div class="bar" style="height:91%"></div>
+    <div class="bar" style="height:73%"></div>
+    <div class="bar" style="height:88%"></div>
+    <div class="bar" style="height:57%"></div>
+    <div class="bar" style="height:79%"></div>
+    <div class="bar" style="height:94%"></div>
+    <div class="bar" style="height:69%"></div>
+    <div class="bar" style="height:85%"></div>
+    <div class="bar" style="height:61%"></div>
+    <div class="bar" style="height:90%"></div>
+    <div class="bar" style="height:75%"></div>
+  </div>
+
+  <div class="activity-foot">
+    <span>24 CYCLES AGO</span>
+    <span>NOW</span>
+  </div>
+
 </section>
+
+
+<footer>
+  NEXUS SOL AI · SOLANA INTELLIGENCE ENGINE
+</footer>
+
 </div>
+
 </body>
 </html>
