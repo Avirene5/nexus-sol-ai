@@ -9,461 +9,509 @@
 *{box-sizing:border-box}
 
 :root{
-  --bg:#020812;
-  --panel:#06111f;
-  --panel2:#091827;
+  --bg:#020811;
+  --panel:#061321;
+  --panel2:#081a2b;
   --line:#12304a;
-  --text:#f2f7ff;
-  --muted:#7187a0;
-  --green:#29e6a4;
-  --cyan:#19d8ff;
-  --blue:#477cff;
+  --text:#eef7ff;
+  --muted:#8298ae;
+  --green:#20f0a0;
+  --cyan:#18d9ff;
+  --blue:#258bff;
   --purple:#8b5cff;
-  --red:#ff5570;
+  --red:#ff5577;
 }
 
 body{
   margin:0;
   background:
-    radial-gradient(circle at 50% -10%,#092238 0,transparent 38%),
-    #020812;
+    radial-gradient(circle at 55% 15%,#08233a 0,#020811 42%,#01060c 100%);
   color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-}
-
-.app{
-  max-width:1450px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:185px 1fr;
+  font-family:Inter,Arial,sans-serif;
   min-height:100vh;
 }
 
-/* SIDEBAR */
-
-.sidebar{
-  border-right:1px solid #10273b;
-  background:rgba(3,10,19,.96);
-  padding:25px 16px;
-  display:flex;
-  flex-direction:column;
+.app{
+  max-width:1500px;
+  margin:auto;
+  padding:22px;
 }
 
-.logo-box{
+/* HEADER */
+
+.top{
+  display:grid;
+  grid-template-columns:310px 1fr;
+  gap:18px;
+  margin-bottom:18px;
+}
+
+.brand{
   display:flex;
   align-items:center;
-  gap:10px;
-  margin-bottom:35px;
+  gap:15px;
 }
 
 .logo{
-  width:49px;
-  height:49px;
-  border-radius:14px;
+  width:82px;
+  height:82px;
+  border-radius:18px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:30px;
+  font-size:54px;
   font-weight:900;
   color:white;
-  background:linear-gradient(145deg,#15d9c0,#477cff);
-  box-shadow:0 0 28px rgba(25,216,255,.28);
+  background:
+    linear-gradient(135deg,#08f0c0,#168bff 55%,#713cff);
+  box-shadow:
+    0 0 28px #09d9ff55,
+    inset 0 0 20px #ffffff22;
 }
 
-.logo-name{
-  font-size:18px;
-  font-weight:900;
+.brand h1{
+  margin:0;
+  font-size:28px;
+  letter-spacing:-1px;
 }
 
-.logo-name span{
+.brand h1 span{
   display:block;
   color:var(--green);
 }
 
-.logo-sub{
-  color:#71869e;
-  font-size:7px;
-  letter-spacing:1.7px;
-  margin-top:3px;
+.brand small{
+  display:block;
+  margin-top:6px;
+  color:#91a8bd;
+  letter-spacing:3px;
+  font-size:11px;
 }
 
-.nav{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.nav a{
-  color:#8aa0b8;
-  text-decoration:none;
-  padding:12px 11px;
-  border-radius:10px;
-  font-size:13px;
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-
-.nav a.active{
-  color:white;
-  background:linear-gradient(90deg,#0b2740,#091a2d);
-  box-shadow:inset 2px 0 var(--purple);
-}
-
-.nav-icon{
-  width:19px;
-  text-align:center;
-  color:#65a9ff;
-}
-
-.side-bottom{
-  margin-top:auto;
-}
-
-.engine{
-  border:1px solid #123451;
-  border-radius:12px;
-  padding:14px 10px;
-  text-align:center;
-  background:#06111e;
-}
-
-.engine small{
-  color:#6f849b;
-  font-size:9px;
-  letter-spacing:1px;
-}
-
-.online{
-  color:var(--green);
-  margin:8px 0 12px;
-  font-size:12px;
-  font-weight:bold;
-}
-
-.ai-art{
-  height:120px;
-  border-radius:9px;
-  background:
-    radial-gradient(circle,#1265e8 0 4%,transparent 5%),
-    radial-gradient(circle at 50% 50%,rgba(28,122,255,.4),transparent 55%);
-  position:relative;
-  overflow:hidden;
-}
-
-.ai-art:after{
-  content:"AI";
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:43px;
-  font-weight:900;
-  color:#168cff;
-  text-shadow:0 0 25px #168cff;
-}
-
-/* MAIN */
-
-.main{
-  padding:22px 25px 30px;
-  min-width:0;
-}
-
-.topbar{
-  height:72px;
-  border:1px solid #102d45;
+.live{
+  border:1px solid #16465a;
   border-radius:20px;
-  background:linear-gradient(90deg,#071525,#06111e);
+  background:linear-gradient(90deg,#061523,#071c2c);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:12px 20px;
-  margin-bottom:20px;
+  padding:18px 24px;
+  box-shadow:0 0 35px #00d9ff0d;
 }
 
-.scanner{
+.live-left{
   display:flex;
   align-items:center;
   gap:12px;
 }
 
 .dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
+  width:12px;
+  height:12px;
   background:var(--green);
-  box-shadow:0 0 13px var(--green);
+  border-radius:50%;
+  box-shadow:0 0 18px var(--green);
 }
 
-.scanner strong{
+.live strong{
   color:var(--green);
+  letter-spacing:1px;
+}
+
+.live p{
+  margin:5px 0 0;
+  color:var(--muted);
   font-size:13px;
 }
 
-.scanner small{
-  display:block;
-  color:#71869e;
-  margin-top:4px;
-}
-
-.confidence{
+.conf{
   display:flex;
   align-items:center;
   gap:20px;
 }
 
-.confidence small{
-  color:#71869e;
+.conf span{
+  color:var(--muted);
+  font-size:12px;
 }
 
-.confidence strong{
-  font-size:29px;
+.conf b{
   color:var(--green);
+  font-size:27px;
 }
 
-.mini-chart{
-  width:130px;
-  height:35px;
+/* MAIN */
+
+.layout{
+  display:grid;
+  grid-template-columns:185px 1fr;
+  gap:18px;
 }
 
-.mini-chart svg{
-  width:100%;
-  height:100%;
+/* SIDEBAR */
+
+.sidebar{
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:linear-gradient(180deg,#061321,#030b15);
+  padding:12px;
 }
 
-/* GRID */
+.nav{
+  padding:13px;
+  margin-bottom:5px;
+  border-radius:10px;
+  color:#a9bdd0;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.nav.active{
+  background:linear-gradient(90deg,#082c45,#071827);
+  color:white;
+  border-left:2px solid var(--cyan);
+  box-shadow:0 0 22px #00d9ff12;
+}
+
+.nav span{
+  font-size:18px;
+}
+
+.engine{
+  margin-top:25px;
+  padding:15px 10px;
+  border:1px solid #14344c;
+  border-radius:14px;
+  text-align:center;
+}
+
+.engine small{
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:1px;
+}
+
+.online{
+  margin:10px auto;
+  width:max-content;
+  padding:7px 13px;
+  border-radius:20px;
+  color:var(--green);
+  background:#063525;
+  font-size:11px;
+}
+
+.brain{
+  height:130px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:65px;
+  color:#13caff;
+  text-shadow:
+    0 0 15px #08cfff,
+    0 0 40px #006cff;
+}
+
+.quote{
+  margin-top:25px;
+  border:1px solid #14344c;
+  border-radius:14px;
+  padding:18px;
+  color:#9aafc2;
+  font-size:12px;
+  line-height:1.6;
+}
+
+/* DASHBOARD */
 
 .dashboard{
-  display:grid;
-  grid-template-columns:1.45fr .85fr;
-  gap:15px;
+  min-width:0;
 }
+
+.cards-top{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:16px;
+}
+
+.card{
+  background:
+    linear-gradient(145deg,#071727,#030c16);
+  border:1px solid #12314a;
+  border-radius:18px;
+  box-shadow:0 10px 35px #0008;
+}
+
+/* SIGNAL */
 
 .signal{
-  min-height:350px;
-  border:1px solid #123652;
-  border-radius:22px;
-  background:
-    radial-gradient(circle at 50% 55%,rgba(0,116,255,.11),transparent 42%),
-    #06111f;
-  padding:27px;
+  min-height:390px;
   position:relative;
   overflow:hidden;
+  padding:22px;
 }
 
-.signal-title{
+.signal h3{
   text-align:center;
-  color:#e8f1ff;
-  font-size:12px;
+  margin:0 0 12px;
+  font-size:15px;
   letter-spacing:1px;
-  font-weight:bold;
 }
 
-.score{
-  width:235px;
-  height:235px;
-  margin:20px auto 10px;
+.gauge{
+  width:285px;
+  height:285px;
+  margin:auto;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
   background:
-    radial-gradient(circle,#06111f 62%,transparent 63%),
     conic-gradient(
+      from 215deg,
       var(--green) 0deg,
-      var(--cyan) 150deg,
-      var(--blue) 260deg,
-      var(--purple) 310deg,
-      #10283d 310deg
+      var(--cyan) 105deg,
+      var(--blue) 175deg,
+      var(--purple) 225deg,
+      transparent 226deg 360deg
     );
-  box-shadow:
-    0 0 35px rgba(25,216,255,.14),
-    inset 0 0 25px rgba(25,216,255,.08);
+  box-shadow:0 0 35px #00eaff22;
 }
 
-.score-inner{
+.gauge:before{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border-radius:50%;
+  background:#020a13;
+  box-shadow:inset 0 0 30px #00192b;
+}
+
+.score{
+  position:relative;
   text-align:center;
 }
 
-.score-inner strong{
+.score b{
   display:block;
-  font-size:68px;
+  font-size:82px;
   line-height:.9;
 }
 
-.score-inner span{
-  color:#91a4bb;
-  font-size:14px;
+.score span{
+  color:#b6c7d7;
 }
 
-.score-label{
+.strong{
+  margin-top:12px;
   color:var(--green);
-  font-size:12px;
   font-weight:bold;
-  margin-top:8px;
 }
 
-.threshold{
-  text-align:center;
+.badge{
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  border:1px solid #116c54;
+  background:#052419;
   color:var(--green);
-  font-size:10px;
-  border:1px solid #145541;
-  background:rgba(41,230,164,.06);
-  padding:8px 13px;
-  border-radius:20px;
-  width:max-content;
-  max-width:100%;
-  margin:auto;
+  border-radius:30px;
+  padding:9px 17px;
+  font-size:11px;
+  white-space:nowrap;
 }
 
-.metrics{
+/* RIGHT METRICS */
+
+.side-metrics{
   display:grid;
-  gap:12px;
+  gap:16px;
 }
 
 .metric{
-  border:1px solid #123652;
-  border-radius:17px;
-  background:#06121f;
-  padding:18px;
-  min-height:108px;
-}
-
-.metric-head{
+  padding:20px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  color:#cdd9e8;
-  font-size:12px;
+  justify-content:space-between;
 }
 
-.metric-value{
-  font-size:28px;
-  font-weight:900;
-  margin-top:12px;
+.metric-left{
+  display:flex;
+  gap:14px;
+  align-items:center;
 }
 
-.metric-good{
-  color:var(--green);
+.metric-icon{
+  font-size:29px;
 }
 
-.metric-blue{
-  color:#46cfff;
-}
-
-.metric-low{
-  color:var(--green);
-}
-
-.metric-bar{
-  height:4px;
-  background:#10283d;
-  border-radius:5px;
-  margin-top:10px;
-}
-
-.metric-bar i{
+.metric label{
   display:block;
-  height:100%;
-  border-radius:5px;
-  background:linear-gradient(90deg,var(--green),var(--cyan));
-}
-
-/* STAT CARDS */
-
-.stats{
-  grid-column:1/-1;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-
-.stat{
-  border:1px solid #123652;
-  border-radius:17px;
-  background:#06121f;
-  padding:18px;
-  min-height:135px;
-}
-
-.stat-title{
-  color:#8da0b6;
-  font-size:11px;
+  color:#9cb0c2;
+  font-size:12px;
   letter-spacing:1px;
 }
 
-.stat-value{
-  font-size:31px;
-  font-weight:900;
-  margin-top:18px;
+.metric strong{
+  display:block;
+  margin-top:5px;
+  font-size:27px;
 }
 
-.stat-change{
-  font-size:10px;
+.metric small{
   color:var(--green);
-  margin-top:10px;
 }
 
-/* LOWER */
+.mini-chart{
+  width:110px;
+  height:45px;
+  position:relative;
+  overflow:hidden;
+}
+
+.mini-chart:after{
+  content:"";
+  position:absolute;
+  width:160%;
+  height:70%;
+  left:-20%;
+  bottom:5px;
+  border-top:2px solid var(--green);
+  transform:rotate(-12deg);
+  box-shadow:0 -8px 0 -7px #18d9ff;
+}
+
+/* KPI */
+
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-top:16px;
+}
+
+.kpi{
+  padding:18px;
+  min-height:145px;
+}
+
+.kpi-title{
+  color:#8da4b8;
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+.kpi-value{
+  font-size:32px;
+  font-weight:800;
+  margin-top:16px;
+}
+
+.green{
+  color:var(--green);
+}
+
+.blue{
+  color:var(--cyan);
+}
+
+.kpi-line{
+  height:35px;
+  margin-top:8px;
+  position:relative;
+  overflow:hidden;
+}
+
+.kpi-line:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:8px;
+  height:18px;
+  border-top:2px solid var(--cyan);
+  transform:skewY(-9deg);
+}
+
+.kpi small{
+  color:#8ba0b4;
+}
+
+/* LOWER GRID */
 
 .lower{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:15px;
-  margin-top:15px;
+  gap:16px;
+  margin-top:16px;
 }
 
 .panel{
-  border:1px solid #123652;
-  border-radius:20px;
-  background:#06121f;
-  padding:22px;
+  padding:20px;
+  min-height:330px;
 }
 
 .panel-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:18px;
+  margin-bottom:20px;
 }
 
 .panel-head h3{
   margin:0;
-  font-size:15px;
+  font-size:16px;
 }
 
-.panel-head span{
-  color:#71869e;
-  font-size:10px;
+.panel-head small{
+  color:#71879b;
 }
 
-.bars{
-  height:190px;
+.select{
+  border:1px solid #24435b;
+  border-radius:8px;
+  padding:6px 10px;
+  color:#9cb0c2;
+  font-size:11px;
+}
+
+/* BAR CHART */
+
+.bar-chart{
+  height:220px;
   display:flex;
-  align-items:flex-end;
+  align-items:end;
   gap:5px;
-  border-bottom:1px solid #17334b;
-  padding:0 4px;
+  border-bottom:1px solid #16354d;
+  padding:0 8px;
 }
 
 .bar{
   flex:1;
-  max-width:13px;
-  margin:auto 0 0;
-  border-radius:4px 4px 0 0;
-  background:linear-gradient(to top,#155de0,#1ddcaf);
-  box-shadow:0 0 7px rgba(25,216,255,.12);
+  min-width:3px;
+  background:linear-gradient(to top,#086cff,#08d8ff);
+  border-radius:3px 3px 0 0;
+  box-shadow:0 0 8px #00aaff55;
 }
 
-.chart-labels{
+.bar.g{
+  background:linear-gradient(to top,#06b86d,#20f0a0);
+}
+
+.axis{
   display:flex;
   justify-content:space-between;
-  color:#536a82;
+  color:#61778b;
   font-size:9px;
-  margin-top:9px;
+  margin-top:8px;
 }
+
+/* TABLE */
 
 table{
   width:100%;
@@ -472,28 +520,47 @@ table{
 
 th{
   text-align:left;
-  color:#5f758d;
-  font-size:9px;
-  font-weight:normal;
-  padding:8px 4px;
+  color:#71879b;
+  font-size:10px;
+  padding:10px 6px;
+  letter-spacing:1px;
 }
 
 td{
-  border-top:1px solid #112b41;
-  padding:11px 4px;
-  font-size:11px;
+  padding:12px 6px;
+  border-top:1px solid #10283c;
+  font-size:12px;
 }
 
 .token{
-  font-weight:bold;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.token-icon{
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#182a3e;
+  color:#fff;
 }
 
 .score-small{
   color:var(--green);
-  font-weight:bold;
+  border:2px solid var(--green);
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.risk{
+.low{
   color:var(--green);
 }
 
@@ -501,95 +568,105 @@ td{
 
 .performance{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-  margin-top:15px;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:20px;
 }
 
-.pnl{
-  font-size:34px;
-  font-weight:900;
-  color:var(--green);
-  margin:15px 0;
+.perf strong{
+  display:block;
+  font-size:24px;
+  margin-top:5px;
 }
 
-.line{
-  height:120px;
+.perf span{
+  color:#71879b;
+  font-size:10px;
+}
+
+.line-chart{
+  height:150px;
   position:relative;
   overflow:hidden;
-  border-bottom:1px solid #153149;
+  border-bottom:1px solid #16354d;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 35px,
+      #0d2435 36px
+    );
 }
 
-.line svg{
-  width:100%;
-  height:100%;
+.line-chart:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:35px;
+  height:90px;
+  border-top:3px solid var(--green);
+  transform:
+    skewY(-7deg)
+    rotate(-2deg);
+  box-shadow:0 0 18px #20f0a055;
 }
 
-.insight{
+/* AI */
+
+.ai{
   display:flex;
   gap:20px;
   align-items:center;
 }
 
-.insight-art{
-  width:130px;
-  height:130px;
-  flex:none;
+.ai-art{
+  min-width:150px;
+  height:150px;
   border-radius:50%;
-  background:
-    radial-gradient(circle,#087cff 0 3%,transparent 4%),
-    radial-gradient(circle,rgba(0,119,255,.45),transparent 58%);
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#20a6ff;
-  font-size:32px;
-  font-weight:900;
-  text-shadow:0 0 20px #168cff;
+  font-size:80px;
+  color:#1acfff;
+  text-shadow:0 0 30px #008dff;
+  background:radial-gradient(circle,#062b52,#020b15 65%);
 }
 
-.insight h3{
+.ai h2{
   color:var(--green);
-  margin:0 0 10px;
+  font-size:17px;
 }
 
-.insight p{
-  color:#8ba0b6;
-  line-height:1.6;
+.ai li{
+  margin:9px 0;
+  color:#9eb1c3;
   font-size:12px;
 }
 
 .button{
   display:block;
   text-align:center;
-  margin-top:20px;
-  padding:12px;
+  margin-top:18px;
+  padding:13px;
   border-radius:9px;
-  background:linear-gradient(90deg,#1559d8,#6b27a8);
   color:white;
-  text-decoration:none;
-  font-size:11px;
+  background:linear-gradient(90deg,#1857db,#7128d8);
 }
 
-/* TICKER */
+/* FOOTER */
 
-.ticker{
-  margin-top:15px;
-  border:1px solid #123652;
-  border-radius:17px;
-  background:#06121f;
-  padding:14px 22px;
+.footer{
+  margin-top:16px;
+  padding:14px 20px;
+  border:1px solid #12314a;
+  border-radius:14px;
   display:flex;
   justify-content:space-between;
-  color:#8398ae;
-  font-size:11px;
+  color:#b0c0cf;
+  font-size:12px;
 }
 
-.ticker strong{
-  color:white;
-}
-
-.positive{
+.healthy{
   color:var(--green);
 }
 
@@ -598,123 +675,123 @@ td{
 @media(max-width:900px){
 
   .app{
-    display:block;
+    padding:12px;
+  }
+
+  .top{
+    grid-template-columns:1fr;
+  }
+
+  .layout{
+    grid-template-columns:1fr;
   }
 
   .sidebar{
     display:none;
   }
 
-  .main{
-    padding:12px;
+  .cards-top{
+    grid-template-columns:1fr;
   }
 
-  .topbar{
-    height:auto;
+  .kpis{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .lower{
+    grid-template-columns:1fr;
+  }
+
+  .brand h1{
+    font-size:23px;
+  }
+
+  .logo{
+    width:65px;
+    height:65px;
+    font-size:42px;
+  }
+
+  .live{
     padding:14px;
   }
 
-  .confidence{
-    gap:8px;
+  .gauge{
+    width:245px;
+    height:245px;
   }
 
-  .confidence .mini-chart{
-    display:none;
+  .score b{
+    font-size:70px;
   }
 
-  .dashboard{
-    grid-template-columns:1fr;
+  .metric{
+    min-height:120px;
   }
 
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .lower,
-  .performance{
-    grid-template-columns:1fr;
-  }
-
-  .signal{
-    min-height:auto;
-  }
-
-  .score{
-    width:210px;
-    height:210px;
-  }
-
-  .ticker{
+  .footer{
     flex-wrap:wrap;
-    gap:12px;
+    gap:10px;
   }
 }
 
 @media(max-width:520px){
 
-  .main{
-    padding:8px;
+  .conf{
+    display:none;
   }
 
-  .topbar{
-    border-radius:14px;
+  .kpis{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
   }
 
-  .scanner small{
-    font-size:9px;
+  .kpi{
+    min-height:120px;
+    padding:14px;
   }
 
-  .confidence strong{
-    font-size:23px;
+  .kpi-value{
+    font-size:27px;
   }
 
   .signal{
-    padding:18px;
+    min-height:350px;
   }
 
-  .score{
-    width:190px;
-    height:190px;
+  .gauge{
+    width:220px;
+    height:220px;
   }
 
-  .score-inner strong{
-    font-size:56px;
-  }
-
-  .stats{
-    gap:8px;
-  }
-
-  .stat{
-    padding:14px;
-    min-height:105px;
-  }
-
-  .stat-value{
-    font-size:27px;
-    margin-top:12px;
+  .score b{
+    font-size:62px;
   }
 
   .lower{
-    gap:8px;
+    gap:10px;
   }
 
   .panel{
-    padding:16px;
-  }
-
-  .insight{
-    align-items:flex-start;
-  }
-
-  .insight-art{
-    width:90px;
-    height:90px;
-    font-size:25px;
+    padding:14px;
+    overflow:hidden;
   }
 
   table{
-    font-size:10px;
+    min-width:500px;
+  }
+
+  .table-wrap{
+    overflow-x:auto;
+  }
+
+  .ai{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .ai-art{
+    width:100%;
   }
 }
 </style>
@@ -724,331 +801,454 @@ td{
 
 <div class="app">
 
-<aside class="sidebar">
+<!-- HEADER -->
 
-  <div class="logo-box">
+<header class="top">
+
+  <div class="brand">
     <div class="logo">N</div>
     <div>
-      <div class="logo-name">NEXUS <span>SOL AI</span></div>
-      <div class="logo-sub">SOLANA SIGNAL INTELLIGENCE</div>
+      <h1>NEXUS <span>SOL AI</span></h1>
+      <small>SOLANA SIGNAL INTELLIGENCE</small>
     </div>
   </div>
 
-  <nav class="nav">
-    <a class="active" href="#"><span class="nav-icon">⌂</span>Dashboard</a>
-    <a href="#"><span class="nav-icon">◉</span>Live Scanner</a>
-    <a href="#"><span class="nav-icon">◇</span>Signals</a>
-    <a href="#"><span class="nav-icon">☆</span>Watchlist</a>
-    <a href="#"><span class="nav-icon">⌁</span>Performance</a>
-    <a href="#"><span class="nav-icon">＋</span>Outcomes</a>
-    <a href="#"><span class="nav-icon">⌁</span>Analytics</a>
-    <a href="#"><span class="nav-icon">⚙</span>Settings</a>
-  </nav>
+  <div class="live">
 
-  <div class="side-bottom">
-    <div class="engine">
-      <small>AI ENGINE STATUS</small>
-      <div class="online">● ONLINE</div>
-      <div class="ai-art"></div>
+    <div class="live-left">
+      <div class="dot"></div>
+      <div>
+        <strong>LIVE SCANNER</strong>
+        <p>Scanning the Solana universe...</p>
+      </div>
     </div>
+
+    <div class="conf">
+      <span>System Confidence</span>
+      <b>87%</b>
+    </div>
+
+  </div>
+
+</header>
+
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+  <div class="nav active"><span>⌂</span> Dashboard</div>
+  <div class="nav"><span>◉</span> Live Scanner</div>
+  <div class="nav"><span>◎</span> Signals</div>
+  <div class="nav"><span>☆</span> Watchlist</div>
+  <div class="nav"><span>⌁</span> Performance</div>
+  <div class="nav"><span>◷</span> Outcomes</div>
+  <div class="nav"><span>⌁</span> Analytics</div>
+  <div class="nav"><span>⚙</span> Settings</div>
+
+  <div class="engine">
+    <small>AI ENGINE STATUS</small>
+    <div class="online">● ONLINE</div>
+    <div class="brain">AI</div>
+  </div>
+
+  <div class="quote">
+    "The edge is intelligence."<br><br>
+    <span class="green">— NEXUS SOL AI</span>
   </div>
 
 </aside>
 
 
-<main class="main">
+<!-- DASHBOARD -->
 
-  <div class="topbar">
+<main class="dashboard">
 
-    <div class="scanner">
-      <span class="dot"></span>
-      <div>
-        <strong>LIVE SCANNER</strong>
-        <small>Scanning the Solana universe...</small>
-      </div>
-    </div>
+<!-- SIGNAL + METRICS -->
 
-    <div class="confidence">
-      <small>System Confidence</small>
-      <strong>87%</strong>
-      <div class="mini-chart">
-        <svg viewBox="0 0 130 35" preserveAspectRatio="none">
-          <polyline
-            points="0,29 12,26 23,28 34,20 45,24 57,17 68,20 79,12 90,15 101,9 112,11 130,2"
-            fill="none"
-            stroke="#19d8ff"
-            stroke-width="2"/>
-        </svg>
-      </div>
-    </div>
+<section class="cards-top">
 
-  </div>
+  <div class="card signal">
 
+    <h3>CURRENT SIGNAL SCORE</h3>
 
-  <div class="dashboard">
-
-    <section class="signal">
-
-      <div class="signal-title">CURRENT SIGNAL SCORE</div>
+    <div class="gauge">
 
       <div class="score">
-        <div class="score-inner">
-          <strong>86</strong>
-          <span>/100</span>
-          <div class="score-label">STRONG SIGNAL</div>
-        </div>
+        <b>86</b>
+        <span>/100</span>
+        <div class="strong">STRONG SIGNAL</div>
       </div>
 
-      <div class="threshold">
-        ◆ Above 85 = High Probability Setups
-      </div>
+    </div>
 
-    </section>
-
-
-    <section class="metrics">
-
-      <div class="metric">
-        <div class="metric-head">
-          <span>💧 LIQUIDITY</span>
-          <span>↗</span>
-        </div>
-        <div class="metric-value metric-good">92/100</div>
-        <div class="metric-bar"><i style="width:92%"></i></div>
-      </div>
-
-      <div class="metric">
-        <div class="metric-head">
-          <span>⚡ MOMENTUM</span>
-          <span>↗</span>
-        </div>
-        <div class="metric-value metric-blue">88/100</div>
-        <div class="metric-bar"><i style="width:88%"></i></div>
-      </div>
-
-      <div class="metric">
-        <div class="metric-head">
-          <span>🛡 RISK LEVEL</span>
-          <span>✓</span>
-        </div>
-        <div class="metric-value metric-low">LOW</div>
-        <div class="metric-bar"><i style="width:82%"></i></div>
-      </div>
-
-    </section>
-
-
-    <section class="stats">
-
-      <div class="stat">
-        <div class="stat-title">SCANS TODAY</div>
-        <div class="stat-value">128</div>
-        <div class="stat-change">+21% vs yesterday</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-title">QUALIFIED SIGNALS</div>
-        <div class="stat-value positive">17</div>
-        <div class="stat-change">+13% vs yesterday</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-title">HIT RATE (1H)</div>
-        <div class="stat-value">62%</div>
-        <div class="stat-change">Last 50 signals</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-title">AVG ROI (1H)</div>
-        <div class="stat-value positive">+4.21%</div>
-        <div class="stat-change">Paper Mode Results</div>
-      </div>
-
-    </section>
+    <div class="badge">
+      ◆ Above 85 = High Probability Setups
+    </div>
 
   </div>
 
 
-  <div class="lower">
+  <div class="side-metrics">
 
-    <section class="panel">
+    <div class="card metric">
 
-      <div class="panel-head">
+      <div class="metric-left">
+        <div class="metric-icon">💧</div>
+        <div>
+          <label>LIQUIDITY</label>
+          <strong>92<small>/100</small></strong>
+          <small>Excellent</small>
+        </div>
+      </div>
+
+      <div class="mini-chart"></div>
+
+    </div>
+
+
+    <div class="card metric">
+
+      <div class="metric-left">
+        <div class="metric-icon">⚡</div>
+        <div>
+          <label>MOMENTUM</label>
+          <strong>88<small>/100</small></strong>
+          <small>Very Strong</small>
+        </div>
+      </div>
+
+      <div class="mini-chart"></div>
+
+    </div>
+
+
+    <div class="card metric">
+
+      <div class="metric-left">
+        <div class="metric-icon">🛡</div>
+        <div>
+          <label>RISK LEVEL</label>
+          <strong class="green">LOW</strong>
+          <small>Safe Zone</small>
+        </div>
+      </div>
+
+      <div class="mini-chart"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- KPIs -->
+
+<section class="kpis">
+
+  <div class="card kpi">
+    <div class="kpi-title">SCANS TODAY</div>
+    <div class="kpi-value">128</div>
+    <div class="kpi-line"></div>
+    <small class="green">+21% vs yesterday</small>
+  </div>
+
+  <div class="card kpi">
+    <div class="kpi-title">QUALIFIED SIGNALS</div>
+    <div class="kpi-value green">17</div>
+    <div class="kpi-line"></div>
+    <small class="green">+13% vs yesterday</small>
+  </div>
+
+  <div class="card kpi">
+    <div class="kpi-title">HIT RATE (1H)</div>
+    <div class="kpi-value">62%</div>
+    <div class="kpi-line"></div>
+    <small>Last 50 signals</small>
+  </div>
+
+  <div class="card kpi">
+    <div class="kpi-title">AVG ROI (1H)</div>
+    <div class="kpi-value green">+4.21%</div>
+    <div class="kpi-line"></div>
+    <small>Paper Mode Results</small>
+  </div>
+
+</section>
+
+
+<!-- CHART + SIGNALS -->
+
+<section class="lower">
+
+  <div class="card panel">
+
+    <div class="panel-head">
+      <div>
         <h3>LIVE SCANNER ACTIVITY</h3>
-        <span>24H ▾</span>
+        <small>Real-time scan volume and qualified signals</small>
       </div>
+      <div class="select">24H⌄</div>
+    </div>
 
-      <div class="bars">
-        <i class="bar" style="height:30%"></i>
-        <i class="bar" style="height:45%"></i>
-        <i class="bar" style="height:55%"></i>
-        <i class="bar" style="height:38%"></i>
-        <i class="bar" style="height:70%"></i>
-        <i class="bar" style="height:82%"></i>
-        <i class="bar" style="height:62%"></i>
-        <i class="bar" style="height:91%"></i>
-        <i class="bar" style="height:72%"></i>
-        <i class="bar" style="height:83%"></i>
-        <i class="bar" style="height:55%"></i>
-        <i class="bar" style="height:74%"></i>
-        <i class="bar" style="height:48%"></i>
-        <i class="bar" style="height:88%"></i>
-        <i class="bar" style="height:65%"></i>
-        <i class="bar" style="height:78%"></i>
-        <i class="bar" style="height:52%"></i>
-        <i class="bar" style="height:69%"></i>
-        <i class="bar" style="height:94%"></i>
-        <i class="bar" style="height:73%"></i>
-        <i class="bar" style="height:61%"></i>
-        <i class="bar" style="height:85%"></i>
-      </div>
+    <div class="bar-chart">
 
-      <div class="chart-labels">
-        <span>00:00</span>
-        <span>04:00</span>
-        <span>08:00</span>
-        <span>12:00</span>
-        <span>16:00</span>
-        <span>20:00</span>
-        <span>24:00</span>
-      </div>
+      <i class="bar" style="height:35%"></i>
+      <i class="bar" style="height:52%"></i>
+      <i class="bar" style="height:44%"></i>
+      <i class="bar" style="height:68%"></i>
+      <i class="bar" style="height:76%"></i>
+      <i class="bar" style="height:62%"></i>
+      <i class="bar" style="height:92%"></i>
+      <i class="bar" style="height:78%"></i>
+      <i class="bar" style="height:100%"></i>
+      <i class="bar" style="height:72%"></i>
+      <i class="bar" style="height:88%"></i>
+      <i class="bar" style="height:64%"></i>
+      <i class="bar" style="height:81%"></i>
+      <i class="bar" style="height:55%"></i>
+      <i class="bar" style="height:74%"></i>
+      <i class="bar" style="height:49%"></i>
+      <i class="bar" style="height:69%"></i>
+      <i class="bar" style="height:58%"></i>
+      <i class="bar" style="height:84%"></i>
+      <i class="bar" style="height:61%"></i>
+      <i class="bar" style="height:70%"></i>
+      <i class="bar" style="height:54%"></i>
+      <i class="bar" style="height:79%"></i>
+      <i class="bar g" style="height:17%"></i>
+      <i class="bar g" style="height:24%"></i>
 
-    </section>
+    </div>
+
+    <div class="axis">
+      <span>00:00</span>
+      <span>04:00</span>
+      <span>08:00</span>
+      <span>12:00</span>
+      <span>16:00</span>
+      <span>20:00</span>
+      <span>24:00</span>
+    </div>
+
+    <p style="color:#7f95a9;font-size:11px">
+      🟢 Last scan: 00:01:23 ago
+      <span style="float:right">Next scan in: 03:37</span>
+    </p>
+
+  </div>
 
 
-    <section class="panel">
+  <div class="card panel">
 
-      <div class="panel-head">
+    <div class="panel-head">
+      <div>
         <h3>TOP QUALIFIED SIGNALS</h3>
-        <span>VIEW ALL →</span>
+        <small>Highest scoring current setups</small>
       </div>
+      <div class="select">VIEW ALL</div>
+    </div>
+
+    <div class="table-wrap">
 
       <table>
 
-        <tr>
-          <th>TOKEN</th>
-          <th>SCORE</th>
-          <th>LIQUIDITY</th>
-          <th>MOMENTUM</th>
-          <th>RISK</th>
-        </tr>
+        <thead>
+          <tr>
+            <th>TOKEN</th>
+            <th>SCORE</th>
+            <th>LIQUIDITY</th>
+            <th>MOMENTUM</th>
+            <th>RISK</th>
+          </tr>
+        </thead>
 
-        <tr>
-          <td class="token">DOGWIF<br><small>WIF</small></td>
-          <td class="score-small">89</td>
-          <td>94</td>
-          <td>90</td>
-          <td class="risk">LOW</td>
-        </tr>
+        <tbody>
 
-        <tr>
-          <td class="token">POPCAT<br><small>POPCAT</small></td>
-          <td class="score-small">87</td>
-          <td>91</td>
-          <td>88</td>
-          <td class="risk">LOW</td>
-        </tr>
+          <tr>
+            <td>
+              <div class="token">
+                <div class="token-icon">🐶</div>
+                DOGWIFHAT
+              </div>
+            </td>
+            <td><span class="score-small">89</span></td>
+            <td class="green">94</td>
+            <td class="green">90</td>
+            <td class="low">LOW</td>
+          </tr>
 
-        <tr>
-          <td class="token">BONK<br><small>SBONK</small></td>
-          <td class="score-small">85</td>
-          <td>88</td>
-          <td>87</td>
-          <td class="risk">LOW</td>
-        </tr>
+          <tr>
+            <td>
+              <div class="token">
+                <div class="token-icon">🐕</div>
+                POPCAT
+              </div>
+            </td>
+            <td><span class="score-small">87</span></td>
+            <td class="green">91</td>
+            <td class="green">88</td>
+            <td class="low">LOW</td>
+          </tr>
 
-        <tr>
-          <td class="token">MYRO<br><small>SMYRO</small></td>
-          <td class="score-small">84</td>
-          <td>86</td>
-          <td>85</td>
-          <td class="risk">LOW</td>
-        </tr>
+          <tr>
+            <td>
+              <div class="token">
+                <div class="token-icon">🐕</div>
+                BONK
+              </div>
+            </td>
+            <td><span class="score-small">85</span></td>
+            <td class="green">88</td>
+            <td class="green">87</td>
+            <td class="low">LOW</td>
+          </tr>
 
-        <tr>
-          <td class="token">PYTH<br><small>SPYTH</small></td>
-          <td class="score-small">83</td>
-          <td>87</td>
-          <td>83</td>
-          <td class="risk">LOW</td>
-        </tr>
+          <tr>
+            <td>
+              <div class="token">
+                <div class="token-icon">M</div>
+                MYRO
+              </div>
+            </td>
+            <td><span class="score-small">84</span></td>
+            <td class="green">86</td>
+            <td class="green">85</td>
+            <td class="low">LOW</td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="token">
+                <div class="token-icon">P</div>
+                PYTH
+              </div>
+            </td>
+            <td><span class="score-small">83</span></td>
+            <td class="green">87</td>
+            <td class="green">83</td>
+            <td class="low">LOW</td>
+          </tr>
+
+        </tbody>
 
       </table>
 
-    </section>
+    </div>
 
   </div>
 
+</section>
 
-  <div class="performance">
 
-    <section class="panel">
+<!-- PERFORMANCE + AI -->
 
-      <div class="panel-head">
+<section class="lower">
+
+  <div class="card panel">
+
+    <div class="panel-head">
+      <div>
         <h3>PERFORMANCE <small>(PAPER MODE)</small></h3>
-        <span>7D ▾</span>
+      </div>
+      <div class="select">7D⌄</div>
+    </div>
+
+    <div class="performance">
+
+      <div class="perf">
+        <span>Total Signals</span>
+        <strong>112</strong>
       </div>
 
-      <div class="pnl">+12.43%</div>
-
-      <div class="line">
-        <svg viewBox="0 0 500 120" preserveAspectRatio="none">
-          <polyline
-            points="0,100 25,105 50,94 75,99 100,78 125,86 150,63 175,72 200,48 225,56 250,40 275,47 300,35 325,42 350,27 375,33 400,21 425,28 450,14 475,19 500,8"
-            fill="none"
-            stroke="#29e6a4"
-            stroke-width="3"/>
-        </svg>
+      <div class="perf">
+        <span>Hit Rate</span>
+        <strong>62%</strong>
       </div>
 
-    </section>
-
-
-    <section class="panel">
-
-      <div class="panel-head">
-        <h3>AI INSIGHT</h3>
-        <span>LIVE ANALYSIS</span>
+      <div class="perf">
+        <span>Avg ROI (1H)</span>
+        <strong class="green">+4.21%</strong>
       </div>
 
-      <div class="insight">
-
-        <div class="insight-art">AI</div>
-
-        <div>
-          <h3>Market conditions are optimal.</h3>
-
-          <p>
-            High liquidity across major pairs,
-            strong momentum in the current sector
-            and acceptable risk conditions.
-          </p>
-
-          <p>
-            • New launches with organic volume<br>
-            • Established tokens with momentum<br>
-            • Low risk, high liquidity setups
-          </p>
-        </div>
-
+      <div class="perf">
+        <span>Total PnL</span>
+        <strong class="green">+12.43%</strong>
       </div>
 
-      <a class="button" href="#">VIEW FULL ANALYSIS</a>
+    </div>
 
-    </section>
+    <div class="line-chart"></div>
+
+    <div class="axis">
+      <span>May 10</span>
+      <span>May 11</span>
+      <span>May 12</span>
+      <span>May 13</span>
+      <span>May 14</span>
+      <span>May 15</span>
+      <span>May 16</span>
+    </div>
 
   </div>
 
 
-  <div class="ticker">
-    <span>SOL <strong>$146.32</strong> <b class="positive">+2.41%</b></span>
-    <span>24H Volume <strong>$2.14B</strong></span>
-    <span>Active Tokens <strong>1,842</strong></span>
-    <span>Network Status <b class="positive">● Healthy</b></span>
+  <div class="card panel">
+
+    <div class="panel-head">
+      <h3>AI INSIGHT</h3>
+    </div>
+
+    <div class="ai">
+
+      <div class="ai-art">AI</div>
+
+      <div>
+        <h2>Market conditions are optimal.</h2>
+
+        <p style="color:#9cafc0;font-size:13px;line-height:1.6">
+          High liquidity across major pairs, strong momentum
+          and improving market quality.
+        </p>
+
+        <ul>
+          <li>New launches with organic volume</li>
+          <li>Established tokens with momentum</li>
+          <li>Low risk, high liquidity setups</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="button">VIEW FULL ANALYSIS</div>
+
   </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  <span>SOL&nbsp;&nbsp; <b>$146.32</b> &nbsp;<span class="green">+2.41%</span></span>
+
+  <span>24H Volume&nbsp;&nbsp; <b>$2.14B</b></span>
+
+  <span>Active Tokens&nbsp;&nbsp; <b>1,842</b></span>
+
+  <span>
+    Network Status&nbsp;&nbsp;
+    <b class="healthy">● Healthy</b>
+  </span>
+
+</footer>
 
 </main>
-
+</div>
 </div>
 
 </body>
