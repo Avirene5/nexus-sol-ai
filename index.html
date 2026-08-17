@@ -1,212 +1,455 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nexus SOL AI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Nexus SOL AI — Command Center</title>
 
 <style>
+:root{
+  --bg:#050914;
+  --panel:#0a1220;
+  --panel2:#0d1727;
+  --line:#1a2a3e;
+  --text:#edf6ff;
+  --muted:#8093a8;
+  --cyan:#63ddff;
+  --purple:#9a6cff;
+  --green:#39e6a2;
+  --red:#ff6577;
+  --amber:#ffc45a;
+}
+
 *{
   box-sizing:border-box;
 }
 
 body{
   margin:0;
-  background:#030811;
-  color:#edf7fb;
-  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 20% -10%,#17233d 0,#050914 42%);
+  color:var(--text);
+  font-family:
+    Inter,
+    Arial,
+    Helvetica,
+    sans-serif;
 }
 
-header{
-  padding:22px 18px;
-  border-bottom:1px solid #172535;
-  background:#06101c;
+button{
+  font:inherit;
+  color:inherit;
+}
+
+.top{
   position:sticky;
   top:0;
-  z-index:10;
+  z-index:20;
+  background:rgba(5,9,20,.90);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
 }
 
-.logo{
-  font-size:24px;
+.topin{
+  max-width:1180px;
+  margin:auto;
+  padding:15px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.brand{
+  font-size:23px;
+  font-weight:900;
+  letter-spacing:-.5px;
+}
+
+.brand b{
+  color:var(--purple);
+}
+
+.sub{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+.live{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--green);
+  font-size:11px;
   font-weight:800;
-  letter-spacing:.5px;
 }
 
-.logo span{
-  color:#8b5cf6;
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 14px var(--green);
 }
 
-.status{
-  margin-top:7px;
-  color:#7f93a6;
-  font-size:12px;
+.refresh{
+  border:1px solid #263b55;
+  background:#0b1726;
+  padding:8px 11px;
+  border-radius:10px;
+  cursor:pointer;
 }
 
-.container{
-  max-width:1100px;
+.refresh:hover{
+  border-color:#45627e;
+}
+
+.wrap{
+  max-width:1180px;
   margin:auto;
   padding:18px;
 }
 
 .hero{
-  background:linear-gradient(135deg,#071522,#08101b);
-  border:1px solid #172b3d;
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:18px;
+  margin-top:2px;
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(15,31,52,.96),
+      rgba(9,15,27,.96)
+    );
+  box-shadow:0 18px 50px rgba(0,0,0,.25);
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:25px;
 }
 
-.hero-title{
-  font-size:28px;
-  font-weight:800;
-  margin-bottom:8px;
+.hero h1{
+  font-size:clamp(28px,6vw,48px);
+  line-height:1;
+  margin:0 0 12px;
+  letter-spacing:-1.8px;
 }
 
-.hero-text{
-  color:#8fa5b8;
-  font-size:14px;
-  line-height:1.6;
+.hero p{
+  margin:0;
+  color:#91a5ba;
+  line-height:1.65;
+  max-width:700px;
 }
 
-.grid{
+.mode{
+  border:1px solid #263b55;
+  background:#0b1b2c;
+  padding:10px 13px;
+  border-radius:14px;
+  text-align:center;
+  min-width:145px;
+}
+
+.mode small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.mode strong{
+  color:var(--cyan);
+  font-size:11px;
+}
+
+.stats{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
+  grid-template-columns:repeat(6,1fr);
+  gap:12px;
+  margin-top:14px;
 }
 
 .card{
-  background:#07111c;
-  border:1px solid #17293a;
-  border-radius:15px;
-  padding:17px;
+  background:
+    linear-gradient(
+      145deg,
+      #0b1523,
+      #08111d
+    );
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
 }
 
 .label{
-  color:#7f93a6;
-  font-size:12px;
-  margin-bottom:9px;
-}
-
-.value{
-  font-size:24px;
+  color:var(--muted);
+  font-size:10px;
   font-weight:800;
+  letter-spacing:.8px;
+  text-transform:uppercase;
 }
 
-.price{
-  color:#72e6ff;
+.num{
+  font-size:25px;
+  font-weight:900;
+  margin-top:8px;
+}
+
+.cyan{
+  color:var(--cyan);
 }
 
 .green{
-  color:#42e6a4;
-}
-
-.orange{
-  color:#ffb454;
+  color:var(--green);
 }
 
 .red{
-  color:#ff6878;
+  color:var(--red);
+}
+
+.amber{
+  color:var(--amber);
+}
+
+.purple{
+  color:var(--purple);
 }
 
 .section{
-  margin-top:18px;
+  margin-top:22px;
 }
 
-.section-title{
+.title{
   font-size:18px;
-  font-weight:800;
-  margin-bottom:12px;
+  font-weight:900;
+  margin-bottom:11px;
 }
 
-.market{
+.marketgrid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1.35fr .65fr;
   gap:14px;
 }
 
-.big-card{
-  background:#07111c;
-  border:1px solid #17293a;
-  border-radius:15px;
+.pricecard{
   padding:20px;
 }
 
-.big-price{
-  font-size:42px;
+.price{
+  font-size:clamp(38px,7vw,62px);
+  font-weight:950;
+  letter-spacing:-2px;
+  margin:5px 0;
+}
+
+.change{
   font-weight:900;
-  margin:8px 0;
 }
 
-.small{
-  font-size:12px;
-  color:#71879a;
-}
-
-.signal{
-  margin-top:18px;
-  padding:18px;
-  border-radius:15px;
-  border:1px solid #263a4b;
-  background:#081522;
-}
-
-.signal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.badge{
-  padding:7px 11px;
-  border-radius:999px;
-  background:#132438;
-  color:#72e6ff;
-  font-size:12px;
-  font-weight:800;
-}
-
-.progress{
+.chart{
+  height:150px;
   margin-top:15px;
-  height:8px;
-  background:#152432;
-  border-radius:20px;
+  border:1px solid #172a3d;
+  border-radius:14px;
+  background:#07101b;
   overflow:hidden;
 }
 
-.progress-bar{
+.chart svg{
+  width:100%;
   height:100%;
-  width:0%;
-  background:#8b5cf6;
-  transition:width .5s;
+  display:block;
+}
+
+.engine{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.metric{
+  padding:12px;
+  border-radius:13px;
+  background:#0a1725;
+  border:1px solid #182b40;
+}
+
+.metric span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.metric strong{
+  display:block;
+  margin-top:5px;
+  font-size:16px;
+}
+
+.engineState{
+  margin-top:12px;
+  padding:11px;
+  border-radius:12px;
+  background:#0b1521;
+  border:1px solid #24374d;
+  color:var(--amber);
+  font-size:10px;
+  font-weight:800;
+}
+
+.signals{
+  background:
+    linear-gradient(
+      145deg,
+      #0b1523,
+      #08111d
+    );
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.signalrow{
+  display:grid;
+  grid-template-columns:
+    1.3fr
+    .65fr
+    .65fr
+    .65fr
+    .7fr
+    1fr;
+  gap:10px;
+  padding:13px 15px;
+  border-bottom:1px solid #142336;
+  align-items:center;
+}
+
+.signalrow:last-child{
+  border-bottom:0;
+}
+
+.thead{
+  color:#6f8499;
+  font-size:9px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+  background:#08111c;
+}
+
+.token{
+  font-weight:900;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 8px;
+  border-radius:999px;
+  background:#132238;
+  color:var(--cyan);
+  font-size:10px;
+  font-weight:900;
+}
+
+.score{
+  font-size:18px;
+  font-weight:950;
+  color:var(--cyan);
+}
+
+.reason{
+  color:#91a4b8;
+  font-size:10px;
+  line-height:1.4;
+}
+
+.empty{
+  padding:28px 18px;
+  text-align:center;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.empty strong{
+  display:block;
+  color:#dce9f5;
+  margin-bottom:5px;
 }
 
 .footer{
   text-align:center;
-  color:#61788c;
-  font-size:11px;
+  color:#52677d;
+  font-size:10px;
   padding:30px 10px;
 }
 
-@media(max-width:800px){
+@media(max-width:900px){
 
-  .grid{
-    grid-template-columns:repeat(2,1fr);
+  .stats{
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .market{
+  .marketgrid{
     grid-template-columns:1fr;
+  }
+
+  .hero{
+    align-items:flex-start;
   }
 }
 
-@media(max-width:500px){
+@media(max-width:560px){
 
-  .value{
-    font-size:20px;
+  .wrap{
+    padding:12px;
   }
 
-  .big-price{
-    font-size:34px;
+  .topin{
+    padding:13px 12px;
+  }
+
+  .hero{
+    padding:20px;
+    border-radius:20px;
+    display:block;
+  }
+
+  .mode{
+    margin-top:15px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .num{
+    font-size:21px;
+  }
+
+  .signalrow{
+    grid-template-columns:1fr auto;
+  }
+
+  .thead{
+    display:none;
+  }
+
+  .signalrow>div:nth-child(2),
+  .signalrow>div:nth-child(3),
+  .signalrow>div:nth-child(4){
+    display:none;
+  }
+
+  .signalrow .reason{
+    grid-column:1/-1;
+  }
+
+  .brand{
+    font-size:20px;
   }
 }
 </style>
@@ -214,337 +457,479 @@ header{
 
 <body>
 
-<header>
+<header class="top">
 
-  <div class="logo">
-    Nexus <span>SOL AI</span>
-  </div>
+  <div class="topin">
 
-  <div class="status" id="status">
-    Connecting to live market data...
+    <div>
+
+      <div class="brand">
+        Nexus <b>SOL AI</b>
+      </div>
+
+      <div class="sub" id="updated">
+        Connecting to market feed…
+      </div>
+
+    </div>
+
+    <div class="live">
+
+      <span class="dot" id="dot"></span>
+
+      <span id="liveText">
+        LIVE
+      </span>
+
+      <button
+        class="refresh"
+        id="refresh">
+        Refresh
+      </button>
+
+    </div>
+
   </div>
 
 </header>
 
-<div class="container">
 
-  <div class="hero">
-
-    <div class="hero-title">
-      Solana AI Intelligence
-    </div>
-
-    <div class="hero-text">
-      Real-time SOL market monitoring and AI signal intelligence.
-      Paper / Simulation mode only.
-    </div>
-
-  </div>
+<main class="wrap">
 
 
-  <div class="grid">
+<section class="hero">
 
-    <div class="card">
+  <div>
 
-      <div class="label">
-        SOL PRICE
-      </div>
+    <h1>
+      AI Trading Command Center
+    </h1>
 
-      <div class="value price" id="solPrice">
-        --
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="label">
-        24H CHANGE
-      </div>
-
-      <div class="value" id="solChange">
-        --
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="label">
-        MARKET STATUS
-      </div>
-
-      <div class="value orange" id="marketStatus">
-        CONNECTING
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="label">
-        ENGINE
-      </div>
-
-      <div class="value">
-        V5.6
-      </div>
-
-    </div>
+    <p>
+      Real-time Solana market intelligence,
+      engine telemetry and paper-simulation
+      signals. The dashboard is designed to
+      display the actual AVIRENE5 engine
+      snapshot when the data bridge is available.
+    </p>
 
   </div>
 
 
-  <div class="section">
+  <div class="mode">
 
-    <div class="section-title">
-      Live SOL Market
-    </div>
+    <small>
+      TRADING MODE
+    </small>
 
-
-    <div class="market">
-
-      <div class="big-card">
-
-        <div class="label">
-          SOL / USDT
-        </div>
-
-
-        <div class="big-price price" id="bigPrice">
-          --
-        </div>
-
-
-        <div class="small">
-          Binance public market feed
-        </div>
-
-
-        <div class="signal">
-
-          <div class="signal-head">
-
-            <div>
-
-              <div class="label">
-                AI SIGNAL
-              </div>
-
-              <strong id="signalText">
-                WAITING FOR DATA
-              </strong>
-
-            </div>
-
-
-            <div class="badge" id="scoreBadge">
-              --
-            </div>
-
-          </div>
-
-
-          <div class="progress">
-
-            <div
-              class="progress-bar"
-              id="scoreBar">
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
+    <strong>
+      PAPER / SIMULATION
+    </strong>
 
   </div>
 
+</section>
 
-  <div class="footer">
-    Nexus SOL AI · Paper / Simulation mode
+
+<section class="stats">
+
+
+<div class="card">
+
+  <div class="label">
+    SOL Price
+  </div>
+
+  <div
+    class="num cyan"
+    id="solPrice">
+    —
   </div>
 
 </div>
 
 
+<div class="card">
+
+  <div class="label">
+    24H Change
+  </div>
+
+  <div
+    class="num"
+    id="solChange">
+    —
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="label">
+    Engine
+  </div>
+
+  <div
+    class="num purple"
+    id="engineVersion">
+    V5.6
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="label">
+    Scanned
+  </div>
+
+  <div
+    class="num"
+    id="scanned">
+    —
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="label">
+    Candidates
+  </div>
+
+  <div
+    class="num amber"
+    id="candidates">
+    —
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="label">
+    Signals
+  </div>
+
+  <div
+    class="num green"
+    id="signals">
+    —
+  </div>
+
+</div>
+
+
+</section>
+
+
+<section class="section">
+
+  <div class="title">
+    Market Intelligence
+  </div>
+
+
+  <div class="marketgrid">
+
+
+    <div class="card pricecard">
+
+      <div class="label">
+        SOL / USDT
+      </div>
+
+
+      <div
+        class="price cyan"
+        id="bigPrice">
+        —
+      </div>
+
+
+      <div
+        class="change"
+        id="changeLine">
+        Waiting for Binance public feed
+      </div>
+
+
+      <div class="chart">
+
+        <svg
+          viewBox="0 0 800 150"
+          preserveAspectRatio="none">
+
+          <polyline
+            id="line"
+            fill="none"
+            stroke="#63ddff"
+            stroke-width="3"
+            points="
+            0,110
+            80,100
+            160,112
+            240,78
+            320,90
+            400,65
+            480,76
+            560,55
+            640,62
+            720,38
+            800,45
+            "/>
+
+        </svg>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="label">
+        Engine Health
+      </div>
+
+
+      <div class="engine">
+
+
+        <div class="metric">
+
+          <span>
+            Last scan
+          </span>
+
+          <strong id="lastScan">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="metric">
+
+          <span>
+            Rejected
+          </span>
+
+          <strong id="rejected">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="metric">
+
+          <span>
+            Win rate
+          </span>
+
+          <strong id="winRate">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="metric">
+
+          <span>
+            Avg return
+          </span>
+
+          <strong id="avgReturn">
+            —
+          </strong>
+
+        </div>
+
+
+      </div>
+
+
+      <div
+        class="engineState"
+        id="engineState">
+
+        ENGINE BRIDGE:
+        WAITING FOR SNAPSHOT
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div class="title">
+    Top AI Signals
+  </div>
+
+
+  <div class="signals">
+
+
+    <div class="signalrow thead">
+
+      <div>
+        Token
+      </div>
+
+      <div>
+        Score
+      </div>
+
+      <div>
+        Momentum
+      </div>
+
+      <div>
+        Liquidity
+      </div>
+
+      <div>
+        Decision
+      </div>
+
+      <div>
+        Reason
+      </div>
+
+    </div>
+
+
+    <div id="signalRows">
+
+      <div class="empty">
+
+        <strong>
+          Waiting for AVIRENE5 engine data
+        </strong>
+
+        No engine snapshot has been published
+        to the dashboard yet. The UI is ready
+        for the real scanner output and will not
+        invent signals.
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<div class="footer">
+
+  Nexus SOL AI · AVIRENE5 ·
+  Paper / Simulation only
+
+</div>
+
+
+</main>
+
+
 <script>
 
-const priceEl =
-  document.getElementById("solPrice");
-
-const bigPriceEl =
-  document.getElementById("bigPrice");
-
-const changeEl =
-  document.getElementById("solChange");
-
-const statusEl =
-  document.getElementById("status");
-
-const marketStatusEl =
-  document.getElementById("marketStatus");
-
-const signalEl =
-  document.getElementById("signalText");
-
-const scoreBadge =
-  document.getElementById("scoreBadge");
-
-const scoreBar =
-  document.getElementById("scoreBar");
+const $ =
+  id => document.getElementById(id);
 
 
-function setStatus(ok,text){
-
-  statusEl.textContent = text;
-
-  marketStatusEl.textContent =
-    ok ? "LIVE" : "OFFLINE";
-
-  marketStatusEl.className =
-    "value " + (ok ? "green" : "red");
-
-}
+let prices = [];
 
 
-function setSignal(change){
+function fmt(n,d=2){
 
-  let signal = "NEUTRAL";
-  let score = 50;
-
-
-  if(change > 2){
-
-    signal = "BULLISH";
-
-    score =
-      Math.min(
-        95,
-        70 + Math.round(change * 3)
-      );
-
-  }
-
-  else if(change > 0.5){
-
-    signal = "WATCH / BULLISH";
-
-    score =
-      Math.min(
-        75,
-        55 + Math.round(change * 4)
-      );
-
-  }
-
-  else if(change < -2){
-
-    signal = "BEARISH";
-
-    score =
-      Math.min(
-        95,
-        70 + Math.round(Math.abs(change) * 3)
-      );
-
-  }
-
-  else if(change < -0.5){
-
-    signal = "WATCH / BEARISH";
-
-    score =
-      Math.min(
-        75,
-        55 + Math.round(Math.abs(change) * 4)
-      );
-
-  }
-
-
-  signalEl.textContent = signal;
-
-  scoreBadge.textContent =
-    score + "%";
-
-  scoreBar.style.width =
-    score + "%";
-
-}
-
-
-function renderMarket(data){
-
-  const price =
-    Number(data.price);
-
-  const change =
-    Number(data.change);
-
-
-  if(
-    !Number.isFinite(price) ||
-    !Number.isFinite(change)
-  ){
-
-    throw new Error(
-      "Invalid market data"
-    );
-
-  }
-
-
-  const formatted =
-    price.toLocaleString(
-      "en-US",
-      {
-        minimumFractionDigits:2,
-        maximumFractionDigits:4
-      }
-    );
-
-
-  priceEl.textContent =
-    "$" + formatted;
-
-  bigPriceEl.textContent =
-    "$" + formatted;
-
-
-  changeEl.textContent =
-    (change >= 0 ? "+" : "") +
-    change.toFixed(2) +
-    "%";
-
-
-  changeEl.className =
-    "value " +
-    (change >= 0 ? "green" : "red");
-
-
-  setSignal(change);
-
-
-  setStatus(
-    true,
-    "Live market data · updated " +
-    new Date().toLocaleTimeString()
+  return Number(n).toLocaleString(
+    "en-US",
+    {
+      minimumFractionDigits:d,
+      maximumFractionDigits:d
+    }
   );
 
 }
 
 
-async function fetchMarket(){
+function setText(id,v){
+
+  $(id).textContent =
+    v ?? "—";
+
+}
+
+
+function renderChart(){
+
+  if(prices.length < 2)
+    return;
+
+
+  const min =
+    Math.min(...prices);
+
+  const max =
+    Math.max(...prices);
+
+  const range =
+    max - min || 1;
+
+
+  const pts =
+    prices.map(
+      (p,i)=>{
+
+        const x =
+          i /
+          (prices.length - 1) *
+          800;
+
+        const y =
+          135 -
+          (p-min) /
+          range *
+          110;
+
+        return (
+          x.toFixed(1) +
+          "," +
+          y.toFixed(1)
+        );
+
+      }
+    ).join(" ");
+
+
+  $("line")
+    .setAttribute(
+      "points",
+      pts
+    );
+
+}
+
+
+async function market(){
 
   try{
 
-    const response =
+    const r =
       await fetch(
         "https://api.binance.com/api/v3/ticker/24hr?symbol=SOLUSDT",
         {
@@ -553,63 +938,333 @@ async function fetchMarket(){
       );
 
 
-    if(!response.ok){
-
-      throw new Error(
-        "Binance HTTP " +
-        response.status
+    if(!r.ok)
+      throw Error(
+        "HTTP " + r.status
       );
 
-    }
+
+    const d =
+      await r.json();
 
 
-    const data =
-      await response.json();
+    const p =
+      Number(d.lastPrice);
+
+    const c =
+      Number(d.priceChangePercent);
 
 
-    renderMarket({
+    prices =
+      [...prices,p]
+      .slice(-30);
 
-      price:data.lastPrice,
 
-      change:data.priceChangePercent
+    setText(
+      "solPrice",
+      "$" + fmt(p)
+    );
 
-    });
+
+    setText(
+      "bigPrice",
+      "$" + fmt(p)
+    );
+
+
+    setText(
+      "solChange",
+      (c>=0?"+":"") +
+      fmt(c) +
+      "%"
+    );
+
+
+    $("solChange")
+      .className =
+      "num " +
+      (c>=0?"green":"red");
+
+
+    $("changeLine")
+      .textContent =
+      (c>=0?"▲ ":"▼ ") +
+      (c>=0?"+":"") +
+      fmt(c) +
+      "% in 24h · Binance public market feed";
+
+
+    renderChart();
+
+
+    $("dot")
+      .style.background =
+      "var(--green)";
+
+
+    $("liveText")
+      .textContent =
+      "LIVE";
+
+
+    $("updated")
+      .textContent =
+      "Market updated " +
+      new Date()
+      .toLocaleTimeString();
 
 
   }
 
-  catch(error){
+  catch(e){
 
-    console.error(error);
+    $("dot")
+      .style.background =
+      "var(--red)";
 
+    $("liveText")
+      .textContent =
+      "OFFLINE";
 
-    setStatus(
-      false,
-      "Live market feed unavailable"
-    );
-
-
-    signalEl.textContent =
-      "DATA UNAVAILABLE";
-
-
-    scoreBadge.textContent =
-      "--";
-
-
-    scoreBar.style.width =
-      "0%";
+    $("updated")
+      .textContent =
+      "Market feed unavailable";
 
   }
 
 }
 
 
-fetchMarket();
+function renderEngine(d){
+
+  if(!d)
+    return;
+
+
+  const e =
+    d.engine || {};
+
+  const m =
+    d.metrics || {};
+
+
+  setText(
+    "engineVersion",
+    e.version || "—"
+  );
+
+
+  setText(
+    "scanned",
+    m.scanned
+  );
+
+
+  setText(
+    "candidates",
+    m.candidates
+  );
+
+
+  setText(
+    "signals",
+    m.signals
+  );
+
+
+  setText(
+    "rejected",
+    m.rejected
+  );
+
+
+  setText(
+    "lastScan",
+    e.last_scan
+      ? new Date(
+          e.last_scan
+        ).toLocaleTimeString()
+      : "—"
+  );
+
+
+  setText(
+    "winRate",
+    m.win_rate != null
+      ? m.win_rate + "%"
+      : "—"
+  );
+
+
+  setText(
+    "avgReturn",
+    m.avg_return != null
+      ? m.avg_return + "%"
+      : "—"
+  );
+
+
+  $("engineState")
+    .textContent =
+    "ENGINE BRIDGE: ONLINE · " +
+    (e.status || "SNAPSHOT RECEIVED");
+
+
+  const rows =
+    Array.isArray(d.signals)
+      ? d.signals
+      : [];
+
+
+  if(!rows.length){
+
+    $("signalRows")
+      .innerHTML =
+      `
+      <div class="empty">
+
+        <strong>
+          No qualifying signals
+        </strong>
+
+        The engine is connected,
+        but no token currently passes
+        the configured signal threshold.
+
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  $("signalRows")
+    .innerHTML =
+    rows
+    .slice(0,10)
+    .map(
+      s =>
+      `
+      <div class="signalrow">
+
+        <div>
+
+          <div class="token">
+            ${s.symbol || s.token || "UNKNOWN"}
+          </div>
+
+          <div class="reason">
+            ${
+              s.address
+              ? s.address.slice(0,12)+"…"
+              : ""
+            }
+          </div>
+
+        </div>
+
+
+        <div class="score">
+          ${s.score ?? "—"}
+        </div>
+
+
+        <div>
+          ${s.momentum ?? "—"}
+        </div>
+
+
+        <div>
+          ${s.liquidity ?? "—"}
+        </div>
+
+
+        <div>
+
+          <span class="pill">
+            ${s.decision || "WATCH"}
+          </span>
+
+        </div>
+
+
+        <div class="reason">
+          ${
+            s.reason ||
+            "Engine-qualified candidate"
+          }
+        </div>
+
+      </div>
+      `
+    )
+    .join("");
+
+}
+
+
+async function engine(){
+
+  try{
+
+    const r =
+      await fetch(
+        "./data/dashboard.json?ts=" +
+        Date.now(),
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    if(!r.ok)
+      throw Error(
+        "no snapshot"
+      );
+
+
+    const d =
+      await r.json();
+
+
+    renderEngine(d);
+
+  }
+
+  catch(e){
+
+    $("engineState")
+      .textContent =
+      "ENGINE BRIDGE: WAITING FOR SNAPSHOT";
+
+  }
+
+}
+
+
+async function refresh(){
+
+  await Promise.all(
+    [
+      market(),
+      engine()
+    ]
+  );
+
+}
+
+
+$("refresh")
+  .onclick =
+  refresh;
+
+
+refresh();
 
 
 setInterval(
-  fetchMarket,
+  refresh,
   30000
 );
 
@@ -617,4 +1272,3 @@ setInterval(
 
 </body>
 </html>
-<!-- Nexus SOL AI deployment refresh -->
