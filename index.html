@@ -3,647 +3,726 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#02050b">
-<title>NEXUS SOL AI — Live Intelligence</title>
+<meta name="theme-color" content="#020811">
+<title>Nexus SOL AI — Live Intelligence</title>
 
 <style>
 *{box-sizing:border-box}
 
 :root{
-  --bg:#02050b;
-  --panel:#07101d;
-  --panel2:#091625;
-  --line:#142b43;
-  --text:#eef7ff;
-  --muted:#7890a8;
+  --bg:#020811;
+  --panel:#071321;
+  --panel2:#0a1a2c;
+  --line:#17324b;
+  --text:#eff8ff;
+  --muted:#8197ad;
   --green:#20f0a0;
   --cyan:#18d9ff;
-  --blue:#4285ff;
+  --blue:#4287ff;
   --purple:#8b5cff;
   --red:#ff5577;
-  --yellow:#ffd166;
 }
 
-html,body{
-  margin:0;
-  min-height:100%;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,Arial,sans-serif;
-}
+html{background:var(--bg)}
 
 body{
-  overflow-x:hidden;
+  margin:0;
   background:
-    radial-gradient(circle at 50% 0%,#09223a 0,#020812 35%,#01040a 80%);
+    radial-gradient(circle at 72% 8%,#10365355 0,transparent 30%),
+    radial-gradient(circle at 15% 60%,#08254144 0,transparent 32%),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif
 }
 
 .app{
-  max-width:1550px;
+  max-width:1500px;
   margin:auto;
-  padding:18px;
+  padding:18px
 }
 
-/* HEADER */
+.card{
+  background:linear-gradient(145deg,#081827,#030b15);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 12px 40px #0008
+}
 
-.header{
+.top{
   display:grid;
   grid-template-columns:310px 1fr;
-  gap:15px;
-  margin-bottom:15px;
+  gap:16px;
+  margin-bottom:16px
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:14px
 }
 
 .logo{
   width:76px;
   height:76px;
   border-radius:20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:43px;
+  display:grid;
+  place-items:center;
+  font-size:48px;
   font-weight:900;
-  color:#fff;
-  background:linear-gradient(135deg,#20f0a0,#18d9ff 48%,#7355ff);
-  box-shadow:0 0 35px #18d9ff55;
+  background:linear-gradient(135deg,#20f0a0,#18d9ff 48%,#7650ff);
+  box-shadow:0 0 32px #18d9ff33,inset 0 0 18px #fff3
 }
 
 .brand h1{
+  font-size:27px;
   margin:0;
-  font-size:25px;
-  letter-spacing:-1px;
+  letter-spacing:-1px
 }
 
 .brand h1 span{
-  color:var(--green);
+  display:block;
+  color:var(--green)
 }
 
 .brand small{
   display:block;
-  margin-top:5px;
-  color:#829ab0;
-  font-size:10px;
+  color:#91a8bd;
   letter-spacing:3px;
+  font-size:10px;
+  margin-top:5px
 }
 
-.livebar{
-  min-height:76px;
-  border:1px solid #123c50;
+.live{
+  border:1px solid #16465a;
   border-radius:18px;
-  background:linear-gradient(100deg,#061321,#071c2b);
+  background:#061523;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:15px 20px;
+  padding:16px 22px
 }
 
 .live-left{
   display:flex;
   align-items:center;
-  gap:11px;
+  gap:11px
 }
 
-.live-dot{
+.dot{
   width:11px;
   height:11px;
   border-radius:50%;
   background:var(--green);
-  box-shadow:0 0 18px var(--green);
-  animation:pulse 1.7s infinite;
+  box-shadow:0 0 16px var(--green)
 }
 
-@keyframes pulse{
-  50%{opacity:.35;transform:scale(.75)}
-}
-
-.live-title{
+.live strong{
   color:var(--green);
-  font-weight:800;
-  letter-spacing:1px;
-  font-size:13px;
+  letter-spacing:1px
 }
 
-.live-sub{
+.live p{
+  margin:5px 0 0;
   color:var(--muted);
-  font-size:11px;
-  margin-top:4px;
-}
-
-.conf{
-  text-align:right;
+  font-size:12px
 }
 
 .conf span{
-  color:var(--muted);
-  font-size:10px;
   display:block;
+  color:var(--muted);
+  font-size:11px
 }
 
-.conf strong{
+.conf b{
   color:var(--green);
-  font-size:18px;
+  font-size:26px
 }
-
-/* LAYOUT */
 
 .layout{
   display:grid;
-  grid-template-columns:190px 1fr;
-  gap:15px;
+  grid-template-columns:185px 1fr;
+  gap:16px
 }
 
-/* SIDEBAR */
-
 .sidebar{
-  background:linear-gradient(180deg,#07111e,#030912);
   border:1px solid var(--line);
-  border-radius:17px;
-  padding:10px;
+  border-radius:18px;
+  background:linear-gradient(180deg,#061321,#030b15);
+  padding:10px
 }
 
 .nav{
-  display:flex;
-  align-items:center;
-  gap:10px;
   padding:12px;
-  margin-bottom:4px;
-  border-radius:9px;
-  color:#8ca3b8;
+  border-radius:10px;
+  color:#a9bdd0;
   font-size:13px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.nav:hover{
-  background:#0b1b2b;
-  color:#fff;
+  display:flex;
+  gap:11px;
+  margin-bottom:4px
 }
 
 .nav.active{
+  background:#082c45;
   color:#fff;
-  background:linear-gradient(90deg,#092c45,#071827);
-  border-left:2px solid var(--cyan);
-  box-shadow:0 0 20px #00d9ff12;
+  border-left:2px solid var(--cyan)
 }
 
-.nav-icon{
-  width:20px;
-  text-align:center;
-  color:var(--cyan);
-}
-
-.engine{
+.engine,.quote{
   margin-top:20px;
-  padding:13px;
-  border:1px solid #12334b;
-  border-radius:13px;
-  text-align:center;
+  border:1px solid #14344c;
+  border-radius:14px;
+  padding:14px;
+  text-align:center
 }
 
-.engine-title{
-  color:#738ba1;
+.engine small{
+  color:var(--muted);
   font-size:9px;
-  letter-spacing:1.5px;
+  letter-spacing:1px
 }
 
 .online{
-  display:inline-block;
-  margin-top:8px;
-  padding:5px 10px;
+  margin:9px auto;
+  padding:6px 12px;
+  width:max-content;
   border-radius:20px;
+  background:#063525;
   color:var(--green);
-  background:#063322;
-  font-size:10px;
+  font-size:10px
 }
 
-/* MAIN */
-
-.main{
-  min-width:0;
-}
-
-.grid{
+.brain{
+  height:115px;
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin-bottom:12px;
+  place-items:center;
+  font-size:54px;
+  color:#19cfff;
+  text-shadow:0 0 28px #008dff
 }
 
-.card{
-  background:linear-gradient(145deg,#071321,#050c16);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:16px;
-  box-shadow:0 10px 30px #00000025;
-}
-
-.card-label{
-  color:var(--muted);
-  font-size:10px;
-  letter-spacing:1.3px;
-  text-transform:uppercase;
-}
-
-.price{
-  margin-top:8px;
-  font-size:27px;
-  font-weight:900;
-  letter-spacing:-1px;
-}
-
-.change{
-  margin-top:5px;
-  font-size:12px;
-  font-weight:700;
-}
-
-.green{color:var(--green)}
-.red{color:var(--red)}
-.yellow{color:var(--yellow)}
-.cyan{color:var(--cyan)}
-
-.section{
-  background:linear-gradient(145deg,#071321,#040a12);
-  border:1px solid var(--line);
-  border-radius:17px;
-  margin-bottom:12px;
-  overflow:hidden;
-}
-
-.section-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:15px 17px;
-  border-bottom:1px solid var(--line);
-}
-
-.section-title{
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.7px;
-}
-
-.section-sub{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:4px;
-}
-
-.status{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  font-size:10px;
-  color:var(--green);
-}
-
-.status-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 10px var(--green);
-}
-
-/* SOL PANEL */
-
-.sol-panel{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:0;
-}
-
-.chart-area{
-  min-height:310px;
-  padding:18px;
-  border-right:1px solid var(--line);
-}
-
-.chart{
-  height:250px;
-  position:relative;
-  overflow:hidden;
-  border-radius:12px;
-  background:
-    linear-gradient(#ffffff08 1px,transparent 1px),
-    linear-gradient(90deg,#ffffff08 1px,transparent 1px);
-  background-size:50px 50px;
-}
-
-.chart-line{
-  position:absolute;
-  inset:20px 10px 20px 10px;
-}
-
-.chart-line svg{
-  width:100%;
-  height:100%;
-  overflow:visible;
-}
-
-.chart-fill{
-  fill:url(#area);
-  opacity:.35;
-}
-
-.chart-path{
-  fill:none;
-  stroke:var(--cyan);
-  stroke-width:3;
-  filter:drop-shadow(0 0 7px #18d9ff);
-}
-
-.chart-point{
-  fill:var(--green);
-  filter:drop-shadow(0 0 7px var(--green));
-}
-
-.chart-loading{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--muted);
+.quote{
+  color:#9aafc2;
   font-size:11px;
+  line-height:1.6
 }
 
-.stats{
-  padding:18px;
+.green{
+  color:var(--green)!important
 }
 
-.stat-row{
-  display:flex;
-  justify-content:space-between;
-  padding:11px 0;
-  border-bottom:1px solid #102238;
-  font-size:12px;
+.cyan{
+  color:var(--cyan)
 }
 
-.stat-row:last-child{
-  border-bottom:0;
+.dashboard{
+  min-width:0
 }
 
-.stat-row span:first-child{
-  color:var(--muted);
+.cards-top{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:16px
 }
-
-.stat-row strong{
-  color:#fff;
-}
-
-/* SIGNAL */
 
 .signal{
-  padding:18px;
+  min-height:390px;
+  position:relative;
+  overflow:hidden;
+  padding:20px
 }
 
-.signal-score{
-  display:flex;
-  align-items:center;
-  gap:20px;
-}
-
-.score-ring{
-  width:105px;
-  height:105px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    radial-gradient(circle,#071321 57%,transparent 59%),
-    conic-gradient(var(--green) 0deg 306deg,#142337 306deg 360deg);
-  box-shadow:0 0 30px #20f0a025;
-  flex:none;
-}
-
-.score-ring strong{
-  font-size:28px;
-}
-
-.signal-info{
-  flex:1;
-}
-
-.signal-label{
-  color:var(--green);
-  font-size:11px;
-  font-weight:800;
+.signal h3{
+  text-align:center;
+  margin:0 0 10px;
+  font-size:13px;
   letter-spacing:1px;
+  color:#a8b8c7
 }
 
-.signal-info h2{
-  margin:7px 0;
-  font-size:21px;
+.gauge{
+  width:275px;
+  height:275px;
+  margin:auto;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:conic-gradient(
+    from 215deg,
+    var(--green),
+    var(--cyan) 105deg,
+    var(--blue) 175deg,
+    var(--purple) 225deg,
+    transparent 226deg 360deg
+  );
+  box-shadow:0 0 35px #00eaff22;
+  position:relative
 }
 
-.signal-info p{
-  color:var(--muted);
+.gauge:before{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border-radius:50%;
+  background:#020a13;
+  box-shadow:inset 0 0 30px #00192b
+}
+
+.score{
+  position:relative;
+  text-align:center
+}
+
+.score b{
+  display:block;
+  font-size:78px;
+  line-height:.9
+}
+
+.score span{
+  color:#b6c7d7
+}
+
+.strong{
+  margin-top:11px;
+  color:var(--green);
+  font-weight:800;
+  font-size:13px
+}
+
+.badge{
+  position:absolute;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  border:1px solid #116c54;
+  background:#052419;
+  color:var(--green);
+  border-radius:30px;
+  padding:8px 14px;
+  font-size:10px;
+  white-space:nowrap
+}
+
+.side-metrics{
+  display:grid;
+  gap:16px
+}
+
+.metric{
+  padding:18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between
+}
+
+.metric-left{
+  display:flex;
+  gap:12px;
+  align-items:center
+}
+
+.metric-icon{
+  font-size:26px
+}
+
+.metric label{
+  display:block;
+  color:#9cb0c2;
   font-size:11px;
-  line-height:1.6;
-  margin:0;
+  letter-spacing:1px
 }
 
-.factors{
+.metric strong{
+  display:block;
+  margin-top:4px;
+  font-size:25px
+}
+
+.metric small{
+  color:var(--green);
+  font-size:10px
+}
+
+.mini-chart{
+  width:100px;
+  height:42px;
+  position:relative;
+  overflow:hidden
+}
+
+.mini-chart svg{
+  width:100%;
+  height:100%
+}
+
+.kpis{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:9px;
-  margin-top:18px;
+  gap:16px;
+  margin-top:16px
 }
 
-.factor{
-  background:#06101c;
-  border:1px solid #10263d;
-  border-radius:11px;
-  padding:12px;
+.kpi{
+  padding:17px;
+  min-height:138px
 }
 
-.factor-title{
-  color:var(--muted);
-  font-size:9px;
-  text-transform:uppercase;
-}
-
-.factor-value{
-  margin-top:6px;
-  font-size:14px;
-  font-weight:800;
-}
-
-/* SCANNER */
-
-.scanner{
-  padding:0;
-}
-
-.scan-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-}
-
-.scan-box{
-  padding:18px;
-  border-right:1px solid var(--line);
-}
-
-.scan-box:last-child{
-  border-right:0;
-}
-
-.scan-number{
-  font-size:27px;
-  font-weight:900;
-}
-
-.scan-text{
-  color:var(--muted);
+.kpi-title{
+  color:#8da4b8;
   font-size:10px;
-  margin-top:5px;
+  letter-spacing:2px
 }
 
-.progress{
-  height:5px;
-  background:#102235;
-  border-radius:10px;
-  overflow:hidden;
-  margin-top:12px;
+.kpi-value{
+  font-size:31px;
+  font-weight:800;
+  margin-top:14px
 }
 
-.progress span{
+.kpi-line{
+  height:25px;
+  margin-top:7px
+}
+
+.kpi small{
+  color:#8ba0b4;
+  font-size:10px
+}
+
+.lower{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-top:16px
+}
+
+.panel{
+  padding:18px;
+  min-height:320px
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:17px
+}
+
+.panel-head h3{
+  margin:0;
+  font-size:14px
+}
+
+.panel-head small{
   display:block;
-  height:100%;
-  width:78%;
-  background:linear-gradient(90deg,var(--cyan),var(--green));
-  box-shadow:0 0 10px #18d9ff88;
+  color:#71879b;
+  font-size:10px;
+  margin-top:4px
 }
 
-/* FOOTER */
+.select{
+  border:1px solid #24435b;
+  border-radius:8px;
+  padding:6px 9px;
+  color:#9cb0c2;
+  font-size:10px
+}
+
+.bar-chart{
+  height:205px;
+  display:flex;
+  align-items:end;
+  gap:4px;
+  border-bottom:1px solid #16354d;
+  padding:0 7px
+}
+
+.bar{
+  flex:1;
+  min-width:3px;
+  background:linear-gradient(to top,#086cff,#08d8ff);
+  border-radius:3px 3px 0 0;
+  box-shadow:0 0 7px #00aaff44
+}
+
+.bar.g{
+  background:linear-gradient(to top,#06b86d,#20f0a0)
+}
+
+.axis{
+  display:flex;
+  justify-content:space-between;
+  color:#61778b;
+  font-size:9px;
+  margin-top:7px
+}
+
+.table-wrap{
+  overflow:auto
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:520px
+}
+
+th{
+  text-align:left;
+  color:#71879b;
+  font-size:9px;
+  padding:8px 5px;
+  letter-spacing:1px
+}
+
+td{
+  padding:10px 5px;
+  border-top:1px solid #10283c;
+  font-size:11px
+}
+
+.token{
+  display:flex;
+  align-items:center;
+  gap:7px
+}
+
+.token-icon{
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#182a3e
+}
+
+.score-small{
+  color:var(--green);
+  border:2px solid var(--green);
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:grid;
+  place-items:center
+}
+
+.performance{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-bottom:18px
+}
+
+.perf strong{
+  display:block;
+  font-size:22px;
+  margin-top:4px
+}
+
+.perf span{
+  color:#71879b;
+  font-size:9px
+}
+
+.line-chart{
+  height:145px;
+  border-bottom:1px solid #16354d;
+  position:relative;
+  overflow:hidden;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent 0 34px,
+    #0d2435 35px
+  )
+}
+
+.line-chart svg{
+  width:100%;
+  height:100%
+}
+
+.ai{
+  display:flex;
+  gap:18px;
+  align-items:center
+}
+
+.ai-art{
+  min-width:145px;
+  height:145px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:60px;
+  color:#1acfff;
+  text-shadow:0 0 30px #008dff;
+  background:radial-gradient(
+    circle,
+    #062b52,
+    #020b15 65%
+  )
+}
+
+.ai h2{
+  color:var(--green);
+  font-size:16px
+}
+
+.ai li{
+  margin:8px 0;
+  color:#9eb1c3;
+  font-size:11px
+}
+
+.button{
+  display:block;
+  text-align:center;
+  margin-top:16px;
+  padding:12px;
+  border-radius:9px;
+  color:#fff;
+  background:linear-gradient(90deg,#1857db,#7128d8)
+}
+
+.ticker{
+  margin-top:16px;
+  border:1px solid #17324b;
+  border-radius:14px;
+  background:#040d17;
+  overflow:hidden;
+  white-space:nowrap
+}
+
+.ticker-track{
+  display:flex;
+  width:max-content;
+  animation:scroll 28s linear infinite
+}
+
+.tick{
+  padding:13px 20px;
+  border-right:1px solid #12283a;
+  font-size:12px
+}
+
+.tick b{
+  margin-left:5px
+}
+
+.up{
+  color:var(--green)
+}
+
+.down{
+  color:var(--red)
+}
+
+@keyframes scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
 
 .footer{
-  text-align:center;
-  padding:15px;
-  color:#526b82;
-  font-size:9px;
-  letter-spacing:.5px;
+  margin-top:12px;
+  padding:12px 16px;
+  border:1px solid #12314a;
+  border-radius:13px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  color:#b0c0cf;
+  font-size:11px
 }
 
-/* MOBILE */
+.healthy{
+  color:var(--green)
+}
 
-@media(max-width:950px){
-  .header{
-    grid-template-columns:1fr;
+@media(max-width:900px){
+
+  .app{padding:10px}
+
+  .top{
+    grid-template-columns:1fr
   }
 
   .layout{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
 
   .sidebar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:4px;
+    display:none
   }
 
-  .nav{
-    margin:0;
-    flex:1 1 110px;
-    justify-content:center;
+  .cards-top,
+  .lower{
+    grid-template-columns:1fr
   }
 
-  .engine{
-    display:none;
-  }
-
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .sol-panel{
-    grid-template-columns:1fr;
-  }
-
-  .chart-area{
-    border-right:0;
-    border-bottom:1px solid var(--line);
-  }
-}
-
-@media(max-width:600px){
-  .app{
-    padding:9px;
-  }
-
-  .brand{
-    padding:4px;
-  }
-
-  .logo{
-    width:60px;
-    height:60px;
-    font-size:34px;
+  .kpis{
+    grid-template-columns:repeat(2,1fr)
   }
 
   .brand h1{
-    font-size:20px;
+    font-size:22px
   }
 
-  .livebar{
-    min-height:65px;
-    padding:12px;
+  .logo{
+    width:64px;
+    height:64px;
+    font-size:40px
   }
 
-  .grid{
-    grid-template-columns:1fr 1fr;
-    gap:8px;
+  .conf{
+    display:none
   }
 
-  .card{
-    padding:12px;
+  .gauge{
+    width:235px;
+    height:235px
   }
 
-  .price{
-    font-size:21px;
+  .score b{
+    font-size:67px
+  }
+}
+
+@media(max-width:520px){
+
+  .signal{
+    min-height:350px
   }
 
-  .scan-grid{
-    grid-template-columns:1fr;
+  .gauge{
+    width:215px;
+    height:215px
   }
 
-  .scan-box{
-    border-right:0;
-    border-bottom:1px solid var(--line);
+  .score b{
+    font-size:60px
   }
 
-  .scan-box:last-child{
-    border-bottom:0;
+  .kpi{
+    min-height:115px;
+    padding:13px
   }
 
-  .factors{
-    grid-template-columns:1fr 1fr;
+  .kpi-value{
+    font-size:26px
   }
 
-  .signal-score{
-    align-items:flex-start;
+  .panel{
+    padding:14px
   }
 
-  .score-ring{
-    width:85px;
-    height:85px;
+  .ai{
+    flex-direction:column;
+    align-items:flex-start
   }
 
-  .score-ring strong{
-    font-size:23px;
-  }
-
-  .signal-info h2{
-    font-size:17px;
+  .ai-art{
+    width:100%
   }
 }
 </style>
@@ -653,690 +732,44 @@ body{
 
 <div class="app">
 
-  <header class="header">
+<header class="top">
 
-    <div class="brand">
-      <div class="logo">N</div>
+  <div class="brand">
+    <div class="logo">N</div>
+
+    <div>
+      <h1>NEXUS <span>SOL AI</span></h1>
+      <small>SOLANA SIGNAL INTELLIGENCE</small>
+    </div>
+  </div>
+
+  <div class="live">
+
+    <div class="live-left">
+      <div class="dot"></div>
+
       <div>
-        <h1>NEXUS <span>SOL AI</span></h1>
-        <small>LIVE INTELLIGENCE ENGINE</small>
+        <strong>LIVE SCANNER</strong>
+        <p id="scannerText">
+          Connecting to live market data...
+        </p>
       </div>
     </div>
 
-    <div class="livebar">
-      <div class="live-left">
-        <div class="live-dot"></div>
-        <div>
-          <div class="live-title">SYSTEM ONLINE</div>
-          <div class="live-sub" id="lastUpdate">
-            Connecting to live market data...
-          </div>
-        </div>
-      </div>
-
-      <div class="conf">
-        <span>ENGINE STATUS</span>
-        <strong id="engineStatus">READY</strong>
-      </div>
+    <div class="conf">
+      <span>System Confidence</span>
+      <b>87%</b>
     </div>
-
-  </header>
-
-  <div class="layout">
-
-    <aside class="sidebar">
-
-      <div class="nav active">
-        <div class="nav-icon">◈</div>
-        <div>Dashboard</div>
-      </div>
-
-      <div class="nav">
-        <div class="nav-icon">⌁</div>
-        <div>Live Scanner</div>
-      </div>
-
-      <div class="nav">
-        <div class="nav-icon">◉</div>
-        <div>Signals</div>
-      </div>
-
-      <div class="nav">
-        <div class="nav-icon">▣</div>
-        <div>Outcomes</div>
-      </div>
-
-      <div class="nav">
-        <div class="nav-icon">◆</div>
-        <div>Intelligence</div>
-      </div>
-
-      <div class="nav">
-        <div class="nav-icon">⚙</div>
-        <div>System</div>
-      </div>
-
-      <div class="engine">
-        <div class="engine-title">AVIRENE5 ENGINE</div>
-        <div class="online">● ONLINE</div>
-      </div>
-
-    </aside>
-
-    <main class="main">
-
-      <!-- MARKET CARDS -->
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="card-label">SOL / USD</div>
-          <div class="price" id="solPrice">Loading...</div>
-          <div class="change" id="solChange">--</div>
-        </div>
-
-        <div class="card">
-          <div class="card-label">24H HIGH</div>
-          <div class="price" id="solHigh">--</div>
-          <div class="change cyan">LIVE MARKET</div>
-        </div>
-
-        <div class="card">
-          <div class="card-label">24H LOW</div>
-          <div class="price" id="solLow">--</div>
-          <div class="change cyan">LIVE MARKET</div>
-        </div>
-
-        <div class="card">
-          <div class="card-label">24H VOLUME</div>
-          <div class="price" id="solVolume">--</div>
-          <div class="change cyan">SOL / USD</div>
-        </div>
-
-      </div>
-
-      <!-- SOL MARKET -->
-
-      <section class="section">
-
-        <div class="section-head">
-          <div>
-            <div class="section-title">SOLANA MARKET INTELLIGENCE</div>
-            <div class="section-sub">
-              Live SOL/USDT market data
-            </div>
-          </div>
-
-          <div class="status">
-            <span class="status-dot"></span>
-            LIVE
-          </div>
-        </div>
-
-        <div class="sol-panel">
-
-          <div class="chart-area">
-
-            <div class="chart">
-
-              <div class="chart-loading" id="chartLoading">
-                Loading market data...
-              </div>
-
-              <div class="chart-line">
-
-                <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
-
-                  <defs>
-                    <linearGradient id="area"
-                      x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%"
-                        stop-color="#18d9ff"
-                        stop-opacity=".45"/>
-                      <stop offset="100%"
-                        stop-color="#18d9ff"
-                        stop-opacity="0"/>
-                    </linearGradient>
-                  </defs>
-
-                  <path
-                    id="chartFill"
-                    class="chart-fill"
-                    d=""
-                  />
-
-                  <path
-                    id="chartPath"
-                    class="chart-path"
-                    d=""
-                  />
-
-                  <circle
-                    id="chartPoint"
-                    class="chart-point"
-                    cx="0"
-                    cy="0"
-                    r="6"
-                  />
-
-                </svg>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="stats">
-
-            <div class="stat-row">
-              <span>Current Price</span>
-              <strong id="statPrice">--</strong>
-            </div>
-
-            <div class="stat-row">
-              <span>24H Change</span>
-              <strong id="statChange">--</strong>
-            </div>
-
-            <div class="stat-row">
-              <span>24H High</span>
-              <strong id="statHigh">--</strong>
-            </div>
-
-            <div class="stat-row">
-              <span>24H Low</span>
-              <strong id="statLow">--</strong>
-            </div>
-
-            <div class="stat-row">
-              <span>24H Volume</span>
-              <strong id="statVolume">--</strong>
-            </div>
-
-            <div class="stat-row">
-              <span>Data Source</span>
-              <strong class="cyan">BINANCE</strong>
-            </div>
-
-            <div class="stat-row">
-              <span>Last Sync</span>
-              <strong id="statTime">--</strong>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- AI SIGNAL -->
-
-      <section class="section">
-
-        <div class="section-head">
-
-          <div>
-            <div class="section-title">
-              AVIRENE5 AI SIGNAL ENGINE
-            </div>
-
-            <div class="section-sub">
-              Paper / Shadow intelligence mode
-            </div>
-          </div>
-
-          <div class="status">
-            <span class="status-dot"></span>
-            ANALYZING
-          </div>
-
-        </div>
-
-        <div class="signal">
-
-          <div class="signal-score">
-
-            <div class="score-ring">
-              <strong>85</strong>
-            </div>
-
-            <div class="signal-info">
-
-              <div class="signal-label">
-                STRONG SIGNAL
-              </div>
-
-              <h2>
-                SOL MARKET MOMENTUM
-              </h2>
-
-              <p>
-                Multi-factor intelligence layer active.
-                Signal shown for paper / simulation analysis only.
-                No live trading is performed by this dashboard.
-              </p>
-
-            </div>
-
-          </div>
-
-          <div class="factors">
-
-            <div class="factor">
-              <div class="factor-title">Momentum</div>
-              <div class="factor-value green">POSITIVE</div>
-            </div>
-
-            <div class="factor">
-              <div class="factor-title">Liquidity</div>
-              <div class="factor-value green">HEALTHY</div>
-            </div>
-
-            <div class="factor">
-              <div class="factor-title">Volatility</div>
-              <div class="factor-value yellow">ACTIVE</div>
-            </div>
-
-            <div class="factor">
-              <div class="factor-title">AI Score</div>
-              <div class="factor-value cyan">85 / 100</div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- SCANNER -->
-
-      <section class="section scanner">
-
-        <div class="section-head">
-
-          <div>
-            <div class="section-title">
-              LIVE SOLANA SCANNER
-            </div>
-
-            <div class="section-sub">
-              Scanner infrastructure status
-            </div>
-          </div>
-
-          <div class="status">
-            <span class="status-dot"></span>
-            ACTIVE
-          </div>
-
-        </div>
-
-        <div class="scan-grid">
-
-          <div class="scan-box">
-
-            <div class="scan-number cyan" id="pairsCount">
-              0
-            </div>
-
-            <div class="scan-text">
-              MARKET DATA UPDATES
-            </div>
-
-            <div class="progress">
-              <span style="width:82%"></span>
-            </div>
-
-          </div>
-
-          <div class="scan-box">
-
-            <div class="scan-number green">
-              85+
-            </div>
-
-            <div class="scan-text">
-              SIGNAL THRESHOLD
-            </div>
-
-            <div class="progress">
-              <span style="width:85%"></span>
-            </div>
-
-          </div>
-
-          <div class="scan-box">
-
-            <div class="scan-number purple">
-              V5.6
-            </div>
-
-            <div class="scan-text">
-              AVIRENE5 ENGINE
-            </div>
-
-            <div class="progress">
-              <span style="width:96%"></span>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <div class="footer">
-        NEXUS SOL AI • AVIRENE5 • PAPER / SHADOW MODE • LIVE MARKET DATA
-      </div>
-
-    </main>
 
   </div>
 
-</div>
+</header>
 
-<script>
+<div class="layout">
 
-/* =========================================================
-   NEXUS SOL AI
-   LIVE SOLANA MARKET DATA
-   ========================================================= */
+<aside class="sidebar">
 
-const API =
-  "https://api.binance.com/api/v3/ticker/24hr?symbol=SOLUSDT";
-
-const KLINES =
-  "https://api.binance.com/api/v3/klines?symbol=SOLUSDT&interval=5m&limit=60";
-
-
-function money(value){
-
-  if(value === null || value === undefined ||
-     Number.isNaN(Number(value))){
-    return "--";
-  }
-
-  return "$" + Number(value).toLocaleString(
-    "en-US",
-    {
-      minimumFractionDigits:2,
-      maximumFractionDigits:4
-    }
-  );
-}
-
-
-function compact(value){
-
-  if(value === null || value === undefined){
-    return "--";
-  }
-
-  const n = Number(value);
-
-  if(n >= 1000000000){
-    return "$" + (n/1000000000).toFixed(2) + "B";
-  }
-
-  if(n >= 1000000){
-    return "$" + (n/1000000).toFixed(2) + "M";
-  }
-
-  if(n >= 1000){
-    return "$" + (n/1000).toFixed(2) + "K";
-  }
-
-  return "$" + n.toFixed(2);
-}
-
-
-function setText(id,value){
-
-  const el = document.getElementById(id);
-
-  if(el){
-    el.textContent = value;
-  }
-
-}
-
-
-async function loadMarket(){
-
-  try{
-
-    const response = await fetch(
-      API,
-      {
-        cache:"no-store"
-      }
-    );
-
-    if(!response.ok){
-      throw new Error("Market API error");
-    }
-
-    const data = await response.json();
-
-    const price = Number(data.lastPrice);
-    const change = Number(data.priceChangePercent);
-    const high = Number(data.highPrice);
-    const low = Number(data.lowPrice);
-    const volume = Number(data.quoteVolume);
-
-    setText("solPrice",money(price));
-    setText("statPrice",money(price));
-
-    setText("solHigh",money(high));
-    setText("statHigh",money(high));
-
-    setText("solLow",money(low));
-    setText("statLow",money(low));
-
-    setText("solVolume",compact(volume));
-    setText("statVolume",compact(volume));
-
-    const changeText =
-      (change >= 0 ? "+" : "") +
-      change.toFixed(2) +
-      "%";
-
-    setText("solChange",changeText);
-    setText("statChange",changeText);
-
-    document.getElementById("solChange").className =
-      "change " + (change >= 0 ? "green" : "red");
-
-    document.getElementById("statChange").className =
-      change >= 0 ? "green" : "red";
-
-    const now = new Date();
-
-    const time =
-      now.toLocaleTimeString(
-        "en-IL",
-        {
-          hour:"2-digit",
-          minute:"2-digit",
-          second:"2-digit"
-        }
-      );
-
-    setText("statTime",time);
-    setText(
-      "lastUpdate",
-      "Live market data • Updated " + time
-    );
-
-    setText("engineStatus","LIVE");
-
-    loadChart();
-
-  }catch(error){
-
-    console.error(error);
-
-    setText(
-      "lastUpdate",
-      "Market connection temporarily unavailable"
-    );
-
-    setText(
-      "engineStatus",
-      "RETRY"
-    );
-
-  }
-
-}
-
-
-async function loadChart(){
-
-  try{
-
-    const response = await fetch(
-      KLINES,
-      {
-        cache:"no-store"
-      }
-    );
-
-    if(!response.ok){
-      throw new Error("Chart API error");
-    }
-
-    const rows = await response.json();
-
-    const prices =
-      rows.map(row => Number(row[4]));
-
-    if(!prices.length){
-      return;
-    }
-
-    drawChart(prices);
-
-    setText(
-      "pairsCount",
-      prices.length
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-}
-
-
-function drawChart(prices){
-
-  const width = 1000;
-  const height = 300;
-  const padding = 12;
-
-  const min = Math.min(...prices);
-  const max = Math.max(...prices);
-
-  const range =
-    max - min === 0
-      ? 1
-      : max - min;
-
-  const points = prices.map(
-    (price,index) => {
-
-      const x =
-        padding +
-        index *
-        ((width-padding*2)/(prices.length-1));
-
-      const y =
-        height-padding -
-        ((price-min)/range) *
-        (height-padding*2);
-
-      return [x,y];
-
-    }
-  );
-
-  let path = "";
-
-  points.forEach(
-    (point,index) => {
-
-      path +=
-        (index === 0 ? "M" : "L") +
-        point[0].toFixed(2) +
-        " " +
-        point[1].toFixed(2) +
-        " ";
-
-    }
-  );
-
-  const fillPath =
-    path +
-    "L " +
-    points[points.length-1][0] +
-    " " +
-    height +
-    " L " +
-    points[0][0] +
-    " " +
-    height +
-    " Z";
-
-  document
-    .getElementById("chartPath")
-    .setAttribute("d",path);
-
-  document
-    .getElementById("chartFill")
-    .setAttribute("d",fillPath);
-
-  const last =
-    points[points.length-1];
-
-  const circle =
-    document.getElementById("chartPoint");
-
-  circle.setAttribute("cx",last[0]);
-  circle.setAttribute("cy",last[1]);
-
-  document
-    .getElementById("chartLoading")
-    .style.display = "none";
-
-}
-
-
-/* START */
-
-loadMarket();
-
-/*
-   Refresh market data every 10 seconds.
-*/
-setInterval(
-  loadMarket,
-  10000
-);
-
-
-/*
-   Refresh chart every 30 seconds.
-*/
-setInterval(
-  loadChart,
-  30000
-);
-
-</script>
-
-</body>
-</html>
+  <div class="nav active">⌂ Dashboard</div>
+  <div class="nav">◉ Live Scanner</div>
+  <div class="nav">◎ Signals</div>
+  <div
