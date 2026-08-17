@@ -2,148 +2,310 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#020811">
-<title>Nexus SOL AI — Live Intelligence</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nexus SOL AI</title>
 
 <style>
-*{box-sizing:border-box}
-:root{--bg:#020811;--panel:#061321;--panel2:#081a2b;--line:#12304a;--text:#eef7ff;--muted:#8298ae;--green:#20f0a0;--cyan:#18d9ff;--blue:#258bff;--purple:#8b5cff;--red:#ff5577}
+*{
+  box-sizing:border-box;
+}
 
 body{
-margin:0;
-background:radial-gradient(circle at 55% 15%,#08233a 0,#020811 42%,#01060c 100%);
-color:var(--text);
-font-family:Inter,Arial,sans-serif;
-min-height:100vh
+  margin:0;
+  background:#030811;
+  color:#edf7fb;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
-.app{max-width:1500px;margin:auto;padding:22px}
-
-.top{display:grid;grid-template-columns:310px 1fr;gap:18px;margin-bottom:18px}
-
-.brand{display:flex;align-items:center;gap:15px}
+header{
+  padding:22px 18px;
+  border-bottom:1px solid #172535;
+  background:#06101c;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
 
 .logo{
-width:82px;
-height:82px;
-border-radius:20px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:54px;
-font-weight:900;
-color:#fff;
-background:linear-gradient(135deg,#08f0c0,#168bff 55%,#713cff);
-box-shadow:0 0 28px #09d9ff55,inset 0 0 20px #ffffff22
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:.5px;
 }
 
-.brand h1{margin:0;font-size:28px;letter-spacing:-1px}
-.brand h1 span{display:block;color:var(--green)}
-.brand small{display:block;margin-top:6px;color:#91a8bd;letter-spacing:3px;font-size:11px}
-
-.live{
-border:1px solid #16465a;
-border-radius:20px;
-background:linear-gradient(90deg,#061523,#071c2c);
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:18px 24px;
-box-shadow:0 0 35px #00d9ff0d
+.logo span{
+  color:#8b5cf6;
 }
 
-.live-left{display:flex;align-items:center;gap:12px}
-
-.dot,.market-live-dot{
-background:var(--green);
-border-radius:50%;
-box-shadow:0 0 18px var(--green)
+.status{
+  margin-top:7px;
+  color:#7f93a6;
+  font-size:12px;
 }
 
-.dot{
-width:12px;
-height:12px;
-animation:pulse 1.6s infinite
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:18px;
 }
 
-@keyframes pulse{
-50%{box-shadow:0 0 28px var(--green);opacity:1}
-100%{opacity:.7}
+.hero{
+  background:linear-gradient(135deg,#071522,#08101b);
+  border:1px solid #172b3d;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:18px;
 }
 
-.live strong{color:var(--green);letter-spacing:1px}
-.live p{margin:5px 0 0;color:var(--muted);font-size:13px}
-
-.conf{display:flex;align-items:center;gap:20px}
-.conf span{color:var(--muted);font-size:12px}
-.conf b{color:var(--green);font-size:27px}
-
-.layout{display:grid;grid-template-columns:185px 1fr;gap:18px}
-
-.sidebar{
-border:1px solid var(--line);
-border-radius:18px;
-background:linear-gradient(180deg,#061321,#030b15);
-padding:12px
+.hero-title{
+  font-size:28px;
+  font-weight:800;
+  margin-bottom:8px;
 }
 
-.nav{
-padding:13px;
-margin-bottom:5px;
-border-radius:10px;
-color:#a9bdd0;
-font-size:14px;
-display:flex;
-align-items:center;
-gap:12px
+.hero-text{
+  color:#8fa5b8;
+  font-size:14px;
+  line-height:1.6;
 }
 
-.nav.active{
-background:linear-gradient(90deg,#082c45,#071827);
-color:#fff;
-border-left:2px solid var(--cyan)
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
 }
 
-.nav span{font-size:18px}
-
-.engine{
-margin-top:25px;
-padding:15px 10px;
-border:1px solid #14344c;
-border-radius:14px;
-text-align:center
+.card{
+  background:#07111c;
+  border:1px solid #17293a;
+  border-radius:15px;
+  padding:17px;
 }
 
-.engine small{
-color:var(--muted);
-font-size:10px;
-letter-spacing:1px
+.label{
+  color:#7f93a6;
+  font-size:12px;
+  margin-bottom:9px;
 }
 
-.online{
-margin:10px auto;
-width:max-content;
-padding:7px 13px;
-border-radius:20px;
-color:var(--green);
-background:#063525;
-font-size:11px
+.value{
+  font-size:24px;
+  font-weight:800;
 }
 
-.brain{
-height:130px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:65px;
-color:#13caff;
-text-shadow:0 0 15px #08cfff,0 0 40px #006cff
+.price{
+  color:#72e6ff;
 }
 
-.quote{
-margin-top:25px;
-border:1px solid #14344c;
-border-radius:14px;
-padding:18px;
-color:#9aaf
+.green{
+  color:#42e6a4;
+}
+
+.orange{
+  color:#ffb454;
+}
+
+.red{
+  color:#ff6878;
+}
+
+.section{
+  margin-top:18px;
+}
+
+.section-title{
+  font-size:18px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.market{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.big-card{
+  background:#07111c;
+  border:1px solid #17293a;
+  border-radius:15px;
+  padding:20px;
+}
+
+.big-price{
+  font-size:42px;
+  font-weight:900;
+  margin:8px 0;
+}
+
+.small{
+  font-size:12px;
+  color:#71879a;
+}
+
+.signal{
+  margin-top:18px;
+  padding:18px;
+  border-radius:15px;
+  border:1px solid #263a4b;
+  background:#081522;
+}
+
+.signal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.badge{
+  padding:7px 11px;
+  border-radius:999px;
+  background:#132438;
+  color:#72e6ff;
+  font-size:12px;
+  font-weight:800;
+}
+
+.progress{
+  margin-top:15px;
+  height:8px;
+  background:#152432;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:#8b5cf6;
+  transition:width .5s;
+}
+
+.footer{
+  text-align:center;
+  color:#61788c;
+  font-size:11px;
+  padding:30px 10px;
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 16px;
+  background:#8b5cf6;
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+@media(max-width:800px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .market{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:500px){
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .value{
+    font-size:20px;
+  }
+
+  .big-price{
+    font-size:34px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Nexus <span>SOL AI</span></div>
+  <div class="status" id="status">
+    Connecting to live market data...
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-title">Solana AI Intelligence</div>
+    <div class="hero-text">
+      Real-time SOL market monitoring and AI signal intelligence.
+      Paper / Simulation mode only.
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="label">SOL PRICE</div>
+      <div class="value price" id="solPrice">--</div>
+    </div>
+
+    <div class="card">
+      <div class="label">24H CHANGE</div>
+      <div class="value" id="solChange">--</div>
+    </div>
+
+    <div class="card">
+      <div class="label">MARKET STATUS</div>
+      <div class="value green" id="marketStatus">LIVE</div>
+    </div>
+
+    <div class="card">
+      <div class="label">ENGINE</div>
+      <div class="value">V5.6</div>
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-title">Live SOL Market</div>
+
+    <div class="market">
+
+      <div class="big-card">
+        <div class="label">SOL / USDT</div>
+
+        <div class="big-price price" id="bigPrice">
+          --
+        </div>
+
+        <div class="small">
+          Binance public market feed
+        </div>
+
+        <div class="signal">
+
+          <div class="signal-head">
+            <div>
+              <div class="label">AI SIGNAL</div>
+              <strong id="signalText">
+                WAITING FOR DATA
+              </strong>
+            </div>
+
+            <div class="badge" id="scoreBadge">
+              --
+            </div>
+          </div>
+
+          <div class="progress">
+            <div
+              class="progress-bar"
+              id="scoreBar">
+            </div>
+          </div>
