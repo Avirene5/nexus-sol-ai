@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -176,6 +176,7 @@ body{
   color:#8ca3b8;
   font-size:13px;
   cursor:pointer;
+  transition:.2s;
 }
 
 .nav:hover{
@@ -218,3 +219,1124 @@ body{
   color:var(--green);
   background:#063322;
   font-size:10px;
+}
+
+/* MAIN */
+
+.main{
+  min-width:0;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.card{
+  background:linear-gradient(145deg,#071321,#050c16);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 10px 30px #00000025;
+}
+
+.card-label{
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+}
+
+.price{
+  margin-top:8px;
+  font-size:27px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+.change{
+  margin-top:5px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.green{color:var(--green)}
+.red{color:var(--red)}
+.yellow{color:var(--yellow)}
+.cyan{color:var(--cyan)}
+
+.section{
+  background:linear-gradient(145deg,#071321,#040a12);
+  border:1px solid var(--line);
+  border-radius:17px;
+  margin-bottom:12px;
+  overflow:hidden;
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 17px;
+  border-bottom:1px solid var(--line);
+}
+
+.section-title{
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.7px;
+}
+
+.section-sub{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:4px;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:10px;
+  color:var(--green);
+}
+
+.status-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 10px var(--green);
+}
+
+/* SOL PANEL */
+
+.sol-panel{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:0;
+}
+
+.chart-area{
+  min-height:310px;
+  padding:18px;
+  border-right:1px solid var(--line);
+}
+
+.chart{
+  height:250px;
+  position:relative;
+  overflow:hidden;
+  border-radius:12px;
+  background:
+    linear-gradient(#ffffff08 1px,transparent 1px),
+    linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+  background-size:50px 50px;
+}
+
+.chart-line{
+  position:absolute;
+  inset:20px 10px 20px 10px;
+}
+
+.chart-line svg{
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+
+.chart-fill{
+  fill:url(#area);
+  opacity:.35;
+}
+
+.chart-path{
+  fill:none;
+  stroke:var(--cyan);
+  stroke-width:3;
+  filter:drop-shadow(0 0 7px #18d9ff);
+}
+
+.chart-point{
+  fill:var(--green);
+  filter:drop-shadow(0 0 7px var(--green));
+}
+
+.chart-loading{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.stats{
+  padding:18px;
+}
+
+.stat-row{
+  display:flex;
+  justify-content:space-between;
+  padding:11px 0;
+  border-bottom:1px solid #102238;
+  font-size:12px;
+}
+
+.stat-row:last-child{
+  border-bottom:0;
+}
+
+.stat-row span:first-child{
+  color:var(--muted);
+}
+
+.stat-row strong{
+  color:#fff;
+}
+
+/* SIGNAL */
+
+.signal{
+  padding:18px;
+}
+
+.signal-score{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.score-ring{
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle,#071321 57%,transparent 59%),
+    conic-gradient(var(--green) 0deg 306deg,#142337 306deg 360deg);
+  box-shadow:0 0 30px #20f0a025;
+  flex:none;
+}
+
+.score-ring strong{
+  font-size:28px;
+}
+
+.signal-info{
+  flex:1;
+}
+
+.signal-label{
+  color:var(--green);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.signal-info h2{
+  margin:7px 0;
+  font-size:21px;
+}
+
+.signal-info p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.6;
+  margin:0;
+}
+
+.factors{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  margin-top:18px;
+}
+
+.factor{
+  background:#06101c;
+  border:1px solid #10263d;
+  border-radius:11px;
+  padding:12px;
+}
+
+.factor-title{
+  color:var(--muted);
+  font-size:9px;
+  text-transform:uppercase;
+}
+
+.factor-value{
+  margin-top:6px;
+  font-size:14px;
+  font-weight:800;
+}
+
+/* SCANNER */
+
+.scanner{
+  padding:0;
+}
+
+.scan-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+}
+
+.scan-box{
+  padding:18px;
+  border-right:1px solid var(--line);
+}
+
+.scan-box:last-child{
+  border-right:0;
+}
+
+.scan-number{
+  font-size:27px;
+  font-weight:900;
+}
+
+.scan-text{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:5px;
+}
+
+.progress{
+  height:5px;
+  background:#102235;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progress span{
+  display:block;
+  height:100%;
+  width:78%;
+  background:linear-gradient(90deg,var(--cyan),var(--green));
+  box-shadow:0 0 10px #18d9ff88;
+}
+
+/* FOOTER */
+
+.footer{
+  text-align:center;
+  padding:15px;
+  color:#526b82;
+  font-size:9px;
+  letter-spacing:.5px;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+  .header{
+    grid-template-columns:1fr;
+  }
+
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px;
+  }
+
+  .nav{
+    margin:0;
+    flex:1 1 110px;
+    justify-content:center;
+  }
+
+  .engine{
+    display:none;
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .sol-panel{
+    grid-template-columns:1fr;
+  }
+
+  .chart-area{
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+}
+
+@media(max-width:600px){
+  .app{
+    padding:9px;
+  }
+
+  .brand{
+    padding:4px;
+  }
+
+  .logo{
+    width:60px;
+    height:60px;
+    font-size:34px;
+  }
+
+  .brand h1{
+    font-size:20px;
+  }
+
+  .livebar{
+    min-height:65px;
+    padding:12px;
+  }
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  .card{
+    padding:12px;
+  }
+
+  .price{
+    font-size:21px;
+  }
+
+  .scan-grid{
+    grid-template-columns:1fr;
+  }
+
+  .scan-box{
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .scan-box:last-child{
+    border-bottom:0;
+  }
+
+  .factors{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .signal-score{
+    align-items:flex-start;
+  }
+
+  .score-ring{
+    width:85px;
+    height:85px;
+  }
+
+  .score-ring strong{
+    font-size:23px;
+  }
+
+  .signal-info h2{
+    font-size:17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header class="header">
+
+    <div class="brand">
+      <div class="logo">N</div>
+      <div>
+        <h1>NEXUS <span>SOL AI</span></h1>
+        <small>LIVE INTELLIGENCE ENGINE</small>
+      </div>
+    </div>
+
+    <div class="livebar">
+      <div class="live-left">
+        <div class="live-dot"></div>
+        <div>
+          <div class="live-title">SYSTEM ONLINE</div>
+          <div class="live-sub" id="lastUpdate">
+            Connecting to live market data...
+          </div>
+        </div>
+      </div>
+
+      <div class="conf">
+        <span>ENGINE STATUS</span>
+        <strong id="engineStatus">READY</strong>
+      </div>
+    </div>
+
+  </header>
+
+  <div class="layout">
+
+    <aside class="sidebar">
+
+      <div class="nav active">
+        <div class="nav-icon">◈</div>
+        <div>Dashboard</div>
+      </div>
+
+      <div class="nav">
+        <div class="nav-icon">⌁</div>
+        <div>Live Scanner</div>
+      </div>
+
+      <div class="nav">
+        <div class="nav-icon">◉</div>
+        <div>Signals</div>
+      </div>
+
+      <div class="nav">
+        <div class="nav-icon">▣</div>
+        <div>Outcomes</div>
+      </div>
+
+      <div class="nav">
+        <div class="nav-icon">◆</div>
+        <div>Intelligence</div>
+      </div>
+
+      <div class="nav">
+        <div class="nav-icon">⚙</div>
+        <div>System</div>
+      </div>
+
+      <div class="engine">
+        <div class="engine-title">AVIRENE5 ENGINE</div>
+        <div class="online">● ONLINE</div>
+      </div>
+
+    </aside>
+
+    <main class="main">
+
+      <!-- MARKET CARDS -->
+
+      <div class="grid">
+
+        <div class="card">
+          <div class="card-label">SOL / USD</div>
+          <div class="price" id="solPrice">Loading...</div>
+          <div class="change" id="solChange">--</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">24H HIGH</div>
+          <div class="price" id="solHigh">--</div>
+          <div class="change cyan">LIVE MARKET</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">24H LOW</div>
+          <div class="price" id="solLow">--</div>
+          <div class="change cyan">LIVE MARKET</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">24H VOLUME</div>
+          <div class="price" id="solVolume">--</div>
+          <div class="change cyan">SOL / USD</div>
+        </div>
+
+      </div>
+
+      <!-- SOL MARKET -->
+
+      <section class="section">
+
+        <div class="section-head">
+          <div>
+            <div class="section-title">SOLANA MARKET INTELLIGENCE</div>
+            <div class="section-sub">
+              Live SOL/USDT market data
+            </div>
+          </div>
+
+          <div class="status">
+            <span class="status-dot"></span>
+            LIVE
+          </div>
+        </div>
+
+        <div class="sol-panel">
+
+          <div class="chart-area">
+
+            <div class="chart">
+
+              <div class="chart-loading" id="chartLoading">
+                Loading market data...
+              </div>
+
+              <div class="chart-line">
+
+                <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
+
+                  <defs>
+                    <linearGradient id="area"
+                      x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%"
+                        stop-color="#18d9ff"
+                        stop-opacity=".45"/>
+                      <stop offset="100%"
+                        stop-color="#18d9ff"
+                        stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+
+                  <path
+                    id="chartFill"
+                    class="chart-fill"
+                    d=""
+                  />
+
+                  <path
+                    id="chartPath"
+                    class="chart-path"
+                    d=""
+                  />
+
+                  <circle
+                    id="chartPoint"
+                    class="chart-point"
+                    cx="0"
+                    cy="0"
+                    r="6"
+                  />
+
+                </svg>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="stats">
+
+            <div class="stat-row">
+              <span>Current Price</span>
+              <strong id="statPrice">--</strong>
+            </div>
+
+            <div class="stat-row">
+              <span>24H Change</span>
+              <strong id="statChange">--</strong>
+            </div>
+
+            <div class="stat-row">
+              <span>24H High</span>
+              <strong id="statHigh">--</strong>
+            </div>
+
+            <div class="stat-row">
+              <span>24H Low</span>
+              <strong id="statLow">--</strong>
+            </div>
+
+            <div class="stat-row">
+              <span>24H Volume</span>
+              <strong id="statVolume">--</strong>
+            </div>
+
+            <div class="stat-row">
+              <span>Data Source</span>
+              <strong class="cyan">BINANCE</strong>
+            </div>
+
+            <div class="stat-row">
+              <span>Last Sync</span>
+              <strong id="statTime">--</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- AI SIGNAL -->
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+            <div class="section-title">
+              AVIRENE5 AI SIGNAL ENGINE
+            </div>
+
+            <div class="section-sub">
+              Paper / Shadow intelligence mode
+            </div>
+          </div>
+
+          <div class="status">
+            <span class="status-dot"></span>
+            ANALYZING
+          </div>
+
+        </div>
+
+        <div class="signal">
+
+          <div class="signal-score">
+
+            <div class="score-ring">
+              <strong>85</strong>
+            </div>
+
+            <div class="signal-info">
+
+              <div class="signal-label">
+                STRONG SIGNAL
+              </div>
+
+              <h2>
+                SOL MARKET MOMENTUM
+              </h2>
+
+              <p>
+                Multi-factor intelligence layer active.
+                Signal shown for paper / simulation analysis only.
+                No live trading is performed by this dashboard.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="factors">
+
+            <div class="factor">
+              <div class="factor-title">Momentum</div>
+              <div class="factor-value green">POSITIVE</div>
+            </div>
+
+            <div class="factor">
+              <div class="factor-title">Liquidity</div>
+              <div class="factor-value green">HEALTHY</div>
+            </div>
+
+            <div class="factor">
+              <div class="factor-title">Volatility</div>
+              <div class="factor-value yellow">ACTIVE</div>
+            </div>
+
+            <div class="factor">
+              <div class="factor-title">AI Score</div>
+              <div class="factor-value cyan">85 / 100</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- SCANNER -->
+
+      <section class="section scanner">
+
+        <div class="section-head">
+
+          <div>
+            <div class="section-title">
+              LIVE SOLANA SCANNER
+            </div>
+
+            <div class="section-sub">
+              Scanner infrastructure status
+            </div>
+          </div>
+
+          <div class="status">
+            <span class="status-dot"></span>
+            ACTIVE
+          </div>
+
+        </div>
+
+        <div class="scan-grid">
+
+          <div class="scan-box">
+
+            <div class="scan-number cyan" id="pairsCount">
+              0
+            </div>
+
+            <div class="scan-text">
+              MARKET DATA UPDATES
+            </div>
+
+            <div class="progress">
+              <span style="width:82%"></span>
+            </div>
+
+          </div>
+
+          <div class="scan-box">
+
+            <div class="scan-number green">
+              85+
+            </div>
+
+            <div class="scan-text">
+              SIGNAL THRESHOLD
+            </div>
+
+            <div class="progress">
+              <span style="width:85%"></span>
+            </div>
+
+          </div>
+
+          <div class="scan-box">
+
+            <div class="scan-number purple">
+              V5.6
+            </div>
+
+            <div class="scan-text">
+              AVIRENE5 ENGINE
+            </div>
+
+            <div class="progress">
+              <span style="width:96%"></span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <div class="footer">
+        NEXUS SOL AI • AVIRENE5 • PAPER / SHADOW MODE • LIVE MARKET DATA
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+<script>
+
+/* =========================================================
+   NEXUS SOL AI
+   LIVE SOLANA MARKET DATA
+   ========================================================= */
+
+const API =
+  "https://api.binance.com/api/v3/ticker/24hr?symbol=SOLUSDT";
+
+const KLINES =
+  "https://api.binance.com/api/v3/klines?symbol=SOLUSDT&interval=5m&limit=60";
+
+
+function money(value){
+
+  if(value === null || value === undefined ||
+     Number.isNaN(Number(value))){
+    return "--";
+  }
+
+  return "$" + Number(value).toLocaleString(
+    "en-US",
+    {
+      minimumFractionDigits:2,
+      maximumFractionDigits:4
+    }
+  );
+}
+
+
+function compact(value){
+
+  if(value === null || value === undefined){
+    return "--";
+  }
+
+  const n = Number(value);
+
+  if(n >= 1000000000){
+    return "$" + (n/1000000000).toFixed(2) + "B";
+  }
+
+  if(n >= 1000000){
+    return "$" + (n/1000000).toFixed(2) + "M";
+  }
+
+  if(n >= 1000){
+    return "$" + (n/1000).toFixed(2) + "K";
+  }
+
+  return "$" + n.toFixed(2);
+}
+
+
+function setText(id,value){
+
+  const el = document.getElementById(id);
+
+  if(el){
+    el.textContent = value;
+  }
+
+}
+
+
+async function loadMarket(){
+
+  try{
+
+    const response = await fetch(
+      API,
+      {
+        cache:"no-store"
+      }
+    );
+
+    if(!response.ok){
+      throw new Error("Market API error");
+    }
+
+    const data = await response.json();
+
+    const price = Number(data.lastPrice);
+    const change = Number(data.priceChangePercent);
+    const high = Number(data.highPrice);
+    const low = Number(data.lowPrice);
+    const volume = Number(data.quoteVolume);
+
+    setText("solPrice",money(price));
+    setText("statPrice",money(price));
+
+    setText("solHigh",money(high));
+    setText("statHigh",money(high));
+
+    setText("solLow",money(low));
+    setText("statLow",money(low));
+
+    setText("solVolume",compact(volume));
+    setText("statVolume",compact(volume));
+
+    const changeText =
+      (change >= 0 ? "+" : "") +
+      change.toFixed(2) +
+      "%";
+
+    setText("solChange",changeText);
+    setText("statChange",changeText);
+
+    document.getElementById("solChange").className =
+      "change " + (change >= 0 ? "green" : "red");
+
+    document.getElementById("statChange").className =
+      change >= 0 ? "green" : "red";
+
+    const now = new Date();
+
+    const time =
+      now.toLocaleTimeString(
+        "en-IL",
+        {
+          hour:"2-digit",
+          minute:"2-digit",
+          second:"2-digit"
+        }
+      );
+
+    setText("statTime",time);
+    setText(
+      "lastUpdate",
+      "Live market data • Updated " + time
+    );
+
+    setText("engineStatus","LIVE");
+
+    loadChart();
+
+  }catch(error){
+
+    console.error(error);
+
+    setText(
+      "lastUpdate",
+      "Market connection temporarily unavailable"
+    );
+
+    setText(
+      "engineStatus",
+      "RETRY"
+    );
+
+  }
+
+}
+
+
+async function loadChart(){
+
+  try{
+
+    const response = await fetch(
+      KLINES,
+      {
+        cache:"no-store"
+      }
+    );
+
+    if(!response.ok){
+      throw new Error("Chart API error");
+    }
+
+    const rows = await response.json();
+
+    const prices =
+      rows.map(row => Number(row[4]));
+
+    if(!prices.length){
+      return;
+    }
+
+    drawChart(prices);
+
+    setText(
+      "pairsCount",
+      prices.length
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+function drawChart(prices){
+
+  const width = 1000;
+  const height = 300;
+  const padding = 12;
+
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+
+  const range =
+    max - min === 0
+      ? 1
+      : max - min;
+
+  const points = prices.map(
+    (price,index) => {
+
+      const x =
+        padding +
+        index *
+        ((width-padding*2)/(prices.length-1));
+
+      const y =
+        height-padding -
+        ((price-min)/range) *
+        (height-padding*2);
+
+      return [x,y];
+
+    }
+  );
+
+  let path = "";
+
+  points.forEach(
+    (point,index) => {
+
+      path +=
+        (index === 0 ? "M" : "L") +
+        point[0].toFixed(2) +
+        " " +
+        point[1].toFixed(2) +
+        " ";
+
+    }
+  );
+
+  const fillPath =
+    path +
+    "L " +
+    points[points.length-1][0] +
+    " " +
+    height +
+    " L " +
+    points[0][0] +
+    " " +
+    height +
+    " Z";
+
+  document
+    .getElementById("chartPath")
+    .setAttribute("d",path);
+
+  document
+    .getElementById("chartFill")
+    .setAttribute("d",fillPath);
+
+  const last =
+    points[points.length-1];
+
+  const circle =
+    document.getElementById("chartPoint");
+
+  circle.setAttribute("cx",last[0]);
+  circle.setAttribute("cy",last[1]);
+
+  document
+    .getElementById("chartLoading")
+    .style.display = "none";
+
+}
+
+
+/* START */
+
+loadMarket();
+
+/*
+   Refresh market data every 10 seconds.
+*/
+setInterval(
+  loadMarket,
+  10000
+);
+
+
+/*
+   Refresh chart every 30 seconds.
+*/
+setInterval(
+  loadChart,
+  30000
+);
+
+</script>
+
+</body>
+</html>
