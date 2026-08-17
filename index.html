@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -188,21 +188,8 @@ header{
   padding:30px 10px;
 }
 
-button{
-  border:0;
-  border-radius:10px;
-  padding:11px 16px;
-  background:#8b5cf6;
-  color:white;
-  font-weight:800;
-  cursor:pointer;
-}
-
-button:active{
-  transform:scale(.98);
-}
-
 @media(max-width:800px){
+
   .grid{
     grid-template-columns:repeat(2,1fr);
   }
@@ -213,9 +200,6 @@ button:active{
 }
 
 @media(max-width:500px){
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
 
   .value{
     font-size:20px;
@@ -231,81 +215,405 @@ button:active{
 <body>
 
 <header>
-  <div class="logo">Nexus <span>SOL AI</span></div>
+
+  <div class="logo">
+    Nexus <span>SOL AI</span>
+  </div>
+
   <div class="status" id="status">
     Connecting to live market data...
   </div>
+
 </header>
 
 <div class="container">
 
   <div class="hero">
-    <div class="hero-title">Solana AI Intelligence</div>
+
+    <div class="hero-title">
+      Solana AI Intelligence
+    </div>
+
     <div class="hero-text">
       Real-time SOL market monitoring and AI signal intelligence.
       Paper / Simulation mode only.
     </div>
+
   </div>
+
 
   <div class="grid">
 
     <div class="card">
-      <div class="label">SOL PRICE</div>
-      <div class="value price" id="solPrice">--</div>
+
+      <div class="label">
+        SOL PRICE
+      </div>
+
+      <div class="value price" id="solPrice">
+        --
+      </div>
+
     </div>
 
-    <div class="card">
-      <div class="label">24H CHANGE</div>
-      <div class="value" id="solChange">--</div>
-    </div>
 
     <div class="card">
-      <div class="label">MARKET STATUS</div>
-      <div class="value green" id="marketStatus">LIVE</div>
+
+      <div class="label">
+        24H CHANGE
+      </div>
+
+      <div class="value" id="solChange">
+        --
+      </div>
+
     </div>
 
+
     <div class="card">
-      <div class="label">ENGINE</div>
-      <div class="value">V5.6</div>
+
+      <div class="label">
+        MARKET STATUS
+      </div>
+
+      <div class="value orange" id="marketStatus">
+        CONNECTING
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="label">
+        ENGINE
+      </div>
+
+      <div class="value">
+        V5.6
+      </div>
+
     </div>
 
   </div>
 
+
   <div class="section">
 
-    <div class="section-title">Live SOL Market</div>
+    <div class="section-title">
+      Live SOL Market
+    </div>
+
 
     <div class="market">
 
       <div class="big-card">
-        <div class="label">SOL / USDT</div>
+
+        <div class="label">
+          SOL / USDT
+        </div>
+
 
         <div class="big-price price" id="bigPrice">
           --
         </div>
 
+
         <div class="small">
           Binance public market feed
         </div>
 
+
         <div class="signal">
 
           <div class="signal-head">
+
             <div>
-              <div class="label">AI SIGNAL</div>
+
+              <div class="label">
+                AI SIGNAL
+              </div>
+
               <strong id="signalText">
                 WAITING FOR DATA
               </strong>
+
             </div>
+
 
             <div class="badge" id="scoreBadge">
               --
             </div>
+
           </div>
 
+
           <div class="progress">
+
             <div
               class="progress-bar"
               id="scoreBar">
             </div>
+
           </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    Nexus SOL AI · Paper / Simulation mode
+  </div>
+
+</div>
+
+
+<script>
+
+const priceEl =
+  document.getElementById("solPrice");
+
+const bigPriceEl =
+  document.getElementById("bigPrice");
+
+const changeEl =
+  document.getElementById("solChange");
+
+const statusEl =
+  document.getElementById("status");
+
+const marketStatusEl =
+  document.getElementById("marketStatus");
+
+const signalEl =
+  document.getElementById("signalText");
+
+const scoreBadge =
+  document.getElementById("scoreBadge");
+
+const scoreBar =
+  document.getElementById("scoreBar");
+
+
+function setStatus(ok,text){
+
+  statusEl.textContent = text;
+
+  marketStatusEl.textContent =
+    ok ? "LIVE" : "OFFLINE";
+
+  marketStatusEl.className =
+    "value " + (ok ? "green" : "red");
+
+}
+
+
+function setSignal(change){
+
+  let signal = "NEUTRAL";
+  let score = 50;
+
+
+  if(change > 2){
+
+    signal = "BULLISH";
+
+    score =
+      Math.min(
+        95,
+        70 + Math.round(change * 3)
+      );
+
+  }
+
+  else if(change > 0.5){
+
+    signal = "WATCH / BULLISH";
+
+    score =
+      Math.min(
+        75,
+        55 + Math.round(change * 4)
+      );
+
+  }
+
+  else if(change < -2){
+
+    signal = "BEARISH";
+
+    score =
+      Math.min(
+        95,
+        70 + Math.round(Math.abs(change) * 3)
+      );
+
+  }
+
+  else if(change < -0.5){
+
+    signal = "WATCH / BEARISH";
+
+    score =
+      Math.min(
+        75,
+        55 + Math.round(Math.abs(change) * 4)
+      );
+
+  }
+
+
+  signalEl.textContent = signal;
+
+  scoreBadge.textContent =
+    score + "%";
+
+  scoreBar.style.width =
+    score + "%";
+
+}
+
+
+function renderMarket(data){
+
+  const price =
+    Number(data.price);
+
+  const change =
+    Number(data.change);
+
+
+  if(
+    !Number.isFinite(price) ||
+    !Number.isFinite(change)
+  ){
+
+    throw new Error(
+      "Invalid market data"
+    );
+
+  }
+
+
+  const formatted =
+    price.toLocaleString(
+      "en-US",
+      {
+        minimumFractionDigits:2,
+        maximumFractionDigits:4
+      }
+    );
+
+
+  priceEl.textContent =
+    "$" + formatted;
+
+  bigPriceEl.textContent =
+    "$" + formatted;
+
+
+  changeEl.textContent =
+    (change >= 0 ? "+" : "") +
+    change.toFixed(2) +
+    "%";
+
+
+  changeEl.className =
+    "value " +
+    (change >= 0 ? "green" : "red");
+
+
+  setSignal(change);
+
+
+  setStatus(
+    true,
+    "Live market data · updated " +
+    new Date().toLocaleTimeString()
+  );
+
+}
+
+
+async function fetchMarket(){
+
+  try{
+
+    const response =
+      await fetch(
+        "https://api.binance.com/api/v3/ticker/24hr?symbol=SOLUSDT",
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Binance HTTP " +
+        response.status
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    renderMarket({
+
+      price:data.lastPrice,
+
+      change:data.priceChangePercent
+
+    });
+
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+
+    setStatus(
+      false,
+      "Live market feed unavailable"
+    );
+
+
+    signalEl.textContent =
+      "DATA UNAVAILABLE";
+
+
+    scoreBadge.textContent =
+      "--";
+
+
+    scoreBar.style.width =
+      "0%";
+
+  }
+
+}
+
+
+fetchMarket();
+
+
+setInterval(
+  fetchMarket,
+  30000
+);
+
+</script>
+
+</body>
+</html>
