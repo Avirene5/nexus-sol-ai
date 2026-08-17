@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#030712">
+<meta name="theme-color" content="#02050b">
 <title>NEXUS SOL AI — Live Intelligence</title>
 
 <style>
@@ -21,12 +21,13 @@
   --blue:#4285ff;
   --purple:#8b5cff;
   --red:#ff5577;
+  --yellow:#ffd166;
 }
 
 html,body{
   margin:0;
   min-height:100%;
-  background:#02050b;
+  background:var(--bg);
   color:var(--text);
   font-family:Inter,Arial,sans-serif;
 }
@@ -43,7 +44,7 @@ body{
   padding:18px;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 
 .header{
   display:grid;
@@ -65,7 +66,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:50px;
+  font-size:43px;
   font-weight:900;
   color:#fff;
   background:linear-gradient(135deg,#20f0a0,#18d9ff 48%,#7355ff);
@@ -148,7 +149,7 @@ body{
   font-size:25px;
 }
 
-/* ================= LAYOUT ================= */
+/* LAYOUT */
 
 .layout{
   display:grid;
@@ -156,7 +157,7 @@ body{
   gap:15px;
 }
 
-/* ================= SIDEBAR ================= */
+/* SIDEBAR */
 
 .sidebar{
   background:linear-gradient(180deg,#07111e,#030912);
@@ -174,6 +175,12 @@ body{
   border-radius:9px;
   color:#8ca3b8;
   font-size:13px;
+  cursor:pointer;
+}
+
+.nav:hover{
+  background:#0b1b2b;
+  color:#fff;
 }
 
 .nav.active{
@@ -221,6 +228,878 @@ body{
   font-size:48px;
   color:var(--cyan);
   text-shadow:0 0 30px #009dff;
+  animation:orb 3s ease-in-out infinite;
 }
 
-.quote
+@keyframes orb{
+  50%{transform:scale(1.08);text-shadow:0 0 50px #00d9ff}
+}
+
+/* MAIN */
+
+.main{
+  min-width:0;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.section-title h2{
+  margin:0;
+  font-size:17px;
+}
+
+.section-title span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* CARDS */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:15px;
+}
+
+.card{
+  background:linear-gradient(145deg,#071321,#050c16);
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:16px;
+  min-height:110px;
+  position:relative;
+  overflow:hidden;
+}
+
+.card:after{
+  content:"";
+  position:absolute;
+  width:90px;
+  height:90px;
+  right:-30px;
+  top:-30px;
+  border-radius:50%;
+  background:#18d9ff0b;
+}
+
+.card-label{
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.card-value{
+  margin-top:9px;
+  font-size:27px;
+  font-weight:800;
+}
+
+.card-sub{
+  margin-top:5px;
+  color:#718aa1;
+  font-size:10px;
+}
+
+.green{color:var(--green)}
+.cyan{color:var(--cyan)}
+.red{color:var(--red)}
+.yellow{color:var(--yellow)}
+
+/* GRID */
+
+.dashboard{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:15px;
+}
+
+.panel{
+  background:linear-gradient(145deg,#071321,#040b14);
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.panel-head{
+  padding:15px 17px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.panel-head strong{
+  font-size:13px;
+}
+
+.panel-head span{
+  font-size:10px;
+  color:var(--muted);
+}
+
+/* SCANNER */
+
+.scan{
+  display:grid;
+  grid-template-columns:1.2fr .7fr .6fr .6fr .8fr;
+  align-items:center;
+  padding:13px 17px;
+  border-bottom:1px solid #0c2032;
+}
+
+.scan:last-child{
+  border-bottom:0;
+}
+
+.token{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.token-icon{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:900;
+  background:linear-gradient(135deg,#12334b,#102238);
+  color:var(--cyan);
+}
+
+.token strong{
+  font-size:12px;
+}
+
+.token small{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:9px;
+}
+
+.metric{
+  font-size:11px;
+}
+
+.metric small{
+  display:block;
+  color:var(--muted);
+  font-size:8px;
+  margin-bottom:3px;
+}
+
+.signal{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:7px;
+  font-size:9px;
+  font-weight:800;
+}
+
+.buy{
+  color:var(--green);
+  background:#063522;
+  border:1px solid #0a6240;
+}
+
+.watch{
+  color:var(--yellow);
+  background:#332a08;
+  border:1px solid #675510;
+}
+
+.avoid{
+  color:var(--red);
+  background:#360b18;
+  border:1px solid #67192d;
+}
+
+/* AI SCORE */
+
+.score-wrap{
+  padding:20px;
+}
+
+.score{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.score-ring{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:
+    radial-gradient(circle at center,#071321 58%,transparent 60%),
+    conic-gradient(var(--green) 0 87%,#122436 87% 100%);
+  box-shadow:0 0 30px #20f0a022;
+}
+
+.score-ring strong{
+  font-size:25px;
+}
+
+.score-info strong{
+  font-size:17px;
+}
+
+.score-info p{
+  margin:7px 0 0;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+}
+
+/* BARS */
+
+.bars{
+  margin-top:20px;
+}
+
+.bar-row{
+  margin-bottom:12px;
+}
+
+.bar-label{
+  display:flex;
+  justify-content:space-between;
+  font-size:9px;
+  color:#9ab0c3;
+  margin-bottom:5px;
+}
+
+.bar{
+  height:6px;
+  border-radius:10px;
+  background:#0b1b2a;
+  overflow:hidden;
+}
+
+.bar i{
+  display:block;
+  height:100%;
+  border-radius:10px;
+  background:linear-gradient(90deg,var(--cyan),var(--green));
+}
+
+/* ACTIVITY */
+
+.activity{
+  padding:8px 17px 14px;
+}
+
+.event{
+  display:flex;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid #0c2032;
+}
+
+.event:last-child{
+  border-bottom:0;
+}
+
+.event-dot{
+  width:7px;
+  height:7px;
+  margin-top:4px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 8px var(--green);
+  flex:none;
+}
+
+.event-text{
+  font-size:10px;
+  color:#b6c8d7;
+}
+
+.event-text span{
+  color:var(--muted);
+  display:block;
+  margin-top:3px;
+  font-size:8px;
+}
+
+/* FOOTER */
+
+.footer{
+  margin-top:15px;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  text-align:center;
+  color:#526b82;
+  font-size:9px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .app{
+    padding:10px;
+  }
+
+  .header{
+    grid-template-columns:1fr;
+  }
+
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+  }
+
+  .nav{
+    margin:0;
+    flex:1;
+    min-width:110px;
+    justify-content:center;
+  }
+
+  .engine{
+    display:none;
+  }
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:560px){
+
+  .brand{
+    padding:5px;
+  }
+
+  .logo{
+    width:58px;
+    height:58px;
+    font-size:34px;
+  }
+
+  .brand h1{
+    font-size:20px;
+  }
+
+  .livebar{
+    padding:12px;
+  }
+
+  .conf strong{
+    font-size:20px;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  .card{
+    padding:12px;
+    min-height:95px;
+  }
+
+  .card-value{
+    font-size:22px;
+  }
+
+  .scan{
+    grid-template-columns:1.3fr .7fr .6fr;
+    gap:8px;
+  }
+
+  .scan .metric:nth-child(3),
+  .scan .metric:nth-child(4){
+    display:none;
+  }
+
+  .panel-head{
+    padding:13px;
+  }
+
+  .score-ring{
+    width:82px;
+    height:82px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="header">
+
+    <div class="brand">
+      <div class="logo">N</div>
+      <div>
+        <h1>NEXUS <span>SOL AI</span></h1>
+        <small>LIVE INTELLIGENCE ENGINE</small>
+      </div>
+    </div>
+
+    <div class="livebar">
+
+      <div class="live-left">
+        <div class="live-dot"></div>
+        <div>
+          <div class="live-title">SYSTEM ONLINE</div>
+          <div class="live-sub">Solana intelligence engine is monitoring the network</div>
+        </div>
+      </div>
+
+      <div class="conf">
+        <span>ENGINE CONFIDENCE</span>
+        <strong id="confidence">87%</strong>
+      </div>
+
+    </div>
+
+  </header>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="nav active">
+        <div class="nav-icon">◈</div>
+        <div>Overview</div>
+      </div>
+
+      <div class="nav">
+        <div class="nav-icon">⌁</div>
+        <div>Scanner</div>
+      </div>
+
+      <div class="nav">
+        <div class="nav-icon">◉</div>
+        <div>Signals</div>
+      </div>
+
+      <div class="nav">
+        <div class="nav-icon">◌</div>
+        <div>Learning</div>
+      </div>
+
+      <div class="nav">
+        <div class="nav-icon">▣</div>
+        <div>Outcomes</div>
+      </div>
+
+      <div class="engine">
+        <div class="engine-title">AI ENGINE</div>
+        <div class="ai-orb">✦</div>
+        <div class="online">● ONLINE</div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <div class="section-title">
+        <h2>Mission Control</h2>
+        <span id="updated">Updated just now</span>
+      </div>
+
+      <!-- TOP CARDS -->
+      <section class="cards">
+
+        <div class="card">
+          <div class="card-label">Tokens Scanned</div>
+          <div class="card-value cyan" id="scanned">1,284</div>
+          <div class="card-sub">Network discovery</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Strong Signals</div>
+          <div class="card-value green" id="signals">18</div>
+          <div class="card-sub">High probability setups</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Risk Alerts</div>
+          <div class="card-value red" id="risks">7</div>
+          <div class="card-sub">Requires attention</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Learning Accuracy</div>
+          <div class="card-value yellow" id="accuracy">84.6%</div>
+          <div class="card-sub">Historical outcomes</div>
+        </div>
+
+      </section>
+
+      <section class="dashboard">
+
+        <!-- SCANNER -->
+        <div class="panel">
+
+          <div class="panel-head">
+            <strong>Live Token Scanner</strong>
+            <span>SIMULATION MODE</span>
+          </div>
+
+          <div class="scan">
+
+            <div class="token">
+              <div class="token-icon">S</div>
+              <div>
+                <strong>SOL</strong>
+                <small>Solana</small>
+              </div>
+            </div>
+
+            <div class="metric">
+              <small>PRICE</small>
+              $186.42
+            </div>
+
+            <div class="metric">
+              <small>MOMENTUM</small>
+              <span class="green">+8.4%</span>
+            </div>
+
+            <div class="metric">
+              <small>RISK</small>
+              Low
+            </div>
+
+            <div>
+              <span class="signal buy">STRONG</span>
+            </div>
+
+          </div>
+
+          <div class="scan">
+
+            <div class="token">
+              <div class="token-icon">N</div>
+              <div>
+                <strong>NEXUS</strong>
+                <small>Solana</small>
+              </div>
+            </div>
+
+            <div class="metric">
+              <small>PRICE</small>
+              $0.084
+            </div>
+
+            <div class="metric">
+              <small>MOMENTUM</small>
+              <span class="green">+21.7%</span>
+            </div>
+
+            <div class="metric">
+              <small>RISK</small>
+              Medium
+            </div>
+
+            <div>
+              <span class="signal watch">WATCH</span>
+            </div>
+
+          </div>
+
+          <div class="scan">
+
+            <div class="token">
+              <div class="token-icon">A</div>
+              <div>
+                <strong>ALPHA</strong>
+                <small>Solana</small>
+              </div>
+            </div>
+
+            <div class="metric">
+              <small>PRICE</small>
+              $0.012
+            </div>
+
+            <div class="metric">
+              <small>MOMENTUM</small>
+              <span class="red">-4.2%</span>
+            </div>
+
+            <div class="metric">
+              <small>RISK</small>
+              High
+            </div>
+
+            <div>
+              <span class="signal avoid">AVOID</span>
+            </div>
+
+          </div>
+
+          <div class="scan">
+
+            <div class="token">
+              <div class="token-icon">V</div>
+              <div>
+                <strong>VECTOR</strong>
+                <small>Solana</small>
+              </div>
+            </div>
+
+            <div class="metric">
+              <small>PRICE</small>
+              $0.031
+            </div>
+
+            <div class="metric">
+              <small>MOMENTUM</small>
+              <span class="green">+13.1%</span>
+            </div>
+
+            <div class="metric">
+              <small>RISK</small>
+              Medium
+            </div>
+
+            <div>
+              <span class="signal buy">BUY BIAS</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- AI ANALYSIS -->
+        <div class="panel">
+
+          <div class="panel-head">
+            <strong>AI Intelligence</strong>
+            <span>MODEL V1</span>
+          </div>
+
+          <div class="score-wrap">
+
+            <div class="score">
+
+              <div class="score-ring">
+                <strong>87</strong>
+              </div>
+
+              <div class="score-info">
+                <strong class="green">Bullish Environment</strong>
+                <p>
+                  Market structure, momentum and liquidity
+                  currently produce a positive AI bias.
+                </p>
+              </div>
+
+            </div>
+
+            <div class="bars">
+
+              <div class="bar-row">
+                <div class="bar-label">
+                  <span>Momentum</span>
+                  <span>91%</span>
+                </div>
+                <div class="bar"><i style="width:91%"></i></div>
+              </div>
+
+              <div class="bar-row">
+                <div class="bar-label">
+                  <span>Liquidity</span>
+                  <span>84%</span>
+                </div>
+                <div class="bar"><i style="width:84%"></i></div>
+              </div>
+
+              <div class="bar-row">
+                <div class="bar-label">
+                  <span>Market Structure</span>
+                  <span>88%</span>
+                </div>
+                <div class="bar"><i style="width:88%"></i></div>
+              </div>
+
+              <div class="bar-row">
+                <div class="bar-label">
+                  <span>Risk Stability</span>
+                  <span>76%</span>
+                </div>
+                <div class="bar"><i style="width:76%"></i></div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ACTIVITY -->
+        <div class="panel">
+
+          <div class="panel-head">
+            <strong>Engine Activity</strong>
+            <span>LIVE</span>
+          </div>
+
+          <div class="activity">
+
+            <div class="event">
+              <div class="event-dot"></div>
+              <div class="event-text">
+                Scanner cycle completed
+                <span>Just now • 128 tokens analyzed</span>
+              </div>
+            </div>
+
+            <div class="event">
+              <div class="event-dot"></div>
+              <div class="event-text">
+                Strong momentum detected
+                <span>2 new candidates identified</span>
+              </div>
+            </div>
+
+            <div class="event">
+              <div class="event-dot"></div>
+              <div class="event-text">
+                Risk engine updated
+                <span>Liquidity and volatility recalculated</span>
+              </div>
+            </div>
+
+            <div class="event">
+              <div class="event-dot"></div>
+              <div class="event-text">
+                Learning engine active
+                <span>Historical outcomes available</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- SYSTEM STATUS -->
+        <div class="panel">
+
+          <div class="panel-head">
+            <strong>System Status</strong>
+            <span>NEXUS CORE</span>
+          </div>
+
+          <div class="activity">
+
+            <div class="event">
+              <div class="event-dot"></div>
+              <div class="event-text">
+                Market Scanner
+                <span class="green">ONLINE</span>
+              </div>
+            </div>
+
+            <div class="event">
+              <div class="event-dot"></div>
+              <div class="event-text">
+                Signal Engine
+                <span class="green">ONLINE</span>
+              </div>
+            </div>
+
+            <div class="event">
+              <div class="event-dot"></div>
+              <div class="event-text">
+                Risk Engine
+                <span class="green">ONLINE</span>
+              </div>
+            </div>
+
+            <div class="event">
+              <div class="event-dot"></div>
+              <div class="event-text">
+                Learning Engine
+                <span class="green">ONLINE</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <div class="footer">
+        NEXUS SOL AI • Live Intelligence Dashboard • Paper / Simulation Mode
+        • No real trades are executed
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+<script>
+
+/* NEXUS SOL AI — FRONTEND DEMO ENGINE */
+
+let scanned = 1284;
+let signals = 18;
+let risks = 7;
+
+function updateEngine(){
+
+  scanned += Math.floor(Math.random()*8)+1;
+
+  const confidence =
+    84 + Math.floor(Math.random()*6);
+
+  document.getElementById("scanned").textContent =
+    scanned.toLocaleString();
+
+  document.getElementById("confidence").textContent =
+    confidence + "%";
+
+  document.getElementById("signals").textContent =
+    signals + Math.floor(Math.random()*2);
+
+  document.getElementById("risks").textContent =
+    risks + Math.floor(Math.random()*2);
+
+  document.getElementById("updated").textContent =
+    "Updated just now";
+}
+
+/* visual heartbeat */
+setInterval(updateEngine,5000);
+
+</script>
+
+</body>
+</html>
