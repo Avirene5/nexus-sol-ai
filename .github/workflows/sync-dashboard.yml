@@ -1,0 +1,49 @@
+name: Sync AVIRENE5 Dashboard
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "data/dashboard.json"
+      - ".github/workflows/sync-dashboard.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nexus-dashboard-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: Checkout Nexus SOL AI
+        uses: actions/checkout@v6
+
+      - name: Fetch latest AVIRENE5 snapshot
+        run: |
+          mkdir -p data
+          curl --fail --location --silent --show-error \
+            --retry 3 --retry-delay 2 \
+            "https://raw.githubusercontent.com/Avirene5/solana-ai-signal-engine/main/data/dashboard.json" \
+            -o data/dashboard.json
+          test -s data/dashboard.json
+          python -m json.tool data/dashboard.json >/dev/null
+
+      - name: Publish snapshot
+        run: |
+          git config user.name "AVIRENE5 Dashboard Sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/dashboard.json
+          if git diff --cached --quiet; then
+            echo "Dashboard snapshot unchanged."
+            exit 0
+          fi
+          git commit -m "Sync AVIRENE5 dashboard snapshot"
+          git push origin main
