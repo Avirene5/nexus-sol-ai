@@ -1,0 +1,20 @@
+{
+  "engine": {
+    "name": "AVIRENE5",
+    "version": "5.6.3",
+    "status": "WAITING FOR ENGINE SNAPSHOT",
+    "last_scan": null
+  },
+  "metrics": {
+    "scanned": 0,
+    "candidates": 0,
+    "signals": 0,
+    "rejected": 0,
+    "win_rate": null,
+    "avg_return": null,
+    "learning_samples": 0
+  },
+  "signals": [],
+  "generated_at": null,
+  "mode": "PAPER / SIMULATION"
+}
