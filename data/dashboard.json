@@ -1,20 +1,61 @@
 {
   "engine": {
     "name": "AVIRENE5",
-    "version": "5.6.3",
-    "status": "WAITING FOR ENGINE SNAPSHOT",
-    "last_scan": null
+    "version": "5.6.4",
+    "status": "ONLINE",
+    "last_scan": "2026-08-18T18:55:43.458217+00:00"
   },
   "metrics": {
-    "scanned": 0,
-    "candidates": 0,
+    "scanned": 13,
+    "candidates": 13,
     "signals": 0,
-    "rejected": 0,
+    "rejected": 13,
     "win_rate": null,
     "avg_return": null,
-    "learning_samples": 0
+    "learning_samples": 0,
+    "shadow_watches": 1,
+    "shadow_active": 1,
+    "shadow_learning_samples": 0,
+    "shadow_win_rate": null,
+    "research_watches": 326,
+    "research_completed_24h": 249,
+    "research_learning_samples": 77,
+    "research_win_rate": 33.77,
+    "research_avg_1h_return": 0.87,
+    "research_avg_24h_return": 42.5
   },
-  "signals": [],
-  "generated_at": null,
-  "mode": "PAPER / SIMULATION"
+  "intelligence": {
+    "timestamp": "2026-08-18T18:55:43.576615+00:00",
+    "universe": 13,
+    "core_85_plus": 0,
+    "shadow_80_84": 0,
+    "research_70_79": 2,
+    "average_score": 64.21,
+    "average_security": 86.38,
+    "average_liquidity": 35108.87,
+    "average_volume": 1175254.1,
+    "average_momentum_5m": -1.43,
+    "average_momentum_1h": 10.96,
+    "average_acceleration": 0.75,
+    "average_buy_ratio": 57.82,
+    "market_breadth": 15.38,
+    "regime": "MIXED",
+    "data_quality": 100.0,
+    "top_candidates": [
+      {"symbol":"Gorikun","mint":"Drac2HBT8Fxt9SauZj8yVWUUyZbE5gZ9fNzXqL8Kpump","core_score":74.74,"quality_score":76.24,"risk_score":20.65,"edge_score":73.24,"flags":["high_turnover_vs_liquidity"]},
+      {"symbol":"CATSEYE","mint":"7TGno7LGF4mJHT1mvBMsthaEmavcKM5H8ojXCVcJpump","core_score":70.05,"quality_score":73.48,"risk_score":22.81,"edge_score":70.48,"flags":["thin_liquidity"]},
+      {"symbol":"SOLCAT","mint":"4skFA8FequaJV8Zd3njafvMvmX4yVbnzmBRo4jXVpump","core_score":64.88,"quality_score":66.99,"risk_score":34.01,"edge_score":66.99,"flags":[]},
+      {"symbol":"SOLCAT","mint":"4skFA8FequaJV8Zd3njafvMvmX4yVbnzmBRo4jXVpump","core_score":64.25,"quality_score":65.79,"risk_score":36.59,"edge_score":65.79,"flags":[]},
+      {"symbol":"Gorikun","mint":"Drac2HBT8Fxt9SauZj8yVWUUyZbE5gZ9fNzXqL8Kpump","core_score":68.46,"quality_score":70.57,"risk_score":29.12,"edge_score":62.57,"flags":["high_turnover_vs_liquidity"]},
+      {"symbol":"NIUNAI","mint":"H9fikySbqRei3wxMdjtW9GHTdp8r8h4SZma2dsUwpump","core_score":69.23,"quality_score":69.78,"risk_score":32.45,"edge_score":61.78,"flags":["high_turnover_vs_liquidity"]},
+      {"symbol":"ANSEMSZN","mint":"5gkuTAKAskEhhc1D6ACtF6mmstfCg2Ldm5qT4C84pump","core_score":62.17,"quality_score":65.37,"risk_score":37.33,"edge_score":57.37,"flags":["high_turnover_vs_liquidity"]},
+      {"symbol":"NIUNAI","mint":"H9fikySbqRei3wxMdjtW9GHTdp8r8h4SZma2dsUwpump","core_score":65.46,"quality_score":65.13,"risk_score":37.68,"edge_score":57.13,"flags":["high_turnover_vs_liquidity","weak_volume_acceleration"]},
+      {"symbol":"ANSEMSZN","mint":"5gkuTAKAskEhhc1D6ACtF6mmstfCg2Ldm5qT4C84pump","core_score":61.67,"quality_score":64.96,"risk_score":37.76,"edge_score":56.96,"flags":["high_turnover_vs_liquidity"]},
+      {"symbol":"CGX","mint":"6E8fPgsBvwjGRHcoeLUW8iugy736SKo54VvYLbYMpump","core_score":63.33,"quality_score":59.58,"risk_score":45.1,"edge_score":51.58,"flags":["security_below_60"]}
+    ],
+    "risk_flags": {"high_turnover_vs_liquidity":8,"weak_volume_acceleration":2,"security_below_60":2,"thin_liquidity":3}
+  },
+  "signals": [{"symbol":"土豆","address":"J4Px2XS2qP4uCqiUad9B48tHe8XGrWJePKy1oyYopump","score":87.77,"momentum":15.54,"liquidity":"$44,059","decision":"SIGNAL","reason":"AVIRENE5 score >= 85","timestamp":"2026-08-18T17:23:59.249050+00:00"}],
+  "generated_at":"2026-08-18T18:55:43.623595+00:00",
+  "mode":"PAPER / SIMULATION"
 }
