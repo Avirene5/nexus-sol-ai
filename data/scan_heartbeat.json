@@ -1,7 +1,1 @@
-{
-  "counts":{"candidate_intelligence":295,"intelligence_snapshots":31,"learning_samples":113,"outcomes":12,"research_outcomes":396,"research_watches":396,"shadow_watches":11,"signals":1,"snapshots":1393},
-  "scan_completed_at":"2026-08-18T22:47:14.361083+00:00",
-  "scheduled_interval_minutes":5,
-  "status":"healthy",
-  "unix_ts":1787093234
-}
+{"counts":{"candidate_intelligence":304,"intelligence_snapshots":32,"learning_samples":118,"outcomes":12,"research_outcomes":400,"research_watches":400,"shadow_watches":11,"signals":1,"snapshots":1402},"scan_completed_at":"2026-08-18T23:09:17.044811+00:00","scheduled_interval_minutes":5,"status":"healthy","unix_ts":1787094557}
