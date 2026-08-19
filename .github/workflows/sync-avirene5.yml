@@ -126,3 +126,30 @@ jobs:
           done
           echo "NEXUS_SYNC_ERROR: published dashboard did not converge to expected telemetry."
           exit 1
+
+      - name: Send one-shot Telegram test
+        if: hashFiles('.telegram-test-pending') != ''
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          set -euo pipefail
+          [[ -n "$BOT_TOKEN" ]] || { echo 'TELEGRAM_CONFIG_ERROR: TELEGRAM_BOT_TOKEN is missing'; exit 1; }
+          [[ -n "$CHAT_ID" ]] || { echo 'TELEGRAM_CONFIG_ERROR: TELEGRAM_CHAT_ID is missing'; exit 1; }
+          BASE="https://api.telegram.org/bot${BOT_TOKEN}"
+          GETME=$(curl --fail-with-body --silent --show-error "$BASE/getMe") || { echo 'TELEGRAM_API_ERROR: getMe failed'; exit 1; }
+          echo "$GETME" | python -c "import json,sys; d=json.load(sys.stdin); assert d.get('ok'), d; r=d['result']; print('Telegram bot verified:', '@'+r.get('username','<no-username>'), '/', r.get('first_name','<no-name>'))"
+          TEXT='🟣 NEXUS SOL AI — TEST SIGNAL\n\n✅ Telegram delivery test\n🎯 Demo Score: 91.20\n🟢 CORE GATE: 85+\n📡 Mode: PAPER / SIMULATION\n\nThis is a DEMO only — no trade was executed.'
+          RESP=$(curl --fail-with-body --silent --show-error -X POST "$BASE/sendMessage" --data-urlencode "chat_id=$CHAT_ID" --data-urlencode "text=$TEXT") || { echo 'TELEGRAM_API_ERROR: sendMessage failed'; exit 1; }
+          echo "$RESP" | python -c "import json,sys; d=json.load(sys.stdin); assert d.get('ok'), d; print('Telegram delivery verified. message_id=', d['result']['message_id'])"
+
+      - name: Clear completed Telegram test marker
+        if: success() && hashFiles('.telegram-test-pending') != ''
+        run: |
+          set -euo pipefail
+          rm -f .telegram-test-pending
+          git config user.name "Nexus SOL AI Sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -u .telegram-test-pending
+          git commit -m "Complete Nexus SOL AI Telegram test"
+          git push origin main
