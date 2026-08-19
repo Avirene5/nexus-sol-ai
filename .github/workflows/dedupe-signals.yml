@@ -1,0 +1,74 @@
+name: Deduplicate Live Signals
+
+on:
+  workflow_run:
+    workflows: ["Sync AVIRENE5 Live Data"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+jobs:
+  dedupe:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Nexus
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Keep only the latest signal per mint
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          path = Path("data/dashboard.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          signals = data.get("signals") or []
+
+          def ts(item):
+              value = item.get("timestamp")
+              if not value:
+                  return datetime.min.replace(tzinfo=timezone.utc)
+              try:
+                  parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+                  return parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)
+              except Exception:
+                  return datetime.min.replace(tzinfo=timezone.utc)
+
+          latest = {}
+          for signal in signals:
+              mint = str(signal.get("address") or signal.get("mint") or "").strip()
+              if not mint:
+                  mint = f"symbol:{str(signal.get('symbol') or '').strip().lower()}"
+              previous = latest.get(mint)
+              if previous is None or ts(signal) > ts(previous):
+                  latest[mint] = signal
+
+          deduped = sorted(latest.values(), key=ts, reverse=True)
+
+          if deduped == signals:
+              print("No duplicate signals found.")
+          else:
+              data["signals"] = deduped
+              path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+              print(f"Deduplicated signals: {len(signals)} -> {len(deduped)}")
+          PY
+
+      - name: Publish deduplicated dashboard
+        run: |
+          set -euo pipefail
+          git config user.name "Nexus SOL AI Sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/dashboard.json
+          if git diff --cached --quiet; then
+            echo "Dashboard already deduplicated."
+            exit 0
+          fi
+          git commit -m "Prevent duplicate live signals"
+          git push origin main
