@@ -4,14 +4,14 @@
     "intelligence_snapshots": 33,
     "learning_samples": 118,
     "outcomes": 13,
-    "research_outcomes": 403,
-    "research_watches": 403,
-    "shadow_watches": 11,
-    "signals": 2,
-    "snapshots": 1412
+    "research_outcomes": 402,
+    "research_watches": 402,
+    "shadow_watches": 12,
+    "signals": 1,
+    "snapshots": 1414
   },
-  "scan_completed_at": "2026-08-19T01:25:22.619677+00:00",
+  "scan_completed_at": "2026-08-19T02:40:15.520994+00:00",
   "scheduled_interval_minutes": 5,
   "status": "healthy",
-  "unix_ts": 1787102722
+  "unix_ts": 1787107215
 }
