@@ -3,15 +3,15 @@
     "candidate_intelligence": 314,
     "intelligence_snapshots": 33,
     "learning_samples": 118,
-    "outcomes": 13,
-    "research_outcomes": 402,
-    "research_watches": 402,
-    "shadow_watches": 12,
+    "outcomes": 12,
+    "research_outcomes": 406,
+    "research_watches": 406,
+    "shadow_watches": 11,
     "signals": 1,
     "snapshots": 1414
   },
-  "scan_completed_at": "2026-08-19T02:40:15.520994+00:00",
+  "scan_completed_at": "2026-08-19T03:16:54.214037+00:00",
   "scheduled_interval_minutes": 5,
   "status": "healthy",
-  "unix_ts": 1787107215
+  "unix_ts": 1787109414
 }
