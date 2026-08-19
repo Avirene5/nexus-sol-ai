@@ -1,0 +1,37 @@
+name: Integrate token detail screen
+on:
+  push:
+    paths:
+      - token.html
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wire signal address to token detail
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          start=s.index('function renderSignals(d){')
+          end=s.index('function renderCandidates(d){', start)
+          fn=r'''function renderSignals(d){const el=document.getElementById('signalBoard'),arr=(d.signals||[]).slice(0,6);const short=a=>a?(a.slice(0,8)+'…'+a.slice(-6)):'N/A';const copy=a=>{if(!a)return;navigator.clipboard?.writeText(a).catch(()=>{});};const when=t=>t?time(t):'N/A';el.innerHTML=arr.length?arr.map(x=>{const a=x.address||x.mint||'';const sol='https://solscan.io/token/'+encodeURIComponent(a);const dex='https://dexscreener.com/solana/'+encodeURIComponent(a);return `<article class="signal"><div class="srow"><b>${esc(x.symbol)}</b><b class="score">${fmt(x.score)}</b></div><small>${esc(x.liquidity)} · momentum ${fmt(x.momentum)} · <b>${esc(x.decision)}</b></small><small>${esc(x.reason)}</small><button type="button" onclick="location.href='token.html?mint='+encodeURIComponent('${esc(a)}')" style="display:block;width:100%;margin-top:8px;text-align:left;border:1px solid #263750;background:#091321;color:#b9d7ea;border-radius:8px;padding:8px;font:inherit;cursor:pointer"><span class="signal-address"><b>Mint:</b> ${esc(short(a))}</span></button><div class="signal-meta"><span>Signal ${esc(when(x.timestamp))}</span><span>Paper / Simulation</span></div><div class="signal-links"><button type="button" data-copy="${esc(a)}">Copy address</button><a href="${sol}" target="_blank" rel="noopener noreferrer">Solscan</a><a href="${dex}" target="_blank" rel="noopener noreferrer">DexScreener</a></div></article>`}).join(''):'<article class="signal"><b>No active 85+ signal</b><small>Monitoring continues in Paper / Simulation.</small></article>';el.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(b.dataset.copy)));}
+'''
+          s=s[:start]+fn+s[end:]
+          p.write_text(s,encoding='utf-8')
+      - name: Commit integration
+        run: |
+          git config user.name "Nexus SOL AI Bot"
+          git config user.email "nexus-sol-ai-bot@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Wire token address to intelligence detail screen"
+          git push
+      - name: Remove one-shot workflow
+        run: |
+          rm .github/workflows/integrate-token-detail.yml
+          git add .github/workflows/integrate-token-detail.yml
+          git commit -m "Remove one-shot token detail integration workflow"
+          git push
