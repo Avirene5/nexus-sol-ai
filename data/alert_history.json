@@ -1,0 +1,7 @@
+[
+  {"symbol":"BULLZ","address":"7XWZDMVv5oSFVuVky9w6yy7aPHQcRfcAenvpjxPCpump","score":88.96,"momentum":7.17,"liquidity":"$31,599","decision":"SIGNAL","reason":"AVIRENE5 score >= 85","timestamp":"2026-08-19T11:30:12.978772+00:00","alert_price":0.0001937,"current_price":0.0001482,"change_pct":-23.49},
+  {"symbol":"SOLUG","address":"FJBWgfc8wdEeUc2n7BN9EcmEJQUauvvpp9ZXvmF2pump","score":86.31,"momentum":24.84,"liquidity":"$61,571","decision":"SIGNAL","reason":"AVIRENE5 score >= 85","timestamp":"2026-08-19T05:17:15.265030+00:00","alert_price":0.0006729,"current_price":0.0004422,"change_pct":-34.28},
+  {"symbol":"wiki","address":"UMfGniBctBLYcy77zahNSWxrTLsdbphdbzasVJ8pump","score":85.24,"momentum":89.2,"liquidity":"$43,222","decision":"SIGNAL","reason":"AVIRENE5 score >= 85","timestamp":"2026-08-19T04:08:29.162944+00:00","alert_price":0.0003417,"current_price":0.0000557,"change_pct":-83.70},
+  {"symbol":"SOLUG","address":"FJBWgfc8wdEeUc2n7BN9EcmEJQUauvvpp9ZXvmF2pump","score":86.40,"momentum":8.78,"liquidity":"$25,230","decision":"SIGNAL","reason":"AVIRENE5 score >= 85","timestamp":"2026-08-19T03:54:28.019800+00:00","alert_price":0.0001256,"current_price":0.0004422,"change_pct":252.07},
+  {"symbol":"土豆","address":"J4Px2XS2qP4uCqiUad9B48tHe8XGrWJePKy1oyYopump","score":87.77,"momentum":15.54,"liquidity":"$44,059","decision":"SIGNAL","reason":"AVIRENE5 score >= 85","timestamp":"2026-08-18T17:23:59.249050+00:00","alert_price":0.0003698,"current_price":0.0004455,"change_pct":20.47}
+]
