@@ -99,6 +99,8 @@ jobs:
             sleep 5
           done
           echo "NEXUS_SYNC_ERROR: published dashboard or alert history did not converge to expected telemetry."; exit 1
+      - name: Sync heartbeat
+        run: echo "Nexus AVIRENE5 sync workflow triggered at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
       - name: Send one-shot Telegram test
         if: hashFiles('.telegram-test-pending') != ''
         env:
