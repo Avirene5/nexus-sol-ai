@@ -1,5 +1,5 @@
 # Nexus live-data sync: dashboard + 85+ alert history are published together.
-# Force-sync trigger refresh: 2026-08-19
+# Recovery trigger: restore live telemetry after dashboard regression.
 name: Sync AVIRENE5 Live Data
 
 on:
