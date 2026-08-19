@@ -1,8 +1,58 @@
 {
-  "engine":{"name":"AVIRENE5","version":"5.6.4","status":"ONLINE","last_scan":"2026-08-18T23:10:48.052467+00:00"},
-  "metrics":{"scanned":18,"candidates":18,"signals":0,"rejected":18,"win_rate":36.44,"avg_return":0.02,"learning_samples":118,"shadow_watches":11,"shadow_active":11,"shadow_learning_samples":2,"shadow_win_rate":100.0,"research_watches":405,"research_completed_24h":263,"research_learning_samples":116,"research_win_rate":35.34,"research_avg_1h_return":1.12,"research_avg_24h_return":42.5},
-  "intelligence":{"timestamp":"2026-08-18T23:10:48.262749+00:00","universe":18,"core_85_plus":0,"shadow_80_84":0,"research_70_79":9,"average_score":68.87,"average_security":91.11,"average_liquidity":33294.03,"average_volume":1197705.47,"average_momentum_5m":-1.73,"average_momentum_1h":256.85,"average_acceleration":1.11,"average_buy_ratio":63.21,"market_breadth":22.22,"regime":"MIXED","data_quality":100.0,"top_candidates":[{"symbol":"BABYANSEM","mint":"9HNEutCZLoo6GZWQTmAgVvbtmLGV1mdeR8X3HWTooYXt","core_score":75.55,"quality_score":77.12,"risk_score":24.59,"edge_score":77.12,"flags":[]},{"symbol":"PEE","mint":"2mG7vDMrZYFyFS2bz3AsrJizFoiAYurY5kc4MPqfpump","core_score":73.48,"quality_score":75.18,"risk_score":21.1,"edge_score":72.18,"flags":["high_turnover_vs_liquidity","weak_volume_acceleration"]},{"symbol":"PEE","mint":"2mG7vDMrZYFyFS2bz3AsrJizFoiAYurY5kc4MPqfpump","core_score":73.23,"quality_score":74.91,"risk_score":21.41,"edge_score":71.91,"flags":["high_turnover_vs_liquidity","weak_volume_acceleration"]},{"symbol":"AXIUS","mint":"EZA5ncFF3XtYYpzFYyxcXjLPovJoxkQbFfDGSRQxpump","core_score":70.78,"quality_score":77.83,"risk_score":22.35,"edge_score":69.83,"flags":["momentum_divergence"]},{"symbol":"AXIUS","mint":"EZA5ncFF3XtYYpzFYyxcXjLPovJoxkQbFfDGSRQxpump","core_score":70.43,"quality_score":77.48,"risk_score":22.74,"edge_score":69.48,"flags":["momentum_divergence"]},{"symbol":"NIUNAI","mint":"H9fikySbqRei3wxMdjtW9GHTdp8r8h4SZma2dsUwpump","core_score":74.37,"quality_score":73.89,"risk_score":27.94,"edge_score":65.89,"flags":["high_turnover_vs_liquidity"]},{"symbol":"NIUNAI","mint":"H9fikySbqRei3wxMdjtW9GHTdp8r8h4SZma2dsUwpump","core_score":74.33,"quality_score":73.82,"risk_score":28.05,"edge_score":65.82,"flags":["high_turnover_vs_liquidity"]},{"symbol":"NEWBIE","mint":"4Xg9qDuEP1vMEwqMr2yWo92Yn9a7xZu5BNQBbXVfpump","core_score":70.75,"quality_score":72.34,"risk_score":27.2,"edge_score":64.34,"flags":["thin_liquidity"]},{"symbol":"Gorikun","mint":"Drac2HBT8Fxt9SauZj8yVWUUyZbE5gZ9fNzXqL8Kpump","core_score":69.68,"quality_score":71.89,"risk_score":27.0,"edge_score":63.89,"flags":["high_turnover_vs_liquidity"]},{"symbol":"SOLCAT","mint":"4skFA8FequaJV8Zd3njafvMvmX4yVbnzmBRo4jXVpump","core_score":67.45,"quality_score":71.5,"risk_score":25.98,"edge_score":63.5,"flags":["high_turnover_vs_liquidity"]}],"risk_flags":{"thin_liquidity":2,"high_turnover_vs_liquidity":10,"momentum_divergence":4,"weak_volume_acceleration":5,"security_below_60":2}},
-  "signals":[{"symbol":"土豆","address":"J4Px2XS2qP4uCqiUad9B48tHe8XGrWJePKy1oyYopump","score":87.77,"momentum":15.54,"liquidity":"$44,059","decision":"SIGNAL","reason":"AVIRENE5 score >= 85","timestamp":"2026-08-18T17:23:59.249050+00:00"}],
-  "generated_at":"2026-08-18T23:10:48.307729+00:00",
-  "mode":"PAPER / SIMULATION"
+  "engine": {
+    "name": "AVIRENE5",
+    "version": "5.6.4",
+    "status": "ONLINE",
+    "last_scan": "2026-08-18T23:55:56.224900+00:00"
+  },
+  "metrics": {
+    "scanned": 7,
+    "candidates": 7,
+    "signals": 0,
+    "rejected": 7,
+    "win_rate": 34.62,
+    "avg_return": 0.02,
+    "learning_samples": 130,
+    "shadow_watches": 11,
+    "shadow_active": 11,
+    "shadow_learning_samples": 4,
+    "shadow_win_rate": 50.0,
+    "research_watches": 403,
+    "research_completed_24h": 264,
+    "research_learning_samples": 126,
+    "research_win_rate": 34.13,
+    "research_avg_1h_return": 2.0,
+    "research_avg_24h_return": 40.12
+  },
+  "intelligence": {
+    "timestamp": "2026-08-18T23:55:56.445248+00:00",
+    "universe": 7,
+    "core_85_plus": 0,
+    "shadow_80_84": 0,
+    "research_70_79": 3,
+    "average_score": 68.2,
+    "average_security": 99.0,
+    "average_liquidity": 34873.39,
+    "average_volume": 1367226.67,
+    "average_momentum_5m": 0.22,
+    "average_momentum_1h": 8.42,
+    "average_acceleration": 0.67,
+    "average_buy_ratio": 63.62,
+    "market_breadth": 14.29,
+    "regime": "MIXED",
+    "data_quality": 100.0,
+    "top_candidates": [
+      {"symbol":"BABYANSEM","mint":"9HNEutCZLoo6GZWQTmAgVvbtmLGV1mdeR8X3HWTooYXt","core_score":70.5,"quality_score":75.91,"risk_score":25.33,"edge_score":75.91,"flags":[]},
+      {"symbol":"AXIUS","mint":"EZA5ncFF3XtYYpzFYyxcXjLPovJoxkQbFfDGSRQxpump","core_score":67.48,"quality_score":73.04,"risk_score":29.46,"edge_score":73.04,"flags":[]},
+      {"symbol":"NEWBIE","mint":"4Xg9qDuEP1vMEwqMr2yWo92Yn9a7xZu5BNQBbXVfpump","core_score":71.11,"quality_score":73.22,"risk_score":24.75,"edge_score":70.22,"flags":["thin_liquidity"]},
+      {"symbol":"ANSEMSZN","mint":"5gkuTAKAskEhhc1D6ACtF6mmstfCg2Ldm5qT4C84pump","core_score":68.56,"quality_score":71.3,"risk_score":28.81,"edge_score":63.3,"flags":["high_turnover_vs_liquidity"]},
+      {"symbol":"Gorikun","mint":"Drac2HBT8Fxt9SauZj8yVWUUyZbE5gZ9fNzXqL8Kpump","core_score":72.13,"quality_score":71.04,"risk_score":30.43,"edge_score":63.04,"flags":["high_turnover_vs_liquidity"]},
+      {"symbol":"NIUNAI","mint":"H9fikySbqRei3wxMdjtW9GHTdp8r8h4SZma2dsUwpump","core_score":67.51,"quality_score":67.79,"risk_score":34.07,"edge_score":59.79,"flags":["high_turnover_vs_liquidity","weak_volume_acceleration"]},
+      {"symbol":"SOLCAT","mint":"4skFA8FequaJV8Zd3njafvMvmX4yVbnzmBRo4jXVpump","core_score":60.08,"quality_score":64.39,"risk_score":35.93,"edge_score":56.39,"flags":["high_turnover_vs_liquidity","weak_volume_acceleration"]}
+    ],
+    "risk_flags": {"high_turnover_vs_liquidity":4,"weak_volume_acceleration":2,"thin_liquidity":1}
+  },
+  "signals": [{"symbol":"土豆","address":"J4Px2XS2qP4uCqiUad9B48tHe8XGrWJePKy1oyYopump","score":87.77,"momentum":15.54,"liquidity":"$44,059","decision":"SIGNAL","reason":"AVIRENE5 score >= 85","timestamp":"2026-08-18T17:23:59.249050+00:00"}],
+  "generated_at": "2026-08-18T23:55:56.504299+00:00",
+  "mode": "PAPER / SIMULATION"
 }
