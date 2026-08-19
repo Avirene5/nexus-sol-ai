@@ -1,0 +1,88 @@
+name: Sync AVIRENE5 Live Data
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nexus-avirene5-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout Nexus
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Download latest AVIRENE5 telemetry
+        run: |
+          set -euo pipefail
+          mkdir -p data
+          curl --fail --retry 4 --retry-delay 2 -L \
+            -o /tmp/dashboard.json \
+            "https://raw.githubusercontent.com/Avirene5/solana-ai-signal-engine/main/data/dashboard.json"
+          curl --fail --retry 4 --retry-delay 2 -L \
+            -o /tmp/improvement.json \
+            "https://raw.githubusercontent.com/Avirene5/solana-ai-signal-engine/main/data/improvement.json"
+          curl --fail --retry 4 --retry-delay 2 -L \
+            -o /tmp/scan_heartbeat.json \
+            "https://raw.githubusercontent.com/Avirene5/solana-ai-signal-engine/main/data/scan_heartbeat.json"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for name in ("dashboard.json", "improvement.json", "scan_heartbeat.json"):
+              p = Path("/tmp") / name
+              data = json.loads(p.read_text(encoding="utf-8"))
+              if not isinstance(data, dict):
+                  raise SystemExit(f"Invalid telemetry payload: {name}")
+              p.replace(Path("data") / name)
+          dashboard = json.loads(Path("data/dashboard.json").read_text(encoding="utf-8"))
+          print("AVIRENE5 last_scan:", dashboard.get("engine", {}).get("last_scan"))
+          print("AVIRENE5 generated_at:", dashboard.get("generated_at"))
+          if dashboard.get("engine", {}).get("name") != "AVIRENE5":
+              raise SystemExit("Unexpected dashboard engine")
+          if not dashboard.get("generated_at"):
+              raise SystemExit("Missing dashboard generated_at")
+          PY
+
+      - name: Publish latest telemetry
+        run: |
+          git config user.name "Nexus SOL AI Sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/dashboard.json data/improvement.json data/scan_heartbeat.json
+          if git diff --cached --quiet; then
+            echo "Nexus telemetry already current."
+            exit 0
+          fi
+          git commit -m "Sync latest AVIRENE5 live telemetry"
+          git push origin main
+
+      - name: Verify published dashboard
+        run: |
+          set -euo pipefail
+          expected=$(python - <<'PY'
+          import json
+          print(json.load(open("data/dashboard.json", encoding="utf-8"))["generated_at"])
+          PY
+          )
+          for attempt in 1 2 3 4 5; do
+            actual=$(curl --fail --retry 2 -L -sS \
+              "https://raw.githubusercontent.com/Avirene5/nexus-sol-ai/main/data/dashboard.json" \
+              | python -c 'import json,sys; print(json.load(sys.stdin).get("generated_at", ""))')
+            echo "Attempt $attempt: expected=$expected actual=$actual"
+            if [ "$actual" = "$expected" ]; then
+              echo "Nexus live-data synchronization verified."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "NEXUS_SYNC_ERROR: published dashboard did not converge to expected telemetry."
+          exit 1
