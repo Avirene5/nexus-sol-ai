@@ -38,23 +38,52 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
+          from datetime import datetime, timezone
+
+          def parse_ts(value):
+              if not value:
+                  return None
+              try:
+                  dt = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+                  return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+              except Exception:
+                  return None
+
           for name in ("dashboard.json", "improvement.json", "scan_heartbeat.json"):
               p = Path("/tmp") / name
               data = json.loads(p.read_text(encoding="utf-8"))
               if not isinstance(data, dict):
                   raise SystemExit(f"Invalid telemetry payload: {name}")
               p.replace(Path("data") / name)
+
           dashboard = json.loads(Path("data/dashboard.json").read_text(encoding="utf-8"))
-          print("AVIRENE5 last_scan:", dashboard.get("engine", {}).get("last_scan"))
-          print("AVIRENE5 generated_at:", dashboard.get("generated_at"))
-          if dashboard.get("engine", {}).get("name") != "AVIRENE5":
+          engine = dashboard.get("engine") or {}
+          source_generated = parse_ts(dashboard.get("generated_at"))
+          source_scan = parse_ts(engine.get("last_scan"))
+          if engine.get("name") != "AVIRENE5":
               raise SystemExit("Unexpected dashboard engine")
-          if not dashboard.get("generated_at"):
-              raise SystemExit("Missing dashboard generated_at")
+          if source_generated is None:
+              raise SystemExit("Missing or invalid dashboard generated_at")
+          if source_scan is None:
+              raise SystemExit("Missing or invalid dashboard engine.last_scan")
+
+          current_path = Path("data/dashboard.json")
+          current = json.loads(current_path.read_text(encoding="utf-8")) if current_path.exists() else {}
+          current_generated = parse_ts(current.get("generated_at"))
+          if current_generated and source_generated < current_generated:
+              raise SystemExit(
+                  f"STALE_SOURCE: incoming generated_at={source_generated.isoformat()} "
+                  f"is older than Nexus={current_generated.isoformat()}"
+              )
+
+          print("AVIRENE5 last_scan:", engine.get("last_scan"))
+          print("AVIRENE5 generated_at:", dashboard.get("generated_at"))
+          print("Nexus previous generated_at:", current.get("generated_at"))
           PY
 
       - name: Publish latest telemetry
         run: |
+          set -euo pipefail
           git config user.name "Nexus SOL AI Sync"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/dashboard.json data/improvement.json data/scan_heartbeat.json
