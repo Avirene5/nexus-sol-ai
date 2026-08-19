@@ -1,0 +1,53 @@
+name: Nexus SOL AI Telegram Delivery Test
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  telegram-test:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, 'test: verify Nexus SOL AI Telegram sender')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify configuration
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          set -euo pipefail
+          [[ -n "$BOT_TOKEN" ]] || { echo 'TELEGRAM_CONFIG_ERROR: TELEGRAM_BOT_TOKEN is missing'; exit 1; }
+          [[ -n "$CHAT_ID" ]] || { echo 'TELEGRAM_CONFIG_ERROR: TELEGRAM_CHAT_ID is missing'; exit 1; }
+
+      - name: Verify bot and set Nexus SOL AI identity
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: |
+          set -euo pipefail
+          BASE="https://api.telegram.org/bot${BOT_TOKEN}"
+          GETME=$(curl --fail-with-body --silent --show-error "$BASE/getMe") || { echo 'TELEGRAM_API_ERROR: getMe failed'; exit 1; }
+          echo "$GETME" | python -c "import json,sys; d=json.load(sys.stdin); assert d.get('ok'), d; r=d['result']; print('Telegram bot verified:', '@'+r.get('username','<no-username>'), '/', r.get('first_name','<no-name>'))"
+          curl --fail-with-body --silent --show-error -X POST "$BASE/setMyName" --data-urlencode 'name=Nexus SOL AI' >/tmp/setname.json || { echo 'TELEGRAM_API_ERROR: setMyName failed'; cat /tmp/setname.json 2>/dev/null || true; exit 1; }
+
+      - name: Send demo signal
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          set -euo pipefail
+          BASE="https://api.telegram.org/bot${BOT_TOKEN}"
+          TEXT=$(cat <<'EOF'
+🟣 NEXUS SOL AI — TEST SIGNAL
+
+✅ Telegram delivery test
+🎯 Demo Score: 91.20
+🟢 CORE GATE: 85+
+📡 Mode: PAPER / SIMULATION
+
+This is a DEMO only — no trade was executed.
+
+When a real 85+ signal arrives, the alert will identify the token, score, signal age and provide the Token Intelligence links.
+EOF
+          )
+          RESP=$(curl --fail-with-body --silent --show-error -X POST "$BASE/sendMessage" --data-urlencode "chat_id=$CHAT_ID" --data-urlencode "text=$TEXT") || { echo 'TELEGRAM_API_ERROR: sendMessage failed'; exit 1; }
+          echo "$RESP" | python -c "import json,sys; d=json.load(sys.stdin); assert d.get('ok'), d; print('Telegram delivery verified. message_id=', d['result']['message_id'])"
