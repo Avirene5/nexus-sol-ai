@@ -51,3 +51,5 @@ EOF
           )
           RESP=$(curl --fail-with-body --silent --show-error -X POST "$BASE/sendMessage" --data-urlencode "chat_id=$CHAT_ID" --data-urlencode "text=$TEXT") || { echo 'TELEGRAM_API_ERROR: sendMessage failed'; exit 1; }
           echo "$RESP" | python -c "import json,sys; d=json.load(sys.stdin); assert d.get('ok'), d; print('Telegram delivery verified. message_id=', d['result']['message_id'])"
+
+# trigger-test
