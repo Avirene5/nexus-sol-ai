@@ -32,3 +32,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Deployment heartbeat
+        run: echo "Nexus SOL AI Pages deployment triggered from main at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
