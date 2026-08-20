@@ -38,6 +38,11 @@ jobs:
           SOLANA_TRACKER_API_KEY: ${{ secrets.SOLANA_TRACKER_API_KEY }}
         run: python scripts/birdeye_wallet_discovery.py
 
+      - name: Run real forward-performance research
+        env:
+          BIRDEYE_API_KEY: ${{ secrets.BIRDEYE_API_KEY }}
+        run: python scripts/forward_wallet_performance.py
+
       - name: Validate provenance and fail closed
         run: |
           set -euo pipefail
@@ -59,21 +64,28 @@ jobs:
                   assert source.get("provider")
                   assert source.get("endpoint")
                   assert source.get("observed_at")
+          f=Path("data/wallet_forward_performance.json")
+          fd=json.loads(f.read_text(encoding="utf-8"))
+          assert fd.get("real_api_records") is True
+          assert fd.get("mode") == "FORWARD_PERFORMANCE_RESEARCH"
+          assert fd.get("source_endpoint") == "/defi/historical_price_unix"
+          assert fd.get("synthetic_values") == 0
           print("Provenance validation passed.")
           print("Real candidate wallets:", d.get("candidate_wallet_count"))
-          print("Birdeye records:", d.get("birdeye_global_leaderboard_record_count"))
-          print("Solana Tracker records:", d.get("solana_tracker_record_count"))
+          print("Forward events:", fd.get("events_selected"))
+          print("Matured checkpoints:", fd.get("matured_checkpoints"))
+          print("Synthetic values:", fd.get("synthetic_values"))
           PY
 
-      - name: Publish real discovery dataset
+      - name: Publish real research datasets
         run: |
           set -euo pipefail
           git config user.name "Nexus SOL AI Discovery"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/wallet_discovery_multisource.json
+          git add data/wallet_discovery_multisource.json data/wallet_forward_performance.json
           if git diff --cached --quiet; then
-            echo "No new discovery dataset changes."
+            echo "No new research dataset changes."
             exit 0
           fi
-          git commit -m "Update real multisource Solana wallet discovery dataset"
+          git commit -m "Update real wallet discovery and forward performance datasets"
           git push origin main
