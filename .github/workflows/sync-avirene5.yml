@@ -1,5 +1,6 @@
 # Nexus live-data sync: dashboard + 85+ alert history are published together.
 # Recovery trigger: restore live telemetry after dashboard regression.
+# Force a fresh synchronization after AVIRENE5 dashboard recovery.
 name: Sync AVIRENE5 Live Data
 
 on:
@@ -56,9 +57,15 @@ jobs:
           engine=dashboard.get("engine") or {}
           source_generated=parse_ts(dashboard.get("generated_at"))
           source_scan=parse_ts(engine.get("last_scan"))
+          heartbeat=incoming["scan_heartbeat.json"]
+          heartbeat_scan=parse_ts(heartbeat.get("scan_completed_at"))
           if engine.get("name")!="AVIRENE5": raise SystemExit("Unexpected dashboard engine")
           if source_generated is None: raise SystemExit("Missing or invalid dashboard generated_at")
           if source_scan is None: raise SystemExit("Missing or invalid dashboard engine.last_scan")
+          if heartbeat_scan is None: raise SystemExit("Missing or invalid scan heartbeat")
+          freshness_delta=abs((source_scan-heartbeat_scan).total_seconds())
+          if freshness_delta > 120:
+              raise SystemExit(f"NEXUS_SOURCE_FRESHNESS_ERROR: dashboard.last_scan={source_scan.isoformat()} heartbeat={heartbeat_scan.isoformat()} delta_seconds={freshness_delta:.0f}")
           validation=incoming["research_validation.json"]
           if validation.get("mode")!="PAPER / SIMULATION": raise SystemExit("Unexpected validation mode")
           safety=validation.get("safety") or {}
@@ -111,7 +118,7 @@ jobs:
         run: |
           set -euo pipefail
           [[ -n "$BOT_TOKEN" ]] || { echo 'TELEGRAM_CONFIG_ERROR: TELEGRAM_BOT_TOKEN is missing'; exit 1; }
-          [[ -n "$CHAT_ID" ]] || { echo 'TELEGRAM_CONFIG_ERROR: TELEGRAM_CHAT_ID is missing'; exit 1; }
+          [[ -n "$CHAT_ID" ]] || { echo 'TELEGRAM_CHAT_ID is missing'; exit 1; }
           BASE="https://api.telegram.org/bot${BOT_TOKEN}"
           curl --fail-with-body --silent --show-error "$BASE/getMe" >/dev/null || { echo 'TELEGRAM_API_ERROR: getMe failed'; exit 1; }
           TEXT='🟣 NEXUS SOL AI — TEST SIGNAL\n\n✅ Telegram delivery test\n🎯 Demo Score: 91.20\n🟢 CORE GATE: 85+\n📡 Mode: PAPER / SIMULATION\n\nThis is a DEMO only — no trade was executed.'
