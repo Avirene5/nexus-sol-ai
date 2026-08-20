@@ -1,21 +1,26 @@
-name: Nexus Wallet Forward Validation V2
+name: Nexus Wallet Forward Validation V3
 
 on:
   workflow_run:
     workflows: ["Nexus Multisource Wallet Discovery"]
     types: [completed]
   workflow_dispatch:
+  push:
+    paths:
+      - "scripts/wallet_forward_validation_v3.py"
+      - ".github/workflows/wallet-forward-validation-v2.yml"
+      - "data/wallet_forward_performance.json"
 
 permissions:
   contents: write
 
 concurrency:
-  group: nexus-wallet-forward-validation-v2
+  group: nexus-wallet-forward-validation-v3
   cancel-in-progress: true
 
 jobs:
   validate:
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -24,8 +29,8 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Run corrected real-data validation
-        run: python scripts/wallet_forward_validation_v2.py
+      - name: Run event-level real-data validation
+        run: python scripts/wallet_forward_validation_v3.py
 
       - name: Fail closed on provenance
         run: |
@@ -33,13 +38,14 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          p = Path("data/wallet_forward_validation_v2.json")
+          p = Path("data/wallet_forward_validation_v3.json")
           d = json.loads(p.read_text(encoding="utf-8"))
           assert d.get("real_api_records") is True
           assert d.get("synthetic_values") == 0
           assert d.get("verification_status") == "NOT_VERIFIED"
-          assert d.get("method") == "EXPANDING_MULTI_WINDOW_WALK_FORWARD_ON_FLATTENED_REAL_CHECKPOINTS"
-          print("Checkpoint rows:", d.get("observed_checkpoint_rows"))
+          assert d.get("method") == "EVENT_LEVEL_EXPANDING_MULTI_WINDOW_WALK_FORWARD"
+          print("Observed checkpoints:", d.get("observed_checkpoint_rows"))
+          print("Unique entry events:", d.get("unique_entry_events"))
           print("Windows:", d.get("window_count"))
           print("Positive windows:", d.get("positive_delta_windows"))
           print("Positive fraction:", d.get("positive_delta_fraction"))
@@ -51,10 +57,10 @@ jobs:
           set -euo pipefail
           git config user.name "Nexus SOL AI Validation"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/wallet_forward_validation_v2.json
+          git add data/wallet_forward_validation_v3.json
           if git diff --cached --quiet; then
             echo "No validation result changes."
             exit 0
           fi
-          git commit -m "Add corrected wallet forward validation result"
+          git commit -m "Add event-level wallet validation result"
           git push origin main
