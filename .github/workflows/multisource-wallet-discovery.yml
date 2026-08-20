@@ -64,8 +64,8 @@ jobs:
       - name: Build conservative wallet clusters
         run: python scripts/wallet_cluster_engine.py
 
-      - name: Run multi-window walk-forward validation
-        run: python scripts/wallet_walk_forward_validation.py
+      - name: Run event-level walk-forward validation
+        run: python scripts/wallet_forward_validation_v3.py
 
       - name: Validate provenance and fail closed
         run: |
@@ -122,11 +122,12 @@ jobs:
           assert cd.get("synthetic_values") == 0
           assert cd.get("verification_status") == "NOT_VERIFIED"
           assert cd.get("relationship_inference") == "CONSERVATIVE_EXPLICIT_EVIDENCE_ONLY"
-          wf=Path("data/wallet_walk_forward_validation.json")
+          wf=Path("data/wallet_forward_validation_v3.json")
           wd=json.loads(wf.read_text(encoding="utf-8"))
           assert wd.get("synthetic_values") == 0
           assert wd.get("verification_status") == "NOT_VERIFIED"
-          assert wd.get("method") == "EXPANDING_MULTI_WINDOW_WALK_FORWARD"
+          assert wd.get("method") == "EVENT_LEVEL_EXPANDING_MULTI_WINDOW_WALK_FORWARD"
+          assert wd.get("real_api_records") is True
           print("Provenance validation passed.")
           print("Real candidate wallets:", d.get("candidate_wallet_count"))
           print("Vybe status:", vd.get("provider_status"))
@@ -138,9 +139,11 @@ jobs:
           print("Evidence wallets:", ed.get("candidate_count"))
           print("Clusters:", cd.get("cluster_count"))
           print("Multi-wallet clusters:", cd.get("multi_wallet_cluster_count"))
-          print("Walk-forward windows:", wd.get("window_count"))
-          print("Positive windows:", wd.get("positive_delta_windows"))
-          print("Positive-window fraction:", wd.get("positive_delta_fraction"))
+          print("V3 observed checkpoints:", wd.get("observed_checkpoint_rows"))
+          print("V3 unique entry events:", wd.get("unique_entry_events"))
+          print("V3 windows:", wd.get("window_count"))
+          print("V3 positive windows:", wd.get("positive_delta_windows"))
+          print("V3 positive-window fraction:", wd.get("positive_delta_fraction"))
           print("Synthetic values:", wd.get("synthetic_values"))
           PY
 
@@ -149,10 +152,10 @@ jobs:
           set -euo pipefail
           git config user.name "Nexus SOL AI Discovery"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/wallet_discovery_multisource.json data/wallet_vybe_crosscheck.json data/wallet_identity_funding.json data/wallet_deep_research.json data/wallet_forward_performance.json data/wallet_evidence.json data/wallet_clusters.json data/wallet_walk_forward_validation.json
+          git add data/wallet_discovery_multisource.json data/wallet_vybe_crosscheck.json data/wallet_identity_funding.json data/wallet_deep_research.json data/wallet_forward_performance.json data/wallet_evidence.json data/wallet_clusters.json data/wallet_forward_validation_v3.json
           if git diff --cached --quiet; then
             echo "No new research dataset changes."
             exit 0
           fi
-          git commit -m "Add multi-window wallet validation"
+          git commit -m "Run event-level wallet validation"
           git push origin main
