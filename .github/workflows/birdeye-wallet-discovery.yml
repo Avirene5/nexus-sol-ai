@@ -1,0 +1,70 @@
+name: Nexus Birdeye Wallet Discovery
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nexus-birdeye-wallet-discovery
+  cancel-in-progress: true
+
+jobs:
+  discovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout Nexus
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Require real Birdeye credential
+        env:
+          BIRDEYE_API_KEY: ${{ secrets.BIRDEYE_API_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "$BIRDEYE_API_KEY" ]; then
+            echo "BIRDEYE_DISCOVERY_ERROR: GitHub secret BIRDEYE_API_KEY is not configured. No fake data will be generated."
+            exit 1
+          fi
+
+      - name: Run real Birdeye discovery
+        env:
+          BIRDEYE_API_KEY: ${{ secrets.BIRDEYE_API_KEY }}
+        run: python scripts/birdeye_wallet_discovery.py
+
+      - name: Validate provenance
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("data/wallet_discovery_birdeye.json")
+          d=json.loads(p.read_text(encoding="utf-8"))
+          assert d.get("real_api_records") is True
+          assert d.get("provider") == "Birdeye"
+          assert d.get("chain") == "solana"
+          assert d.get("mode") == "DISCOVERY_ONLY"
+          assert d.get("verification_status") == "NOT_VERIFIED"
+          assert isinstance(d.get("candidates"), list)
+          print("Provenance validation passed.")
+          print("Real candidate wallets:", d.get("candidate_wallet_count"))
+          print("Real listing records:", d.get("listing_count"))
+          PY
+
+      - name: Publish real discovery dataset
+        run: |
+          set -euo pipefail
+          git config user.name "Nexus SOL AI Discovery"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/wallet_discovery_birdeye.json
+          if git diff --cached --quiet; then
+            echo "No new discovery dataset changes."
+            exit 0
+          fi
+          git commit -m "Update real Solana wallet discovery dataset"
+          git push origin main
