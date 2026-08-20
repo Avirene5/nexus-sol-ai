@@ -1,5 +1,7 @@
 name: Nexus Wallet Forward Validation V3
 
+# V3 is event-level to prevent checkpoint leakage between train and test.
+
 on:
   workflow_run:
     workflows: ["Nexus Multisource Wallet Discovery"]
