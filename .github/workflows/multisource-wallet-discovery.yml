@@ -38,6 +38,11 @@ jobs:
           SOLANA_TRACKER_API_KEY: ${{ secrets.SOLANA_TRACKER_API_KEY }}
         run: python scripts/birdeye_wallet_discovery.py
 
+      - name: Run deep wallet research
+        env:
+          BIRDEYE_API_KEY: ${{ secrets.BIRDEYE_API_KEY }}
+        run: python scripts/deep_wallet_research.py
+
       - name: Run real forward-performance research
         env:
           BIRDEYE_API_KEY: ${{ secrets.BIRDEYE_API_KEY }}
@@ -70,8 +75,15 @@ jobs:
           assert fd.get("mode") == "FORWARD_PERFORMANCE_RESEARCH"
           assert fd.get("source_endpoint") == "/defi/historical_price_unix"
           assert fd.get("synthetic_values") == 0
+          deep=Path("data/wallet_deep_research.json")
+          dd=json.loads(deep.read_text(encoding="utf-8"))
+          assert dd.get("real_api_records") is True
+          assert dd.get("mode") == "DEEP_WALLET_RESEARCH"
+          assert dd.get("synthetic_values") == 0
+          assert dd.get("verification_status") == "NOT_VERIFIED"
           print("Provenance validation passed.")
           print("Real candidate wallets:", d.get("candidate_wallet_count"))
+          print("Deep wallets:", dd.get("wallets_researched"))
           print("Forward events:", fd.get("events_selected"))
           print("Matured checkpoints:", fd.get("matured_checkpoints"))
           print("Synthetic values:", fd.get("synthetic_values"))
@@ -82,10 +94,10 @@ jobs:
           set -euo pipefail
           git config user.name "Nexus SOL AI Discovery"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/wallet_discovery_multisource.json data/wallet_forward_performance.json
+          git add data/wallet_discovery_multisource.json data/wallet_deep_research.json data/wallet_forward_performance.json
           if git diff --cached --quiet; then
             echo "No new research dataset changes."
             exit 0
           fi
-          git commit -m "Update real wallet discovery and forward performance datasets"
+          git commit -m "Update deep wallet research and forward performance datasets"
           git push origin main
