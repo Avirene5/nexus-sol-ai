@@ -1,5 +1,7 @@
 name: Sync Nexus Watch Alerts
 
+# Force an immediate sync on workflow changes; scheduled sync remains every 5 minutes.
+
 on:
   schedule:
     - cron: "*/5 * * * *"
