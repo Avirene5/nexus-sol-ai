@@ -4,8 +4,11 @@
 Real-data rule: this collector only persists records returned by configured
 providers. Birdeye is the primary provider; Solana Tracker is an optional
 independent cross-source provider. Missing credentials fail closed for that
-provider and never create synthetic records. Discovery/evidence remain
-separate from transaction-level verification.
+provider and never create synthetic records.
+
+Important: Birdeye Gainers/Losers is TOKEN discovery, not a wallet leaderboard.
+Token addresses from that endpoint are therefore fed into Top Traders; they are
+never stored as wallet candidates themselves.
 """
 from __future__ import annotations
 
@@ -25,6 +28,9 @@ BIRDEYE_KEY = os.environ.get("BIRDEYE_API_KEY", "").strip()
 ST_KEY = os.environ.get("SOLANA_TRACKER_API_KEY", "").strip()
 MAX_WALLET_PNL_CHECKS = 50
 MAX_ST_TOP = 100
+MAX_TOKEN_UNIVERSE = 20
+TOP_TRADER_PAGES = 3
+PAGE_SIZE = 10
 
 
 def http_get(base: str, path: str, params: dict[str, object], headers: dict[str, str]) -> dict:
@@ -70,8 +76,13 @@ def extract_list(payload: dict) -> list[dict]:
 
 
 def wallet_from_item(item: dict) -> str | None:
-    wallet = item.get("owner") or item.get("wallet") or item.get("address")
+    wallet = item.get("owner") or item.get("wallet")
     return str(wallet) if wallet else None
+
+
+def token_from_item(item: dict) -> str | None:
+    address = item.get("address") or item.get("tokenAddress") or item.get("token_address")
+    return str(address) if address else None
 
 
 def add_candidate(candidates: dict[str, dict], wallet: str, source: dict, observed: str) -> dict:
@@ -84,6 +95,12 @@ def add_candidate(candidates: dict[str, dict], wallet: str, source: dict, observ
     return existing
 
 
+def add_token(token_universe: dict[str, dict], address: str, source: dict) -> None:
+    row = token_universe.setdefault(address, {"address": address, "sources": []})
+    if source not in row["sources"]:
+        row["sources"].append(source)
+
+
 def main() -> int:
     if not BIRDEYE_KEY:
         raise RuntimeError("BIRDEYE_API_KEY is required; no discovery run will be performed")
@@ -91,60 +108,83 @@ def main() -> int:
     started = datetime.now(timezone.utc).isoformat()
     observed = datetime.now(timezone.utc).isoformat()
     candidates: dict[str, dict] = {}
+    token_universe: dict[str, dict] = {}
     provider_status = {"birdeye": "enabled", "solana_tracker": "enabled" if ST_KEY else "not_configured"}
     listings: list[dict] = []
     token_runs: list[dict] = []
-    global_records = 0
+    global_token_records = 0
     st_records = 0
 
-    # ---------------- Birdeye ----------------
+    # ---------------- Birdeye token discovery ----------------
     listing_payload = be_get(
         "/defi/v2/tokens/new_listing",
         {"limit": 20, "meme_platform_enabled": "true"},
     )
     listings = extract_list(listing_payload)
+    for item in listings:
+        address = token_from_item(item)
+        if address:
+            add_token(token_universe, address, {"provider": "birdeye", "endpoint": "/defi/v2/tokens/new_listing", "observed_at": observed})
 
+    # Gainers/Losers is a TOKEN leaderboard. Never turn its token address into
+    # a wallet candidate. Use a small, real token sample to expand discovery.
     for ranking_type in ("1W", "30d", "90d"):
         payload = be_get(
             "/trader/gainers-losers",
             {"type": ranking_type, "sort_by": "realized_pnl", "sort_type": "desc", "offset": 0, "limit": 100},
         )
         for item in extract_list(payload):
-            wallet = wallet_from_item(item)
-            if wallet:
-                add_candidate(candidates, wallet, {
+            address = token_from_item(item)
+            if address:
+                add_token(token_universe, address, {
                     "provider": "birdeye", "endpoint": "/trader/gainers-losers",
                     "ranking_type": ranking_type, "sort_by": "realized_pnl", "observed_at": observed,
-                }, observed)
-                global_records += 1
+                })
+                global_token_records += 1
         time.sleep(0.05)
 
-    for token in listings:
-        address = token.get("address") or token.get("tokenAddress")
-        if not address:
-            continue
+    # Deterministic cap keeps the scheduled job within its timeout while still
+    # combining multiple independent token-discovery surfaces.
+    selected_tokens = list(token_universe.values())[:MAX_TOKEN_UNIVERSE]
+
+    # ---------------- Birdeye wallet discovery ----------------
+    for token in selected_tokens:
+        address = token["address"]
         trader_records = 0
         for sort_by in ("realized_pnl", "volume_usd"):
-            payload = be_get(
-                "/defi/v2/tokens/top_traders",
-                {"address": address, "time_frame": "7d", "sort_type": "desc", "sort_by": sort_by,
-                 "offset": 0, "limit": 10, "get_holders_networth": "true"},
-            )
-            for trader in extract_list(payload):
-                wallet = wallet_from_item(trader)
-                if not wallet:
-                    continue
-                existing = add_candidate(candidates, wallet, {
-                    "provider": "birdeye", "endpoint": "/defi/v2/tokens/top_traders",
-                    "sort_by": sort_by, "time_frame": "7d", "observed_at": observed,
-                }, observed)
-                existing["tokens"].setdefault(str(address), []).append(trader)
-                trader_records += 1
-            time.sleep(0.05)
-        token_runs.append({"token": address, "trader_records": trader_records})
+            for page in range(TOP_TRADER_PAGES):
+                payload = be_get(
+                    "/defi/v2/tokens/top_traders",
+                    {
+                        "address": address,
+                        "time_frame": "7d",
+                        "sort_type": "desc",
+                        "sort_by": sort_by,
+                        "offset": page * PAGE_SIZE,
+                        "limit": PAGE_SIZE,
+                        "get_holders_networth": "true",
+                    },
+                )
+                rows = extract_list(payload)
+                if not rows:
+                    break
+                for trader in rows:
+                    wallet = wallet_from_item(trader)
+                    if not wallet:
+                        continue
+                    existing = add_candidate(candidates, wallet, {
+                        "provider": "birdeye", "endpoint": "/defi/v2/tokens/top_traders",
+                        "sort_by": sort_by, "time_frame": "7d", "page": page,
+                        "observed_at": observed,
+                    }, observed)
+                    existing["tokens"].setdefault(address, []).append(trader)
+                    trader_records += 1
+                if len(rows) < PAGE_SIZE:
+                    break
+                time.sleep(0.05)
+        token_runs.append({"token": address, "sources": token["sources"], "trader_records": trader_records})
 
-    # Wallet-level PnL is evidence only. Birdeye explicitly warns that protocol
-    # trade data may not be fully backfilled, so this never becomes VERIFIED.
+    # Wallet-level PnL is evidence only. It never becomes VERIFIED by itself.
     pnl_checked = 0
     for wallet in list(candidates)[:MAX_WALLET_PNL_CHECKS]:
         payload = be_get("/wallet/v2/pnl/summary", {
@@ -157,17 +197,16 @@ def main() -> int:
         pnl_checked += 1
         time.sleep(0.05)
 
-    # ---------------- Solana Tracker (optional cross-source) ----------------
-    # Uses documented PnL V2 top-trader and KOL endpoints. No scraping.
+    # ---------------- Solana Tracker cross-source ----------------
     if ST_KEY:
         for days in (7, 30, 90):
-            payload = st_get("/v2/pnl/leaderboard/top", {"days": days, "limit": MAX_ST_TOP, "pnlMode": "adjusted"})
+            payload = st_get("/v2/pnl/leaderboard/top", {"days": days, "limit": MAX_ST_TOP, "pnlMode": "strict"})
             for item in extract_list(payload):
                 wallet = wallet_from_item(item)
                 if wallet:
                     add_candidate(candidates, wallet, {
                         "provider": "solana_tracker", "endpoint": "/v2/pnl/leaderboard/top",
-                        "days": days, "pnl_mode": "adjusted", "observed_at": observed,
+                        "days": days, "pnl_mode": "strict", "observed_at": observed,
                     }, observed)
                     st_records += 1
             time.sleep(0.05)
@@ -182,7 +221,7 @@ def main() -> int:
                 st_records += 1
 
     result = {
-        "schema_version": 3,
+        "schema_version": 4,
         "mode": "DISCOVERY_ONLY",
         "chain": "solana",
         "started_at": started,
@@ -191,7 +230,9 @@ def main() -> int:
         "provider_status": provider_status,
         "candidate_wallet_count": len(candidates),
         "listing_count": len(listings),
-        "birdeye_global_leaderboard_record_count": global_records,
+        "token_universe_count": len(token_universe),
+        "selected_token_count": len(selected_tokens),
+        "birdeye_token_leaderboard_record_count": global_token_records,
         "birdeye_wallet_pnl_checks": pnl_checked,
         "solana_tracker_record_count": st_records,
         "token_runs": token_runs,
@@ -203,8 +244,8 @@ def main() -> int:
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(
         "REAL_MULTISOURCE_DISCOVERY "
-        f"wallets={len(candidates)} listings={len(listings)} "
-        f"birdeye_global={global_records} birdeye_pnl={pnl_checked} st={st_records}"
+        f"wallets={len(candidates)} listings={len(listings)} tokens={len(selected_tokens)} "
+        f"birdeye_tokens={global_token_records} birdeye_pnl={pnl_checked} st={st_records}"
     )
     return 0
 
