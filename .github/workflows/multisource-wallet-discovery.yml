@@ -38,6 +38,11 @@ jobs:
           SOLANA_TRACKER_API_KEY: ${{ secrets.SOLANA_TRACKER_API_KEY }}
         run: python scripts/birdeye_wallet_discovery.py
 
+      - name: Run independent Vybe cross-check
+        env:
+          VYBE_API_KEY: ${{ secrets.VYBE_API_KEY }}
+        run: python scripts/vybe_wallet_crosscheck.py
+
       - name: Run wallet identity and funding provenance
         env:
           BIRDEYE_API_KEY: ${{ secrets.BIRDEYE_API_KEY }}
@@ -77,6 +82,12 @@ jobs:
                   assert source.get("provider")
                   assert source.get("endpoint")
                   assert source.get("observed_at")
+          v=Path("data/wallet_vybe_crosscheck.json")
+          vd=json.loads(v.read_text(encoding="utf-8"))
+          assert vd.get("synthetic_values") == 0
+          assert vd.get("verification_status") == "NOT_VERIFIED"
+          if vd.get("provider_status") == "ENABLED":
+              assert vd.get("real_api_records") is True
           f=Path("data/wallet_forward_performance.json")
           fd=json.loads(f.read_text(encoding="utf-8"))
           assert fd.get("real_api_records") is True
@@ -102,6 +113,8 @@ jobs:
           assert ed.get("mode") == "WALLET_EVIDENCE"
           print("Provenance validation passed.")
           print("Real candidate wallets:", d.get("candidate_wallet_count"))
+          print("Vybe status:", vd.get("provider_status"))
+          print("Vybe rows:", len(vd.get("rows", [])))
           print("Identity/funding wallets:", idd.get("wallets_enriched"))
           print("Deep wallets:", dd.get("wallets_researched"))
           print("Forward events:", fd.get("events_selected"))
@@ -115,10 +128,10 @@ jobs:
           set -euo pipefail
           git config user.name "Nexus SOL AI Discovery"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/wallet_discovery_multisource.json data/wallet_identity_funding.json data/wallet_deep_research.json data/wallet_forward_performance.json data/wallet_evidence.json
+          git add data/wallet_discovery_multisource.json data/wallet_vybe_crosscheck.json data/wallet_identity_funding.json data/wallet_deep_research.json data/wallet_forward_performance.json data/wallet_evidence.json
           if git diff --cached --quiet; then
             echo "No new research dataset changes."
             exit 0
           fi
-          git commit -m "Update auditable wallet evidence datasets"
+          git commit -m "Add independent Vybe wallet cross-check"
           git push origin main
