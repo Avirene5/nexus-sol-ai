@@ -64,6 +64,9 @@ jobs:
       - name: Build conservative wallet clusters
         run: python scripts/wallet_cluster_engine.py
 
+      - name: Run multi-window walk-forward validation
+        run: python scripts/wallet_walk_forward_validation.py
+
       - name: Validate provenance and fail closed
         run: |
           set -euo pipefail
@@ -119,6 +122,11 @@ jobs:
           assert cd.get("synthetic_values") == 0
           assert cd.get("verification_status") == "NOT_VERIFIED"
           assert cd.get("relationship_inference") == "CONSERVATIVE_EXPLICIT_EVIDENCE_ONLY"
+          wf=Path("data/wallet_walk_forward_validation.json")
+          wd=json.loads(wf.read_text(encoding="utf-8"))
+          assert wd.get("synthetic_values") == 0
+          assert wd.get("verification_status") == "NOT_VERIFIED"
+          assert wd.get("method") == "EXPANDING_MULTI_WINDOW_WALK_FORWARD"
           print("Provenance validation passed.")
           print("Real candidate wallets:", d.get("candidate_wallet_count"))
           print("Vybe status:", vd.get("provider_status"))
@@ -130,7 +138,10 @@ jobs:
           print("Evidence wallets:", ed.get("candidate_count"))
           print("Clusters:", cd.get("cluster_count"))
           print("Multi-wallet clusters:", cd.get("multi_wallet_cluster_count"))
-          print("Synthetic values:", cd.get("synthetic_values"))
+          print("Walk-forward windows:", wd.get("window_count"))
+          print("Positive windows:", wd.get("positive_delta_windows"))
+          print("Positive-window fraction:", wd.get("positive_delta_fraction"))
+          print("Synthetic values:", wd.get("synthetic_values"))
           PY
 
       - name: Publish real research datasets
@@ -138,10 +149,10 @@ jobs:
           set -euo pipefail
           git config user.name "Nexus SOL AI Discovery"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/wallet_discovery_multisource.json data/wallet_vybe_crosscheck.json data/wallet_identity_funding.json data/wallet_deep_research.json data/wallet_forward_performance.json data/wallet_evidence.json data/wallet_clusters.json
+          git add data/wallet_discovery_multisource.json data/wallet_vybe_crosscheck.json data/wallet_identity_funding.json data/wallet_deep_research.json data/wallet_forward_performance.json data/wallet_evidence.json data/wallet_clusters.json data/wallet_walk_forward_validation.json
           if git diff --cached --quiet; then
             echo "No new research dataset changes."
             exit 0
           fi
-          git commit -m "Add conservative wallet independence clustering"
+          git commit -m "Add multi-window wallet validation"
           git push origin main
