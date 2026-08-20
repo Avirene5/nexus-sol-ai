@@ -33,52 +33,65 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Require real Birdeye credential
+      - name: Check Birdeye credential (optional)
         env:
           BIRDEYE_API_KEY: ${{ secrets.BIRDEYE_API_KEY }}
         run: |
           set -euo pipefail
           if [ -z "$BIRDEYE_API_KEY" ]; then
-            echo "DISCOVERY_ERROR: BIRDEYE_API_KEY is not configured. No fake data will be generated."
-            exit 1
+            echo "BIRDEYE_AVAILABLE=false" >> "$GITHUB_ENV"
+            echo "Birdeye API key is not configured yet — multisource wallet research will be skipped safely."
+            echo "Nexus core scanner and other independent workflows are unaffected."
+          else
+            echo "BIRDEYE_AVAILABLE=true" >> "$GITHUB_ENV"
+            echo "Birdeye credential detected — multisource wallet research enabled."
           fi
 
       - name: Run real multisource discovery
+        if: ${{ env.BIRDEYE_AVAILABLE == 'true' }}
         env:
           BIRDEYE_API_KEY: ${{ secrets.BIRDEYE_API_KEY }}
           SOLANA_TRACKER_API_KEY: ${{ secrets.SOLANA_TRACKER_API_KEY }}
         run: python scripts/birdeye_wallet_discovery.py
 
       - name: Run independent Vybe cross-check
+        if: ${{ env.BIRDEYE_AVAILABLE == 'true' }}
         env:
           VYBE_API_KEY: ${{ secrets.VYBE_API_KEY }}
         run: python scripts/vybe_wallet_crosscheck.py
 
       - name: Run wallet identity and funding provenance
+        if: ${{ env.BIRDEYE_AVAILABLE == 'true' }}
         env:
           BIRDEYE_API_KEY: ${{ secrets.BIRDEYE_API_KEY }}
         run: python scripts/wallet_identity_funding.py
 
       - name: Run deep wallet research
+        if: ${{ env.BIRDEYE_AVAILABLE == 'true' }}
         env:
           BIRDEYE_API_KEY: ${{ secrets.BIRDEYE_API_KEY }}
         run: python scripts/deep_wallet_research.py
 
       - name: Run real forward-performance research
+        if: ${{ env.BIRDEYE_AVAILABLE == 'true' }}
         env:
           BIRDEYE_API_KEY: ${{ secrets.BIRDEYE_API_KEY }}
         run: python scripts/forward_wallet_performance.py
 
       - name: Build independence-adjusted evidence
+        if: ${{ env.BIRDEYE_AVAILABLE == 'true' }}
         run: python scripts/wallet_evidence_engine.py
 
       - name: Build conservative wallet clusters
+        if: ${{ env.BIRDEYE_AVAILABLE == 'true' }}
         run: python scripts/wallet_cluster_engine.py
 
       - name: Run event-level walk-forward validation
+        if: ${{ env.BIRDEYE_AVAILABLE == 'true' }}
         run: python scripts/wallet_forward_validation_v3.py
 
       - name: Validate provenance and fail closed
+        if: ${{ env.BIRDEYE_AVAILABLE == 'true' }}
         run: |
           set -euo pipefail
           python - <<'PY'
@@ -159,6 +172,7 @@ jobs:
           PY
 
       - name: Publish real research datasets
+        if: ${{ env.BIRDEYE_AVAILABLE == 'true' }}
         run: |
           set -euo pipefail
           git config user.name "Nexus SOL AI Discovery"
@@ -170,3 +184,10 @@ jobs:
           fi
           git commit -m "Run event-level wallet validation"
           git push origin main
+
+      - name: Finish safely while Birdeye is unavailable
+        if: ${{ env.BIRDEYE_AVAILABLE != 'true' }}
+        run: |
+          echo "Birdeye is OPTIONAL for now."
+          echo "No wallet research data was generated without a real API credential."
+          echo "Add BIRDEYE_API_KEY later and the full multisource research pipeline will resume automatically."
