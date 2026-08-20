@@ -1,17 +1,7 @@
 {
-  "counts": {
-    "candidate_intelligence": 394,
-    "intelligence_snapshots": 41,
-    "learning_samples": 118,
-    "outcomes": 19,
-    "research_outcomes": 443,
-    "research_watches": 443,
-    "shadow_watches": 16,
-    "signals": 3,
-    "snapshots": 1510
-  },
-  "scan_completed_at": "2026-08-19T04:52:51.088690+00:00",
-  "scheduled_interval_minutes": 5,
-  "status": "healthy",
-  "unix_ts": 1787115171
+  "counts": {"candidate_intelligence":774,"intelligence_snapshots":79,"learning_samples":246,"outcomes":154,"research_outcomes":587,"research_watches":587,"shadow_watches":115,"signals":39,"snapshots":3001},
+  "scan_completed_at":"2026-08-20T12:17:57.803861+00:00",
+  "scheduled_interval_minutes":5,
+  "status":"healthy",
+  "unix_ts":1787228277
 }
