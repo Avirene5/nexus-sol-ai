@@ -4,6 +4,17 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "*/30 * * * *"
+  push:
+    paths:
+      - "scripts/birdeye_wallet_discovery.py"
+      - "scripts/vybe_wallet_crosscheck.py"
+      - "scripts/wallet_identity_funding.py"
+      - "scripts/deep_wallet_research.py"
+      - "scripts/forward_wallet_performance.py"
+      - "scripts/wallet_evidence_engine.py"
+      - "scripts/wallet_cluster_engine.py"
+      - "scripts/wallet_forward_validation_v3.py"
+      - ".github/workflows/multisource-wallet-discovery.yml"
 
 permissions:
   contents: write
