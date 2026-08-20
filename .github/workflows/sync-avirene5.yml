@@ -1,6 +1,7 @@
 # Nexus live-data sync: dashboard + 85+ alert history are published together.
 # Recovery trigger: restore live telemetry after dashboard regression.
 # Force a fresh synchronization after AVIRENE5 dashboard recovery.
+# Manual recovery touch: trigger the existing sync workflow without changing sync logic.
 name: Sync AVIRENE5 Live Data
 
 on:
