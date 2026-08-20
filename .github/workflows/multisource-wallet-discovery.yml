@@ -1,5 +1,8 @@
 name: Nexus Multisource Wallet Discovery
 
+# Birdeye is intentionally OPTIONAL until the real API credential is connected.
+# This workflow must never fail just because BIRDEYE_API_KEY is absent.
+
 on:
   workflow_dispatch:
   schedule:
@@ -191,3 +194,4 @@ jobs:
           echo "Birdeye is OPTIONAL for now."
           echo "No wallet research data was generated without a real API credential."
           echo "Add BIRDEYE_API_KEY later and the full multisource research pipeline will resume automatically."
+          echo "SAFE_EXIT=true" >> "$GITHUB_ENV"
