@@ -1,0 +1,14 @@
+{
+  "brand": "Nexus SOL AI",
+  "identity": {
+    "hebrew_header": "בס"ד",
+    "motto": "עשר ותתעשר"
+  },
+  "purpose": "Identity and presentation metadata only.",
+  "affects_engine_logic": false,
+  "affects_market_data": false,
+  "affects_signal_scoring": false,
+  "affects_backtests": false,
+  "affects_trading_decisions": false,
+  "synthetic_values": 0
+}
